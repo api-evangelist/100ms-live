@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: 100ms
+providerId: 100ms-live
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: false
+tags:
+  - Live Video
+  - Rate Limiting
+  - Quotas
+description: >
+  Rate-limit and quota model for the 100ms Server-Side API and the underlying live
+  media plane. 100ms does not publish per-endpoint REST rate-limit headers on the
+  Server-Side API; control-plane abuse is bounded by overall request volume and
+  account-level fair use. The hard caps that practically govern the platform are
+  the in-session concurrency caps (peers per room, sessions per app, recordings per
+  account) and the per-region capacity caps negotiated on Enterprise plans.
+sources:
+  - https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - https://www.100ms.live/docs/server-side/v2/how-to-guides/create-large-rooms
+  - https://www.100ms.live/pricing
+algorithm: unspecified-fair-use
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+notes: >
+  Throttled responses surface as HTTP 429 with a JSON error body containing
+  `code`, `message`, and `id`. There are no documented `X-RateLimit-*` headers
+  on the Server-Side API; client SDKs implement exponential backoff with jitter.
+limits:
+  - id: peers-per-room-standard
+    scope: room
+    label: Concurrent peers per room (standard)
+    value: 1000
+    notes: >
+      Default upper bound for a standard room. Higher caps require enabling
+      large_room=true on the room or moving to Enterprise.
+  - id: peers-per-room-large
+    scope: room
+    label: Concurrent peers per large room
+    value: 10000
+    notes: >
+      `large_room: true` rooms use a different SFU topology and unlock 10k+ concurrent peers
+      (the same primitive that powers IPL on JioCinema/Hotstar). Higher than 10k requires
+      Enterprise contract and capacity reservation.
+  - id: hls-viewers
+    scope: live-stream
+    label: HLS viewers per stream
+    value: unlimited
+    notes: HLS playback scales horizontally through the CDN; viewer count is bounded by output minutes (billed) rather than a hard cap.
+  - id: management-token-ttl
+    scope: account
+    label: Management token TTL
+    value: 86400
+    unit: seconds
+    notes: Management JWT must include an `exp` claim no further than 24 hours in the future.
+  - id: webhook-payload-retries
+    scope: account
+    label: Webhook delivery retries
+    value: 5
+    notes: 100ms retries failed webhook deliveries with exponential backoff over ~24h; replay is available via /v2/analytics/events/replay.

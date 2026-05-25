@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/draft/2025/schema",
+  "title": "100ms Room Structure",
+  "description": "Canonical structure of a 100ms Room resource as returned by GET /v2/rooms/{room_id}.",
+  "type": "object",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique room id." },
+    { "name": "name", "type": "string" },
+    { "name": "description", "type": "string" },
+    { "name": "enabled", "type": "boolean", "default": true },
+    { "name": "customer_id", "type": "string" },
+    { "name": "app_id", "type": "string" },
+    { "name": "template_id", "type": "string" },
+    { "name": "template", "type": "string" },
+    { "name": "region", "type": "string", "enum": ["in", "us", "eu", "auto"] },
+    { "name": "size", "type": "integer" },
+    { "name": "max_duration_seconds", "type": "integer" },
+    { "name": "large_room", "type": "boolean" },
+    {
+      "name": "recording_info",
+      "type": "object",
+      "fields": [
+        { "name": "enabled", "type": "boolean" },
+        { "name": "upload_info", "type": "object" }
+      ]
+    },
+    { "name": "created_at", "type": "string", "format": "date-time" },
+    { "name": "updated_at", "type": "string", "format": "date-time" }
+  ],
+  "relationships": [
+    { "from": "Room.template_id", "to": "Template.id", "kind": "many-to-one" },
+    { "from": "Session.room_id", "to": "Room.id", "kind": "many-to-one" },
+    { "from": "Recording.room_id", "to": "Room.id", "kind": "many-to-one" },
+    { "from": "LiveStream.room_id", "to": "Room.id", "kind": "many-to-one" },
+    { "from": "ExternalStream.room_id", "to": "Room.id", "kind": "many-to-one" },
+    { "from": "RoomCode.room_id", "to": "Room.id", "kind": "many-to-one" }
+  ]
+}

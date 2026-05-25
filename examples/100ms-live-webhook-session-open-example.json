@@ -1,0 +1,22 @@
+{
+  "headers": {
+    "Content-Type": "application/json",
+    "X-100ms-Signature": "sha256=<HMAC of body using webhook secret>"
+  },
+  "body": {
+    "version": "2.0",
+    "id": "evt_63a2bbb1c5b3a64a8f7f0010",
+    "type": "session.open.success",
+    "timestamp": "2026-05-25T10:15:04.500Z",
+    "data": {
+      "session_id": "63a2bbb1c5b3a64a8f7f0002",
+      "room_id": "627cddff2e4e30487862ad1",
+      "room_name": "live-shopping-2026-05-25",
+      "template_id": "627cdb74ae489d3c4c9b91a4",
+      "customer_id": "627cdb45ae489d3c4c9b91a1",
+      "app_id": "627cdb45ae489d3c4c9b91a2",
+      "active": true,
+      "session_started_at": "2026-05-25T10:15:04.123Z"
+    }
+  }
+}

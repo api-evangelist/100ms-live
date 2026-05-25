@@ -1,0 +1,79 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 100ms Server-Side API — External Streams (RTMP Push)
+  description: 'Push the 100ms room feed out to external RTMP destinations (YouTube Live, Twitch,
+    Facebook Live, custom RTMP server). Self-contained Naftiko capability.'
+  tags:
+  - 100ms
+  - RTMP
+  - Simulcast
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    HMS_MANAGEMENT_TOKEN: HMS_MANAGEMENT_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: external-streams
+    baseUri: https://api.100ms.live/v2
+    resources:
+    - name: external-streams
+      path: /external-streams
+      operations:
+      - { name: listexternalstreams, method: GET, description: List External Streams, outputRawFormat: json, outputParameters: [{ name: result, type: object, value: $. }] }
+    - name: external-stream
+      path: /external-streams/{stream_id}
+      operations:
+      - name: getexternalstream
+        method: GET
+        description: Get External Stream
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: stream_id, in: path, type: string, required: true }
+    - name: external-stream-room-start
+      path: /external-streams/room/{room_id}/start
+      operations:
+      - name: startexternalstream
+        method: POST
+        description: Start External Stream For Room
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: external-stream-room-stop
+      path: /external-streams/room/{room_id}/stop
+      operations:
+      - name: stopexternalstream
+        method: POST
+        description: Stop External Stream For Room
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+    authentication:
+      type: bearer
+      value: '{{env.HMS_MANAGEMENT_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: external-streams-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 100ms External (RTMP-out) Streams.
+    tools:
+    - name: hms-start-external-stream
+      description: Start RTMP push to one or more destinations (YouTube/Twitch/Facebook).
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: external-streams.startexternalstream
+      with: { room_id: tools.room_id, body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-stop-external-stream
+      description: Stop the room's RTMP push.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: external-streams.stopexternalstream
+      with: { room_id: tools.room_id }
+      outputParameters: [{ type: object, mapping: $. }]

@@ -1,0 +1,70 @@
+extends: [[spectral:oas, recommended]]
+documentationUrl: https://www.100ms.live/docs/server-side/v2/foundation/basics
+rules:
+  # 100ms uses singular "v2" base path and resource paths in lower-kebab.
+  hms-paths-must-be-lower-kebab:
+    description: 100ms paths must be lower-kebab-case (e.g. /live-streams, /room-codes).
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/[a-z0-9-]+(?:/\{[a-z_]+\}|/[a-z0-9-]+)*$'
+
+  # operationIds use camelCase per the dashboard / Postman naming convention.
+  hms-operation-id-camel-case:
+    description: 100ms operationIds use camelCase (e.g. createRoom, startLiveStreamForRoom).
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]+$'
+
+  # Summaries must be Title Case (Generator standard for api-evangelist).
+  hms-summary-title-case:
+    description: Operation summary must be Title Case.
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: '^([A-Z][a-zA-Z0-9]*)( [A-Z][a-zA-Z0-9]*)*$'
+
+  # Every operation must declare at least one tag.
+  hms-operation-tagged:
+    description: All operations must be tagged for grouping in the docs.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  # Every endpoint requires the management JWT (Bearer).
+  hms-bearer-security-everywhere:
+    description: Every operation must inherit the ManagementToken bearer scheme.
+    severity: warn
+    given: "$"
+    then:
+      field: security
+      function: truthy
+
+  # IDs in path use snake_case ({room_id}, {template_id}, ...).
+  hms-path-params-snake-case:
+    description: Path parameters use snake_case (room_id, template_id, recording_id, peer_id).
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '\{[A-Z]'
+
+  # Schemas must be PascalCase.
+  hms-schemas-pascal-case:
+    description: Schemas use PascalCase names.
+    severity: warn
+    given: "$.components.schemas[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][a-zA-Z0-9]+$'

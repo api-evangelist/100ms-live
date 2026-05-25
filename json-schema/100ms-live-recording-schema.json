@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/100ms-live/refs/heads/main/json-schema/100ms-live-recording-schema.json",
+  "title": "100ms Recording",
+  "description": "A composite or per-track recording produced from a 100ms session.",
+  "type": "object",
+  "required": ["id", "room_id"],
+  "properties": {
+    "id": { "type": "string" },
+    "room_id": { "type": "string" },
+    "session_id": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["queued", "init", "running", "paused", "completed", "failed"]
+    },
+    "duration": { "type": "integer", "description": "Total recording duration in seconds." },
+    "size": { "type": "integer", "description": "Total bytes." },
+    "started_at": { "type": "string", "format": "date-time" },
+    "stopped_at": { "type": "string", "format": "date-time" },
+    "stopped_by": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "recording_assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["room-composite", "room-vod", "transcript", "chat-log", "summary"]
+          },
+          "path": { "type": "string" },
+          "format": { "type": "string" },
+          "size": { "type": "integer" },
+          "duration": { "type": "integer" }
+        }
+      }
+    }
+  }
+}

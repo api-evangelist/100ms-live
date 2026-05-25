@@ -1,0 +1,106 @@
+specification: API Commons Vocabulary
+specificationVersion: '0.1'
+provider: 100ms
+providerId: 100ms-live
+created: '2026-05-25'
+modified: '2026-05-25'
+description: >
+  Operational and capability vocabulary for the 100ms live video platform.
+  Maps the 100ms domain (rooms, sessions, peers, templates, recordings,
+  live streams, RTMP, HLS, webhooks) into the cross-provider API Evangelist
+  vocabulary so it can be compared against other live-video and realtime
+  providers (Mux, Agora, Daily, Ably, LiveKit, Twilio).
+domains:
+  - id: live-video
+    label: Live Video Infrastructure
+    description: SDK + REST primitives for low-latency multi-party video and audio.
+  - id: live-streaming
+    label: Live Streaming
+    description: One-to-many distribution via HLS playback and RTMP ingest/egress.
+  - id: realtime-messaging
+    label: Realtime Messaging
+    description: In-session chat, broadcast messages, peer signaling.
+  - id: media-recording
+    label: Media Recording
+    description: Composite and track-level recording with asset and presigned-URL access.
+  - id: observability
+    label: Observability and Analytics
+    description: Webhook events, track quality stats, error events.
+entities:
+  - id: room
+    label: Room
+    description: Persistent container into which peers join. Maps to LiveKit room, Twilio Room, Daily room, Agora channel.
+    crossReferences:
+      - livekit:Room
+      - twilio:Video.Room
+      - daily:Room
+      - agora:Channel
+  - id: session
+    label: Session
+    description: Discrete activation of a room — from first peer joining to last peer leaving / explicit end.
+  - id: peer
+    label: Peer
+    description: A connected participant within an active room. Carries role, user_id, name, metadata, and tracks.
+  - id: track
+    label: Track
+    description: Audio, video, or screen-share media stream associated with a peer.
+  - id: template
+    label: Template
+    description: Reusable policy bundle that governs roles, permissions, recording settings, and destinations for a room.
+  - id: role
+    label: Role
+    description: Named participation profile (publish/subscribe/permissions). Examples - host, guest, viewer, broadcaster.
+  - id: recording
+    label: Recording
+    description: Composite or per-track capture of a session, producing one or more recording assets.
+  - id: live-stream
+    label: Live Stream (HLS)
+    description: One-to-many HLS broadcast generated from a 100ms room. Produces a master.m3u8 playback URL.
+  - id: external-stream
+    label: External Stream (RTMP push)
+    description: Out-going RTMP push to YouTube/Twitch/Facebook from a 100ms room.
+  - id: stream-key
+    label: RTMP Stream Key
+    description: Per-room RTMP ingest credential for pushing an external broadcast into a 100ms room.
+  - id: room-code
+    label: Room Code
+    description: Short, role-bound code used by client apps to join a room.
+  - id: poll
+    label: Poll
+    description: Real-time poll or quiz attached to a room or session.
+  - id: webhook-event
+    label: Webhook Event
+    description: HMAC-signed event delivered to a destination URL (session/peer/recording/HLS lifecycle).
+capabilities:
+  - id: provision-room
+    label: Provision a Live Room
+    operations:
+      - POST /v2/rooms
+      - POST /v2/templates
+  - id: control-session
+    label: Control a Live Session
+    operations:
+      - POST /v2/active-rooms/{id}/send-message
+      - POST /v2/active-rooms/{id}/remove-peers
+      - POST /v2/active-rooms/{id}/end-room
+  - id: record-session
+    label: Record a Live Session
+    operations:
+      - POST /v2/recordings/room/{id}/start
+      - POST /v2/recordings/room/{id}/stop
+      - GET  /v2/recording-assets/{id}/presigned-url
+  - id: hls-stream-session
+    label: HLS Broadcast a Live Session
+    operations:
+      - POST /v2/live-streams/room/{id}/start
+      - POST /v2/live-streams/{id}/stop
+  - id: rtmp-push-session
+    label: RTMP Push to YouTube/Twitch/Facebook
+    operations:
+      - POST /v2/external-streams/room/{id}/start
+      - POST /v2/external-streams/{id}/stop
+  - id: observe-session
+    label: Observe and Replay Events
+    operations:
+      - GET  /v2/analytics/events
+      - POST /v2/analytics/events/replay

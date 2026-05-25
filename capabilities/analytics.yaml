@@ -1,0 +1,84 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 100ms Server-Side API — Analytics
+  description: 'Query 100ms webhook events, track events, recording events, error events, and
+    peer quality stats. Replay missed webhook deliveries. Self-contained Naftiko capability.'
+  tags:
+  - 100ms
+  - Analytics
+  - Observability
+  - Webhooks
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    HMS_MANAGEMENT_TOKEN: HMS_MANAGEMENT_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: analytics
+    baseUri: https://api.100ms.live/v2
+    resources:
+    - name: analytics-events
+      path: /analytics/events
+      operations:
+      - { name: listwebhookevents, method: GET, description: List Webhook Events, outputRawFormat: json, outputParameters: [{ name: result, type: object, value: $. }] }
+    - name: analytics-events-replay
+      path: /analytics/events/replay
+      operations:
+      - name: replaywebhookevents
+        method: POST
+        description: Replay Webhook Events
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: body, in: body, type: object, required: true }
+    - name: analytics-track-events
+      path: /analytics/track-events
+      operations:
+      - { name: listtrackevents, method: GET, description: List Track Events, outputRawFormat: json, outputParameters: [{ name: result, type: object, value: $. }] }
+    - name: analytics-recording-events
+      path: /analytics/recording-events
+      operations:
+      - { name: listrecordingevents, method: GET, description: List Recording Events, outputRawFormat: json, outputParameters: [{ name: result, type: object, value: $. }] }
+    - name: analytics-error-events
+      path: /analytics/error-events
+      operations:
+      - { name: listerrorevents, method: GET, description: List Error Events, outputRawFormat: json, outputParameters: [{ name: result, type: object, value: $. }] }
+    - name: analytics-peer-quality
+      path: /analytics/peer-quality
+      operations:
+      - { name: getpeerqualitystats, method: GET, description: Get Peer Quality Stats, outputRawFormat: json, outputParameters: [{ name: result, type: object, value: $. }] }
+    authentication:
+      type: bearer
+      value: '{{env.HMS_MANAGEMENT_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: analytics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 100ms Analytics.
+    tools:
+    - name: hms-list-webhook-events
+      description: List webhook events.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: analytics.listwebhookevents
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-replay-webhook-events
+      description: Replay missed webhook deliveries.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: analytics.replaywebhookevents
+      with: { body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-list-error-events
+      description: List error events for a session.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: analytics.listerrorevents
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-get-peer-quality
+      description: Get per-peer quality stats for a session.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: analytics.getpeerqualitystats
+      outputParameters: [{ type: object, mapping: $. }]

@@ -1,0 +1,162 @@
+aid: 100ms-live
+url: https://raw.githubusercontent.com/api-evangelist/100ms-live/refs/heads/main/apis.yml
+name: 100ms
+kind: company
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+- Live Video
+- Live Streaming
+- Video Conferencing
+- WebRTC
+- HLS
+- RTMP
+- Recording
+- Real-time Messaging
+- Live Infrastructure
+- India
+created: '2026-05-25'
+modified: '2026-05-25'
+specificationVersion: '0.19'
+description: 100ms is a live video and audio infrastructure company headquartered in Bengaluru, India that provides
+  developer SDKs and a REST control plane for embedding video conferencing, interactive live streaming (HLS),
+  RTMP ingest/egress, recording, real-time chat/messaging, polls, whiteboard, and AI-powered transcription into
+  applications. The company was acquired by Disney+ Hotstar (JioCinema/JioHotstar) in 2023 and continues to
+  operate as an independent commercial SaaS — the same infrastructure powering some of the largest live cricket
+  audiences in the world (IPL on JioCinema/Hotstar). The platform exposes a single Server-Side REST API at
+  api.100ms.live/v2 plus client SDKs for Web (JavaScript/React), iOS (Swift), Android (Kotlin), React Native,
+  Flutter, and a Node.js server SDK, with public OpenAPI specs generated from the docs and a Postman collection.
+apis:
+- aid: 100ms-live:server-side-api
+  name: 100ms Server-Side API
+  tags:
+  - Rooms
+  - Sessions
+  - Recordings
+  - Live Streams
+  - RTMP
+  - HLS
+  - Webhooks
+  - Polls
+  - Templates
+  - Analytics
+  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  baseURL: https://api.100ms.live/v2
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  description: The 100ms Server-Side API is the unified REST control plane for the 100ms live video platform.
+    It manages rooms (the persistent containers for a live session), templates and roles (policy), active rooms
+    and peers (in-session control like kick/mute/message), recordings (composite and per-track), live streams
+    (HLS output and RTMP ingest stream keys), external streams (push to YouTube/Twitch/Facebook Live),
+    recording assets, room codes, polls, sessions, and an analytics API for querying webhook events, track
+    events, recording events, error events, and peer quality stats. Authentication uses a short-lived
+    management JWT (HS256) signed with an app access key + secret pair issued from the dashboard.
+  properties:
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: OpenAPI
+    url: openapi/100ms-live-server-side-api-openapi.yml
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDK
+    url: https://github.com/100mslive/server-sdks
+  - type: NaftikoCapability
+    url: capabilities/rooms.yaml
+  - type: NaftikoCapability
+    url: capabilities/active-rooms.yaml
+  - type: NaftikoCapability
+    url: capabilities/recordings.yaml
+  - type: NaftikoCapability
+    url: capabilities/live-streams.yaml
+  - type: NaftikoCapability
+    url: capabilities/external-streams.yaml
+  - type: NaftikoCapability
+    url: capabilities/policy-templates.yaml
+  - type: NaftikoCapability
+    url: capabilities/room-codes.yaml
+  - type: NaftikoCapability
+    url: capabilities/analytics.yaml
+  x-features:
+  - Programmatic room and template provisioning
+  - Composite + track-level recording with auto-upload to S3
+  - HLS live streaming with low-latency LL-HLS support
+  - RTMP ingest via per-room stream keys
+  - External RTMP push to YouTube/Twitch/Facebook
+  - Polls and whiteboard via REST
+  - Webhook delivery with HMAC signature verification
+  - Analytics API for events, track quality, and webhook replay
+  x-use-cases:
+  - Telehealth and 1:1 consultations
+  - Live shopping and creator commerce
+  - Edtech virtual classrooms
+  - Audio rooms (Clubhouse/Discord Stages style)
+  - Live sports and event streaming (HLS)
+  - Webinars and town halls
+  - Slack-huddle/Discord-stage clones
+  x-integrations:
+  - YouTube Live (RTMP push)
+  - Twitch (RTMP push)
+  - Facebook Live (RTMP push)
+  - AWS S3 (recording storage)
+  - Webhooks (HMAC-signed)
+common:
+- type: Portal
+  url: https://www.100ms.live/
+- type: Documentation
+  url: https://www.100ms.live/docs/
+- type: SignUp
+  url: https://dashboard.100ms.live/register
+- type: Dashboard
+  url: https://dashboard.100ms.live/
+- type: Pricing
+  url: https://www.100ms.live/pricing
+- type: GitHub
+  url: https://github.com/100mslive
+- type: StatusPage
+  url: https://status.100ms.live/
+- type: Blog
+  url: https://www.100ms.live/blog
+- type: Postman
+  url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+- type: Twitter
+  url: https://twitter.com/100mslive
+- type: LinkedIn
+  url: https://www.linkedin.com/company/100mslive/
+- type: SDK
+  url: https://github.com/100mslive/web-sdks
+- type: SDK
+  url: https://github.com/100mslive/100ms-ios-sdk
+- type: SDK
+  url: https://github.com/100mslive/100ms-android
+- type: SDK
+  url: https://github.com/100mslive/100ms-react-native
+- type: SDK
+  url: https://github.com/100mslive/100ms-flutter
+- type: SDK
+  url: https://github.com/100mslive/server-sdks
+- type: Samples
+  url: https://github.com/100mslive/100ms-examples
+- type: Plans
+  url: plans/100ms-live-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/100ms-live-rate-limits.yml
+- type: FinOps
+  url: finops/100ms-live-finops.yml
+- type: JSONSchema
+  url: json-schema/100ms-live-room-schema.json
+- type: JSONSchema
+  url: json-schema/100ms-live-recording-schema.json
+- type: JSONSchema
+  url: json-schema/100ms-live-webhook-event-schema.json
+- type: JSONLD
+  url: json-ld/100ms-live-context.jsonld
+- type: Vocabulary
+  url: vocabulary/100ms-live-vocabulary.yml
+- type: SpectralRules
+  url: rules/100ms-live-rules.yml
+x-acquirer: Disney+ Hotstar (JioHotstar)
+x-acquired: 2022-11
+x-headquarters: Bengaluru, Karnataka, India
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

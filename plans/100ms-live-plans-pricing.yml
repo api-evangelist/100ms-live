@@ -1,0 +1,149 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: 100ms
+providerId: 100ms-live
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Live Video
+  - Live Streaming
+  - HLS
+  - RTMP
+  - Recording
+description: >
+  Reconciled plans and per-minute pricing for the 100ms live video and audio platform.
+  Pricing surface from https://www.100ms.live/pricing. 100ms uses a free tier that
+  includes 10,000 free minutes per month across audio, video, HLS, and recording, then
+  meters per minute of usage per peer (audio/video) or per output (HLS, recording,
+  transcription).
+sources:
+  - https://www.100ms.live/pricing
+  - https://www.100ms.live/docs/server-side/v2/foundation/basics
+plans:
+  - id: 100ms-build
+    name: Build (Free)
+    type: free
+    description: >
+      Free tier intended for development and prototyping. Includes 10,000 free minutes
+      per month split across audio, video, recording, HLS streaming, and transcription
+      usage. After the free minutes, usage is metered at the public per-minute rates.
+    entries:
+      - label: Audio minutes (free pool)
+        name: audio_minutes_free
+        type: included
+        metric: minutes
+        limit: 10000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Audio minutes (per peer, metered)
+        name: audio_minutes
+        type: metered
+        metric: peer-minutes
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.0012'
+        userMultiplied: true
+      - label: HD video minutes (per peer, metered)
+        name: video_hd_minutes
+        type: metered
+        metric: peer-minutes
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.004'
+        userMultiplied: true
+      - label: Full HD video minutes (per peer, metered)
+        name: video_fhd_minutes
+        type: metered
+        metric: peer-minutes
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.017'
+        userMultiplied: true
+      - label: Recording minutes (composite, per output minute)
+        name: recording_minutes
+        type: metered
+        metric: minutes
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.04'
+        userMultiplied: false
+      - label: HLS streaming minutes (per output minute)
+        name: hls_minutes
+        type: metered
+        metric: minutes
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.0135'
+        userMultiplied: false
+      - label: RTMP-out external streaming minutes
+        name: rtmp_out_minutes
+        type: metered
+        metric: minutes
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.0035'
+        userMultiplied: false
+      - label: Live transcription minutes
+        name: transcription_minutes
+        type: metered
+        metric: minutes
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.04'
+        userMultiplied: false
+  - id: 100ms-growth
+    name: Growth
+    type: subscription
+    description: >
+      Paid tier with the same per-minute meters as Build, plus volume discounts,
+      higher concurrency/large-room support, and SLA. Starts at a $1/min minimum
+      commitment and scales into Enterprise once usage crosses contract thresholds.
+    entries:
+      - label: Volume-tier per-minute usage
+        name: usage_volume_tier
+        type: metered
+        metric: peer-minutes
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'volume-discount'
+        userMultiplied: true
+  - id: 100ms-enterprise
+    name: Enterprise
+    type: contract
+    description: >
+      Custom-contract tier for large customers (e.g. live sports, telehealth networks).
+      Includes dedicated infra options, private regions, custom SLAs, SOC 2 deliverables,
+      VPC peering, and committed-use discounts. Pricing is negotiated, typically tied
+      to committed peer-minutes and recording/HLS output minutes.
+    entries:
+      - label: Committed peer-minutes
+        name: committed_peer_minutes
+        type: committed
+        metric: peer-minutes
+        limit: -1
+        timeFrame: contract
+        geo: global
+        unit: 1
+        price: 'contract'
+        userMultiplied: true

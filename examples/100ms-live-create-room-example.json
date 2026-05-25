@@ -1,0 +1,40 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.100ms.live/v2/rooms",
+    "headers": {
+      "Authorization": "Bearer <MANAGEMENT_JWT>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "live-shopping-2026-05-25",
+      "description": "Live shopping room for Mother's Day flash sale.",
+      "template_id": "627cdb74ae489d3c4c9b91a4",
+      "region": "in",
+      "size": 10000,
+      "max_duration_seconds": 14400,
+      "large_room": true,
+      "recording_info": { "enabled": true },
+      "webhook": { "url": "https://example.com/100ms/webhook" }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "627cddff2e4e30487862ad1",
+      "name": "live-shopping-2026-05-25",
+      "description": "Live shopping room for Mother's Day flash sale.",
+      "enabled": true,
+      "customer_id": "627cdb45ae489d3c4c9b91a1",
+      "app_id": "627cdb45ae489d3c4c9b91a2",
+      "template_id": "627cdb74ae489d3c4c9b91a4",
+      "region": "in",
+      "size": 10000,
+      "max_duration_seconds": 14400,
+      "large_room": true,
+      "recording_info": { "enabled": true, "upload_info": {} },
+      "created_at": "2026-05-25T10:12:33.041Z",
+      "updated_at": "2026-05-25T10:12:33.041Z"
+    }
+  }
+}

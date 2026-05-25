@@ -1,0 +1,106 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 100ms Server-Side API — Policy Templates
+  description: 'Manage 100ms templates and their roles - the policy bundles that define publish/
+    subscribe rights, permissions, recording settings, and destinations attached to a room.
+    Self-contained Naftiko capability.'
+  tags:
+  - 100ms
+  - Policy
+  - Templates
+  - Roles
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    HMS_MANAGEMENT_TOKEN: HMS_MANAGEMENT_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: policy-templates
+    baseUri: https://api.100ms.live/v2
+    resources:
+    - name: templates
+      path: /templates
+      operations:
+      - { name: listtemplates, method: GET, description: List Templates, outputRawFormat: json, outputParameters: [{ name: result, type: object, value: $. }] }
+      - name: createtemplate
+        method: POST
+        description: Create Template
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: body, in: body, type: object, required: true }
+    - name: template
+      path: /templates/{template_id}
+      operations:
+      - name: retrievetemplate
+        method: GET
+        description: Retrieve Template
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: template_id, in: path, type: string, required: true }
+      - name: updatetemplate
+        method: POST
+        description: Update Template
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: template_id, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: template-role
+      path: /templates/{template_id}/roles/{role_name}
+      operations:
+      - name: upsertrole
+        method: POST
+        description: Create Or Update Role
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: template_id, in: path, type: string, required: true }
+        - { name: role_name, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+      - name: deleterole
+        method: DELETE
+        description: Delete A Role
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: template_id, in: path, type: string, required: true }
+        - { name: role_name, in: path, type: string, required: true }
+    authentication:
+      type: bearer
+      value: '{{env.HMS_MANAGEMENT_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: policy-templates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 100ms Policy / Templates.
+    tools:
+    - name: hms-list-templates
+      description: List policy templates.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: policy-templates.listtemplates
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-create-template
+      description: Create a policy template.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: policy-templates.createtemplate
+      with: { body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-upsert-role
+      description: Create or update a role inside a template.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: policy-templates.upsertrole
+      with: { template_id: tools.template_id, role_name: tools.role_name, body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-delete-role
+      description: Delete a role from a template.
+      hints: { readOnly: false, destructive: true, idempotent: true }
+      call: policy-templates.deleterole
+      with: { template_id: tools.template_id, role_name: tools.role_name }
+      outputParameters: [{ type: object, mapping: $. }]

@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 100ms Server-Side API — Active Rooms
+  description: 'In-session control of running 100ms rooms — list/retrieve/update peers, send broadcast
+    messages, remove peers, and end the active room. Self-contained Naftiko capability.'
+  tags:
+  - 100ms
+  - Live Video
+  - Active Rooms
+  - Moderation
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    HMS_MANAGEMENT_TOKEN: HMS_MANAGEMENT_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: active-rooms
+    baseUri: https://api.100ms.live/v2
+    resources:
+    - name: active-room
+      path: /active-rooms/{room_id}
+      operations:
+      - name: retrieveactiveroom
+        method: GET
+        description: Retrieve Active Room
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+    - name: active-room-end
+      path: /active-rooms/{room_id}/end-room
+      operations:
+      - name: endactiveroom
+        method: POST
+        description: End Active Room
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: active-room-peers
+      path: /active-rooms/{room_id}/peers
+      operations:
+      - name: listpeers
+        method: GET
+        description: List Peers
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+    - name: active-room-peer
+      path: /active-rooms/{room_id}/peers/{peer_id}
+      operations:
+      - name: retrievepeer
+        method: GET
+        description: Retrieve A Peer
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+        - { name: peer_id, in: path, type: string, required: true }
+      - name: updatepeer
+        method: POST
+        description: Update A Peer
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+        - { name: peer_id, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: active-room-remove
+      path: /active-rooms/{room_id}/remove-peers
+      operations:
+      - name: removepeers
+        method: POST
+        description: Remove Peers
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: active-room-message
+      path: /active-rooms/{room_id}/send-message
+      operations:
+      - name: sendmessage
+        method: POST
+        description: Send Message
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    authentication:
+      type: bearer
+      value: '{{env.HMS_MANAGEMENT_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: active-rooms-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 100ms Active Rooms.
+    tools:
+    - name: hms-retrieve-active-room
+      description: Retrieve the live state of an active 100ms room.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: active-rooms.retrieveactiveroom
+      with: { room_id: tools.room_id }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-list-peers
+      description: List peers currently connected in an active room.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: active-rooms.listpeers
+      with: { room_id: tools.room_id }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-send-message
+      description: Broadcast or direct-message a peer/role inside the room.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: active-rooms.sendmessage
+      with: { room_id: tools.room_id, body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-remove-peers
+      description: Remove a peer or role from the active room.
+      hints: { readOnly: false, destructive: true, idempotent: false }
+      call: active-rooms.removepeers
+      with: { room_id: tools.room_id, body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-end-active-room
+      description: End the active 100ms session for a room.
+      hints: { readOnly: false, destructive: true, idempotent: true }
+      call: active-rooms.endactiveroom
+      with: { room_id: tools.room_id, body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]

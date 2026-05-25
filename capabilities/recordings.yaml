@@ -1,0 +1,131 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: 100ms Server-Side API — Recordings
+  description: 'Start, stop, pause, resume, list, and retrieve composite/track recordings of 100ms
+    sessions. Self-contained Naftiko capability.'
+  tags:
+  - 100ms
+  - Recording
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    HMS_MANAGEMENT_TOKEN: HMS_MANAGEMENT_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: recordings
+    baseUri: https://api.100ms.live/v2
+    resources:
+    - name: recordings
+      path: /recordings
+      operations:
+      - name: listrecordings
+        method: GET
+        description: List All Recordings
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+    - name: recording
+      path: /recordings/{recording_id}
+      operations:
+      - name: getrecording
+        method: GET
+        description: Get Recording
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: recording_id, in: path, type: string, required: true }
+    - name: recording-room-start
+      path: /recordings/room/{room_id}/start
+      operations:
+      - name: startrecordingforroom
+        method: POST
+        description: Start Recording For Room
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: recording-room-stop
+      path: /recordings/room/{room_id}/stop
+      operations:
+      - name: stoprecordingforroom
+        method: POST
+        description: Stop Recording For Room
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+    - name: recording-room-pause
+      path: /recordings/room/{room_id}/pause
+      operations:
+      - name: pauserecording
+        method: POST
+        description: Pause Recording For Room
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+    - name: recording-room-resume
+      path: /recordings/room/{room_id}/resume
+      operations:
+      - name: resumerecording
+        method: POST
+        description: Resume Recording For Room
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: room_id, in: path, type: string, required: true }
+    - name: recording-assets
+      path: /recording-assets
+      operations:
+      - name: listrecordingassets
+        method: GET
+        description: List Recording Assets
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+    - name: recording-asset-presign
+      path: /recording-assets/{asset_id}/presigned-url
+      operations:
+      - name: getpresignedurl
+        method: GET
+        description: Get Presigned URL
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: asset_id, in: path, type: string, required: true }
+    authentication:
+      type: bearer
+      value: '{{env.HMS_MANAGEMENT_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: recordings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for 100ms Recordings.
+    tools:
+    - name: hms-start-recording
+      description: Start a composite recording for a room.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: recordings.startrecordingforroom
+      with: { room_id: tools.room_id, body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-stop-recording
+      description: Stop the composite recording for a room.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: recordings.stoprecordingforroom
+      with: { room_id: tools.room_id }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-list-recordings
+      description: List recordings.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: recordings.listrecordings
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: hms-get-recording-presigned-url
+      description: Get a presigned URL for a recording asset.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: recordings.getpresignedurl
+      with: { asset_id: tools.asset_id }
+      outputParameters: [{ type: object, mapping: $. }]

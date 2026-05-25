@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/100ms-live/refs/heads/main/json-schema/100ms-live-room-schema.json",
+  "title": "100ms Room",
+  "description": "A persistent container for a 100ms live session. Rooms are created from templates; each instance of users joining a room is a session.",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique 100ms room id (e.g. 627cdddff2e4e30487862ad1)."
+    },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "enabled": { "type": "boolean", "default": true },
+    "customer_id": { "type": "string" },
+    "app_id": { "type": "string" },
+    "template_id": { "type": "string" },
+    "template": { "type": "string" },
+    "region": {
+      "type": "string",
+      "enum": ["in", "us", "eu", "auto"],
+      "description": "Region the room is provisioned in. `in` = Mumbai, `us` = US, `eu` = EU, `auto` = closest to peer."
+    },
+    "size": {
+      "type": "integer",
+      "description": "Soft cap on concurrent peers (subject to plan limits)."
+    },
+    "max_duration_seconds": {
+      "type": "integer",
+      "description": "Maximum continuous session duration before the room is auto-ended."
+    },
+    "large_room": {
+      "type": "boolean",
+      "description": "When true, this is a 'large room' (10k+ peers) which changes the underlying topology."
+    },
+    "recording_info": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "upload_info": { "type": "object" }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "customer": { "type": "string" }
+  }
+}

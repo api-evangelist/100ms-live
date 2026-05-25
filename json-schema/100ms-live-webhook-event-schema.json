@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/100ms-live/refs/heads/main/json-schema/100ms-live-webhook-event-schema.json",
+  "title": "100ms Webhook Event",
+  "description": "Envelope for events delivered by 100ms to a webhook destination. Events are HMAC-signed with the destination's secret in the X-100ms-Signature header.",
+  "type": "object",
+  "required": ["id", "type", "timestamp", "data"],
+  "properties": {
+    "id": { "type": "string", "description": "Event id, used for replay and dedupe." },
+    "version": { "type": "string", "description": "Event schema version (e.g. 2.0)." },
+    "type": {
+      "type": "string",
+      "description": "Event type identifier.",
+      "examples": [
+        "session.open.success",
+        "session.close.success",
+        "peer.join.success",
+        "peer.leave.success",
+        "track.add.success",
+        "track.remove.success",
+        "beam.started.success",
+        "beam.recording.success",
+        "beam.failure",
+        "hls.started.success",
+        "hls.stopped.success",
+        "hls.recording.success",
+        "hls.failure",
+        "rtmp.started.success",
+        "rtmp.failure",
+        "recording.success",
+        "recording.failed",
+        "transcription.success",
+        "transcription.failed",
+        "summary.success",
+        "policy.update"
+      ]
+    },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "data": {
+      "type": "object",
+      "description": "Event-specific payload. See https://www.100ms.live/docs/server-side/v2/how-to-guides/configure-webhooks/webhook for per-type schemas."
+    }
+  }
+}
