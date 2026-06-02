@@ -1,0 +1,127 @@
+provider: 100ms
+providerId: 100ms-live
+reviewer: API Evangelist
+reviewedBy: Kin Lane
+date: '2026-05-29'
+scope: AsyncAPI / public WebSocket protocol review
+verdict: no-public-websocket-protocol
+verdictRationale: >
+  100ms does not publish a documented public WebSocket protocol that a third-party
+  server can connect to. WebSocket transport exists inside the platform — it carries
+  in-room chat and SDK signaling between client SDKs and the 100ms media servers — but
+  it is treated as an internal implementation detail of the JavaScript / iOS / Android /
+  React Native / Flutter SDKs, not as a public on-the-wire contract. The only
+  documented references to WebSockets in the public docs are (a) the JavaScript SDK
+  FAQ noting "Chat is sent over websockets," and (b) the firewall guide listing
+  "API, WebSocket, TURN/TLS" alongside ports 80/443 and the *.100ms.live wildcard for
+  outbound whitelisting. Neither document exposes a wss:// endpoint URL, a message
+  schema, a subprotocol identifier, an authentication handshake, or a list of
+  channels / operations that a developer could implement against.
+  Server-side event delivery to customer infrastructure is done via HMAC-signed
+  HTTP POST webhooks (configured in the dashboard) and pulled via the REST
+  Analytics API (events, track-events, recording-events, error-events,
+  peer-quality-stats). Both are HTTP-based and already covered by the existing
+  OpenAPI artifact at openapi/100ms-live-server-side-api-openapi.yml.
+findings:
+  - finding: No public WebSocket endpoint URL is published.
+    evidence:
+      - Firewall guide lists "*.100ms.live" + ports 80/443 (and TURN 3478, UDP 41000-65535)
+        as outbound whitelist targets, not as a documented WebSocket API surface.
+      - No wss:// URL appears anywhere in the server-side v2 docs, the JavaScript v2
+        docs, or the API reference.
+    sources:
+      - https://www.100ms.live/docs/server-side/v2/how-to-guides/firewall-and-ports
+      - https://www.100ms.live/docs/javascript/v2/how-to-guides/debugging/faq
+  - finding: WebSocket usage is SDK-internal (chat + signaling), not a public protocol.
+    evidence:
+      - JavaScript SDK FAQ states "Chat is sent over websockets" but provides no
+        endpoint, frame format, or subprotocol — the SDK is the contract.
+      - No "WebSocket API" or "Streaming API" section exists under
+        /docs/server-side/v2/api-reference/.
+    sources:
+      - https://www.100ms.live/docs/javascript/v2/how-to-guides/debugging/faq
+      - https://www.100ms.live/docs/server-side/v2/api-reference/
+  - finding: Push event delivery to customer infrastructure is webhooks-only.
+    evidence:
+      - Webhook overview defines a webhook as "an HTTP(S) endpoint used for pushing
+        notifications" that "MUST implement POST HTTP method for receiving notifications."
+      - Webhooks are HMAC-signed and configured via the 100ms dashboard.
+      - Documented event types include peer.join, peer.leave, session.open,
+        session.close, beam.started.success, beam.recording.success, beam.failure,
+        track.add, track.remove, and recording lifecycle events.
+    sources:
+      - https://www.100ms.live/docs/server-side/v2/how-to-guides/configure-webhooks/overview
+      - https://www.100ms.live/docs/server-side/v2/how-to-guides/configure-webhooks/webhook
+      - https://www.100ms.live/docs/server-side/v2/how-to-guides/configure-webhooks/secure-webhooks
+  - finding: Pull-based event retrieval is REST, not streaming.
+    evidence:
+      - Analytics API is a synchronous REST endpoint
+        (GET https://api.100ms.live/v2/analytics/events?type=...&room_id=...).
+      - Docs describe Analytics as "similar to webhook" but pull/polled, not pushed.
+    sources:
+      - https://www.100ms.live/docs/server-side/v2/api-reference/analytics/recording-events
+probes:
+  - probe: WebFetch https://www.100ms.live/docs/server-side/v2/how-to-guides/configure-webhooks/overview
+    status: 200
+    note: Confirms webhooks are HTTP POST only; no WebSocket / SSE alternative is mentioned.
+  - probe: WebFetch https://www.100ms.live/docs/javascript/v2/how-to-guides/debugging/faq
+    status: 200
+    note: Single passing reference — "Chat is sent over websockets" — with no protocol detail.
+  - probe: WebFetch https://www.100ms.live/docs/server-side/v2/how-to-guides/firewall-and-ports
+    status: 200
+    note: Lists *.100ms.live + ports but does not document a public WebSocket endpoint.
+  - probe: WebFetch https://www.100ms.live/docs/server-side/v2/api-reference/analytics/recording-events
+    status: 200
+    note: Analytics API is REST/polling, not streaming.
+  - probe: WebSearch "100ms.live" "wss://" OR "websocket endpoint" developer documentation
+    status: ok
+    note: No wss:// endpoint or AsyncAPI artifact returned; only the FAQ and firewall guide surface.
+publicWebSocketProtocol: false
+publicSSEProtocol: false
+publicGrpcStreamingProtocol: false
+serverSentEventsDocumented: false
+eventDeliveryMechanisms:
+  - mechanism: Webhooks
+    transport: HTTP POST
+    auth: HMAC signature (shared secret) + optional source-IP allowlist
+    docs: https://www.100ms.live/docs/server-side/v2/how-to-guides/configure-webhooks/overview
+  - mechanism: Analytics API
+    transport: HTTPS GET (REST)
+    auth: Management JWT (HS256, app access key + secret)
+    docs: https://www.100ms.live/docs/server-side/v2/api-reference/analytics/recording-events
+sdkInternalRealtime:
+  transport: WebSocket (wss) + WebRTC (SRTP/DTLS) + TURN
+  purpose: Signaling, in-room chat, media negotiation between SDK and 100ms media servers
+  publiclyContracted: false
+  note: >
+    The wire protocol between the 100ms SDKs and the 100ms backend is not a published
+    contract. Customers integrate via the supported SDKs (Web, iOS, Android, React
+    Native, Flutter) rather than by speaking the wire protocol directly. There is no
+    documented way for a third-party server to open a wss:// session and exchange
+    messages with 100ms.
+decision:
+  produceAsyncAPI: false
+  reason: >
+    Producing an AsyncAPI 2.6 / 3.0 spec would require fabricating channel URLs,
+    message schemas, and operation bindings that 100ms has not published. The
+    documented event surface is fully covered by the existing REST OpenAPI
+    (webhooks configuration + analytics) and by the JSON Schema for
+    webhook event payloads (json-schema/100ms-live-webhook-event-schema.json).
+    No AsyncAPI artifact will be added to apis.yml.
+  alternatives:
+    - Keep webhook event coverage in the existing REST OpenAPI + JSON Schema.
+    - Re-evaluate if 100ms publishes a documented streaming/server-events
+      endpoint in a future release.
+links:
+  docs:
+    - https://www.100ms.live/docs/
+    - https://www.100ms.live/docs/server-side/v2/foundation/basics
+    - https://www.100ms.live/docs/server-side/v2/how-to-guides/configure-webhooks/overview
+    - https://www.100ms.live/docs/server-side/v2/how-to-guides/configure-webhooks/webhook
+    - https://www.100ms.live/docs/server-side/v2/how-to-guides/configure-webhooks/secure-webhooks
+    - https://www.100ms.live/docs/server-side/v2/how-to-guides/firewall-and-ports
+    - https://www.100ms.live/docs/server-side/v2/api-reference/analytics/recording-events
+    - https://www.100ms.live/docs/javascript/v2/how-to-guides/debugging/faq
+  github:
+    - https://github.com/100mslive
+    - https://github.com/100mslive/server-sdks
