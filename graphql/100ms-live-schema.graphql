@@ -1,0 +1,1058 @@
+"""
+100ms Live GraphQL Schema
+Conceptual schema derived from the 100ms Server-Side REST API.
+Source: https://www.100ms.live/docs/api-reference/
+Base REST URL: https://api.100ms.live/v2
+"""
+
+# ─── Scalars ────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar URL
+
+# ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum RecordingStatus {
+  STARTING
+  RUNNING
+  STOPPING
+  STOPPED
+  FAILED
+}
+
+enum StreamStatus {
+  STARTING
+  RUNNING
+  STOPPING
+  STOPPED
+  FAILED
+}
+
+enum TrackType {
+  AUDIO
+  VIDEO
+  SCREEN
+}
+
+enum TrackState {
+  ACTIVE
+  INACTIVE
+  DEGRADED
+}
+
+enum PeerRole {
+  HOST
+  GUEST
+  VIEWER
+  HLS_VIEWER
+  BROADCASTER
+  CUSTOM
+}
+
+enum VideoQuality {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum StorageType {
+  S3
+  GCS
+  OBS
+  INTERNAL
+}
+
+enum WebhookEventType {
+  room_created
+  room_deleted
+  peer_joined
+  peer_left
+  track_added
+  track_removed
+  recording_started
+  recording_stopped
+  recording_success
+  recording_failed
+  hls_started
+  hls_stopped
+  rtmp_started
+  rtmp_stopped
+  session_created
+  session_closed
+  transcription_success
+  transcription_failed
+}
+
+enum SubscriptionPolicy {
+  ALL
+  ROLES
+  NONE
+}
+
+# ─── Room ───────────────────────────────────────────────────────────────────
+
+"""
+A Room is the persistent container for all 100ms sessions. It is created once
+and may host many sequential sessions. Each room is linked to a template that
+defines role and feature policy.
+"""
+type Room {
+  id: ID!
+  name: String!
+  description: String
+  enabled: Boolean!
+  templateId: ID!
+  template: Template
+  region: String
+  recordingConfig: RecordingConfig
+  created_at: DateTime!
+  updated_at: DateTime!
+  details: RoomDetails
+}
+
+"""Extended details returned when fetching a single room."""
+type RoomDetails {
+  id: ID!
+  name: String!
+  description: String
+  enabled: Boolean!
+  templateId: ID!
+  region: String
+  maxDurationSeconds: Int
+  autoStopTimeout: Int
+  recordingConfig: RecordingConfig
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""Configuration options for creating or updating a room."""
+type RoomConfig {
+  name: String!
+  description: String
+  templateId: ID!
+  region: String
+  recordingConfig: RecordingConfig
+  maxDurationSeconds: Int
+}
+
+"""Per-room recording policy."""
+type RecordingConfig {
+  enabled: Boolean!
+  uploadInfo: RecordingStorage
+  compositeKey: String
+}
+
+# ─── Template ────────────────────────────────────────────────────────────────
+
+"""
+A Template is a reusable policy blueprint applied to rooms. It defines roles,
+feature flags (polls, whiteboard, HLS, RTMP), and default settings.
+"""
+type Template {
+  id: ID!
+  name: String!
+  customerId: String
+  default: Boolean
+  roles: [Role!]
+  config: TemplateConfig
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""Full template details including nested roles and settings."""
+type TemplateDetails {
+  id: ID!
+  name: String!
+  customerId: String
+  default: Boolean
+  roles: [RoleDetails!]
+  settings: JSON
+  config: TemplateConfig
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""Top-level template feature configuration."""
+type TemplateConfig {
+  recording: Boolean
+  hls: Boolean
+  rtmp: Boolean
+  polls: Boolean
+  whiteboard: Boolean
+  chat: Boolean
+  noiseSupression: Boolean
+  virtualBackground: Boolean
+}
+
+# ─── Role ────────────────────────────────────────────────────────────────────
+
+"""
+A Role defines what a peer is allowed to publish and subscribe to within a room.
+Each template can have many roles (e.g. host, guest, viewer, broadcaster).
+"""
+type Role {
+  name: String!
+  templateId: ID!
+  publishParams: RolePublishParams
+  subscribeParams: RoleSubscribeParams
+  permissions: RolePermissions
+  priority: Int
+}
+
+"""Detailed role object including all nested policy objects."""
+type RoleDetails {
+  name: String!
+  templateId: ID!
+  publishParams: RolePublishParams
+  subscribeParams: RoleSubscribeParams
+  permissions: RolePermissions
+  priority: Int
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""What media a peer in this role is allowed to publish."""
+type RolePublishParams {
+  audio: Boolean!
+  video: Boolean!
+  screen: Boolean!
+  allowed: [String!]
+  videoSimulcastLayers: [SimulcastLayer!]
+}
+
+"""What other roles/peers a peer in this role can subscribe to."""
+type RoleSubscribeParams {
+  subscribeToRoles: [String!]
+  maxSubsBitRate: Int
+  subscribePolicy: SubscriptionPolicy
+  degradationPreference: String
+}
+
+"""In-session moderation permissions assigned to a role."""
+type RolePermissions {
+  endRoom: Boolean
+  removeOthers: Boolean
+  muteAll: Boolean
+  unmuteAll: Boolean
+  changeRole: Boolean
+  sendMessages: Boolean
+  hlsViewer: Boolean
+  browserRecording: Boolean
+  rtmpStreaming: Boolean
+}
+
+"""A single simulcast video layer definition."""
+type SimulcastLayer {
+  rid: String!
+  scaleResolutionDownBy: Float
+  maxBitrate: Int
+  maxFramerate: Int
+}
+
+# ─── RoleConfig (input mirror) ───────────────────────────────────────────────
+
+"""Role configuration returned in flat summary contexts."""
+type RoleConfig {
+  name: String!
+  publishVideo: Boolean
+  publishAudio: Boolean
+  publishScreen: Boolean
+  canChangeRole: Boolean
+  canEndRoom: Boolean
+  canRemovePeers: Boolean
+}
+
+# ─── Peer ────────────────────────────────────────────────────────────────────
+
+"""
+A Peer is a participant connected to an active room in the current session.
+"""
+type Peer {
+  id: ID!
+  sessionId: ID!
+  roomId: ID!
+  name: String
+  role: String
+  userId: String
+  joinedAt: DateTime
+  leftAt: DateTime
+  isActive: Boolean!
+  tracks: PeerTracks
+  status: PeerStatus
+}
+
+"""Detailed peer object including metadata and track states."""
+type PeerDetails {
+  id: ID!
+  sessionId: ID!
+  roomId: ID!
+  name: String
+  role: String
+  userId: String
+  joinedAt: DateTime
+  leftAt: DateTime
+  isActive: Boolean!
+  tracks: PeerTracks
+  status: PeerStatus
+  metadata: String
+  networkQuality: NetworkScore
+}
+
+"""Current connectivity and media status of a peer."""
+type PeerStatus {
+  connected: Boolean!
+  audioMuted: Boolean
+  videoMuted: Boolean
+  screenShareActive: Boolean
+}
+
+"""All tracks currently associated with a peer."""
+type PeerTracks {
+  audio: AudioTrack
+  video: VideoTrack
+  screen: ScreenTrack
+}
+
+# ─── Tracks ──────────────────────────────────────────────────────────────────
+
+"""An audio track published by a peer."""
+type AudioTrack {
+  id: ID!
+  peerId: ID!
+  sessionId: ID!
+  enabled: Boolean!
+  state: TrackState!
+  codec: String
+  bitrate: Int
+  started_at: DateTime
+  stopped_at: DateTime
+}
+
+"""A video track published by a peer."""
+type VideoTrack {
+  id: ID!
+  peerId: ID!
+  sessionId: ID!
+  enabled: Boolean!
+  state: TrackState!
+  codec: String
+  width: Int
+  height: Int
+  frameRate: Int
+  bitrate: Int
+  quality: VideoQuality
+  started_at: DateTime
+  stopped_at: DateTime
+}
+
+"""A screen-share track published by a peer."""
+type ScreenTrack {
+  id: ID!
+  peerId: ID!
+  sessionId: ID!
+  enabled: Boolean!
+  state: TrackState!
+  codec: String
+  width: Int
+  height: Int
+  frameRate: Int
+  started_at: DateTime
+  stopped_at: DateTime
+}
+
+# ─── Meeting and Tokens ───────────────────────────────────────────────────────
+
+"""
+A Meeting represents the live context of an ongoing session in a room,
+including current peers and streaming state.
+"""
+type Meeting {
+  roomId: ID!
+  sessionId: ID!
+  active: Boolean!
+  peers: [Peer!]
+  recording: Recording
+  hlsStream: HLS
+  rtmpStream: RTMP
+  startedAt: DateTime
+}
+
+"""A signed JWT used by a peer to authenticate and join a room."""
+type MeetingToken {
+  token: String!
+  roomId: ID!
+  role: String!
+  userId: String
+  expiresAt: DateTime!
+}
+
+"""Parameters used to generate a MeetingToken."""
+type TokenParams {
+  roomId: ID!
+  role: String!
+  userId: String
+  userName: String
+  metadata: String
+  expirySeconds: Int
+}
+
+# ─── Session ─────────────────────────────────────────────────────────────────
+
+"""
+A Session is a time-bounded occurrence of activity in a room. A single room
+can have many sequential sessions over its lifetime.
+"""
+type Session {
+  id: ID!
+  roomId: ID!
+  active: Boolean!
+  peers: [Peer!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  duration: SessionDuration
+}
+
+"""Full session details including analytics hooks."""
+type SessionDetails {
+  id: ID!
+  roomId: ID!
+  active: Boolean!
+  peers: [PeerDetails!]
+  recording: RecordingDetails
+  hlsStream: HLSConfig
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  duration: SessionDuration
+}
+
+"""Timing and duration data for a session."""
+type SessionDuration {
+  startedAt: DateTime
+  endedAt: DateTime
+  durationSeconds: Int
+}
+
+# ─── Recording ───────────────────────────────────────────────────────────────
+
+"""
+A Recording captures a session in composite (mixed) or per-track mode
+and uploads it to a configured storage destination.
+"""
+type Recording {
+  id: ID!
+  roomId: ID!
+  sessionId: ID!
+  status: RecordingStatus!
+  duration: Int
+  size: Int
+  uploadInfo: RecordingStorage
+  startedAt: DateTime
+  stoppedAt: DateTime
+  assetId: String
+}
+
+"""Detailed recording object including download URLs and metadata."""
+type RecordingDetails {
+  id: ID!
+  roomId: ID!
+  sessionId: ID!
+  status: RecordingStatus!
+  duration: Int
+  size: Int
+  uploadInfo: RecordingStorage
+  downloadUrl: URL
+  thumbnailUrl: URL
+  startedAt: DateTime
+  stoppedAt: DateTime
+  assetId: String
+  metadata: JSON
+}
+
+"""Storage destination and upload state for a recording asset."""
+type RecordingStorage {
+  type: StorageType!
+  location: String!
+  prefix: String
+  options: JSON
+  uploadedAt: DateTime
+  uploadedSize: Int
+}
+
+# ─── Transcript ───────────────────────────────────────────────────────────────
+
+"""An AI-generated transcription linked to a recording."""
+type Transcript {
+  id: ID!
+  recordingId: ID!
+  roomId: ID!
+  sessionId: ID!
+  status: RecordingStatus!
+  language: String
+  createdAt: DateTime!
+}
+
+"""Full transcript details including segment-level data."""
+type TranscriptDetails {
+  id: ID!
+  recordingId: ID!
+  roomId: ID!
+  sessionId: ID!
+  status: RecordingStatus!
+  language: String
+  segments: [TranscriptSegment!]
+  fullText: String
+  downloadUrl: URL
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A time-stamped segment within a transcript."""
+type TranscriptSegment {
+  id: ID!
+  speakerId: String
+  speakerName: String
+  text: String!
+  startMs: Int!
+  endMs: Int!
+  confidence: Float
+}
+
+# ─── Beam ────────────────────────────────────────────────────────────────────
+
+"""
+The Beam service is an internal 100ms encoder/compositor that drives HLS
+and RTMP output from an active room.
+"""
+type Beam {
+  id: ID!
+  roomId: ID!
+  sessionId: ID!
+  status: StreamStatus!
+  startedAt: DateTime
+  stoppedAt: DateTime
+}
+
+"""Detailed beam state including configuration."""
+type BeamDetails {
+  id: ID!
+  roomId: ID!
+  sessionId: ID!
+  status: StreamStatus!
+  config: BeamConfig
+  startedAt: DateTime
+  stoppedAt: DateTime
+  logs: [String!]
+}
+
+"""Configuration for a beam compositor instance."""
+type BeamConfig {
+  width: Int
+  height: Int
+  frameRate: Int
+  bitrate: Int
+  recordingEnabled: Boolean
+  hlsEnabled: Boolean
+  rtmpEnabled: Boolean
+}
+
+# ─── RTMP ────────────────────────────────────────────────────────────────────
+
+"""
+RTMP encapsulates both ingest stream keys (peers push into 100ms) and
+external RTMP push destinations (100ms pushes to YouTube, Twitch, etc.).
+"""
+type RTMP {
+  id: ID!
+  roomId: ID!
+  sessionId: ID!
+  status: StreamStatus!
+  streamKey: String
+  ingestUrl: URL
+  destinations: [RTMPDestination!]
+  startedAt: DateTime
+  stoppedAt: DateTime
+}
+
+"""A single external RTMP push destination."""
+type RTMPDestination {
+  url: URL!
+  streamKey: String
+  label: String
+}
+
+# ─── HLS ─────────────────────────────────────────────────────────────────────
+
+"""HLS live streaming state for a room."""
+type HLS {
+  id: ID!
+  roomId: ID!
+  sessionId: ID!
+  status: StreamStatus!
+  config: HLSConfig
+  playlist: HLSPlaylist
+  startedAt: DateTime
+  stoppedAt: DateTime
+}
+
+"""Configuration for an HLS live stream."""
+type HLSConfig {
+  meetingUrl: URL
+  recordingEnabled: Boolean
+  singleFilePerLayer: Boolean
+  videoOnDemand: Boolean
+  playlistType: String
+  numPlaylistSegments: Int
+  targetSegmentDuration: Int
+}
+
+"""HLS manifest URL details for viewers."""
+type HLSPlaylist {
+  url: URL!
+  m3u8Url: URL
+  variants: [HLSVariant!]
+}
+
+"""A single HLS variant playlist for a quality tier."""
+type HLSVariant {
+  url: URL!
+  bandwidth: Int
+  resolution: String
+  frameRate: Float
+}
+
+# ─── Live Stream and Composite Stream ────────────────────────────────────────
+
+"""Current live stream context for a room (HLS or RTMP)."""
+type LiveStream {
+  roomId: ID!
+  sessionId: ID!
+  hls: HLS
+  rtmp: RTMP
+  beam: Beam
+  active: Boolean!
+  startedAt: DateTime
+}
+
+"""A composite output stream that merges all peer tracks."""
+type CompositeStream {
+  id: ID!
+  roomId: ID!
+  sessionId: ID!
+  status: StreamStatus!
+  resolution: String
+  bitrate: Int
+  frameRate: Int
+  startedAt: DateTime
+  stoppedAt: DateTime
+}
+
+# ─── Broadcast Events ─────────────────────────────────────────────────────────
+
+"""A real-time broadcast lifecycle event emitted by 100ms."""
+type BroadcastEvent {
+  id: ID!
+  type: WebhookEventType!
+  roomId: ID!
+  sessionId: ID
+  timestamp: DateTime!
+  details: EventDetails
+}
+
+"""Payload details for a broadcast event."""
+type EventDetails {
+  peerId: ID
+  peerName: String
+  role: String
+  trackId: ID
+  trackType: TrackType
+  reason: String
+  metadata: JSON
+}
+
+# ─── Analytics ───────────────────────────────────────────────────────────────
+
+"""Aggregate analytics for a room over a time range."""
+type Analytics {
+  roomId: ID!
+  from: DateTime!
+  to: DateTime!
+  roomAnalytics: RoomAnalytics
+  sessionAnalytics: [SessionAnalytics!]
+  peerAnalytics: [PeerAnalytics!]
+  trackAnalytics: [TrackAnalytics!]
+}
+
+"""Room-level summary metrics."""
+type RoomAnalytics {
+  roomId: ID!
+  totalSessions: Int!
+  totalPeers: Int!
+  totalDurationSeconds: Int!
+  avgSessionDurationSeconds: Float
+  peakConcurrentPeers: Int
+  totalRecordings: Int
+  totalHLSMinutes: Float
+}
+
+"""Session-level analytics snapshot."""
+type SessionAnalytics {
+  sessionId: ID!
+  roomId: ID!
+  peersJoined: Int!
+  durationSeconds: Int
+  avgNetworkScore: Float
+  recordingCount: Int
+  startedAt: DateTime
+  endedAt: DateTime
+}
+
+"""Per-peer analytics summary for a session."""
+type PeerAnalytics {
+  peerId: ID!
+  sessionId: ID!
+  roomId: ID!
+  name: String
+  role: String
+  joinDurationSeconds: Int
+  audioPublishSeconds: Int
+  videoPublishSeconds: Int
+  screenPublishSeconds: Int
+  avgNetworkScore: Float
+}
+
+"""Per-track quality analytics."""
+type TrackAnalytics {
+  trackId: ID!
+  peerId: ID!
+  sessionId: ID!
+  roomId: ID!
+  type: TrackType!
+  codec: String
+  totalSeconds: Int
+  avgBitrate: Int
+  avgFrameRate: Float
+  avgResolution: String
+  packetsLostPct: Float
+  jitterMs: Float
+}
+
+"""Network quality score for a peer or track."""
+type NetworkScore {
+  overall: Float!
+  audio: Float
+  video: Float
+  downlink: Float
+  uplink: Float
+  rttMs: Float
+  jitterMs: Float
+  packetsLostPct: Float
+}
+
+# ─── Webhooks ─────────────────────────────────────────────────────────────────
+
+"""A registered webhook endpoint that receives 100ms event notifications."""
+type Webhook {
+  id: ID!
+  url: URL!
+  events: [WebhookEventType!]
+  enabled: Boolean!
+  secret: String
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""A single webhook event delivery record."""
+type WebhookEvent {
+  id: ID!
+  webhookId: ID!
+  type: WebhookEventType!
+  roomId: ID!
+  sessionId: ID
+  payload: JSON!
+  deliveredAt: DateTime
+  statusCode: Int
+  success: Boolean!
+  retries: Int
+}
+
+# ─── Auth ─────────────────────────────────────────────────────────────────────
+
+"""An API key pair used to generate management tokens."""
+type APIKey {
+  keyId: ID!
+  appName: String
+  enabled: Boolean!
+  created_at: DateTime!
+}
+
+"""A short-lived management JWT used to authenticate API calls."""
+type ManagementToken {
+  token: String!
+  keyId: ID!
+  expiresAt: DateTime!
+  issuedAt: DateTime!
+}
+
+# ─── Input Types ──────────────────────────────────────────────────────────────
+
+input RoomInput {
+  name: String
+  description: String
+  templateId: ID
+  region: String
+  recordingConfig: RecordingConfigInput
+  maxDurationSeconds: Int
+}
+
+input RecordingConfigInput {
+  enabled: Boolean!
+  uploadInfo: RecordingStorageInput
+}
+
+input RecordingStorageInput {
+  type: StorageType!
+  location: String!
+  prefix: String
+  options: JSON
+}
+
+input RecordingInput {
+  resolution: String
+  frameRate: Int
+  quality: VideoQuality
+  uploadInfo: RecordingStorageInput
+  transcriptionEnabled: Boolean
+}
+
+input HLSInput {
+  meetingUrl: URL
+  recordingEnabled: Boolean
+  singleFilePerLayer: Boolean
+  videoOnDemand: Boolean
+  numPlaylistSegments: Int
+  targetSegmentDuration: Int
+}
+
+input RTMPInput {
+  destinations: [RTMPDestinationInput!]!
+  recordingEnabled: Boolean
+}
+
+input RTMPDestinationInput {
+  url: URL!
+  streamKey: String
+  label: String
+}
+
+input TemplateInput {
+  name: String!
+  config: TemplateConfigInput
+}
+
+input TemplateConfigInput {
+  recording: Boolean
+  hls: Boolean
+  rtmp: Boolean
+  polls: Boolean
+  whiteboard: Boolean
+  chat: Boolean
+}
+
+input RoleInput {
+  name: String!
+  publishParams: RolePublishParamsInput
+  subscribeParams: RoleSubscribeParamsInput
+  permissions: RolePermissionsInput
+  priority: Int
+}
+
+input RolePublishParamsInput {
+  audio: Boolean
+  video: Boolean
+  screen: Boolean
+}
+
+input RoleSubscribeParamsInput {
+  subscribeToRoles: [String!]
+  maxSubsBitRate: Int
+  subscribePolicy: SubscriptionPolicy
+}
+
+input RolePermissionsInput {
+  endRoom: Boolean
+  removeOthers: Boolean
+  muteAll: Boolean
+  unmuteAll: Boolean
+  changeRole: Boolean
+  sendMessages: Boolean
+}
+
+input TokenParamsInput {
+  roomId: ID!
+  role: String!
+  userId: String
+  userName: String
+  metadata: String
+  expirySeconds: Int
+}
+
+input WebhookInput {
+  url: URL!
+  events: [WebhookEventType!]
+  enabled: Boolean
+  secret: String
+}
+
+# ─── Query ────────────────────────────────────────────────────────────────────
+
+type Query {
+  """Fetch a single room by ID."""
+  room(id: ID!): Room
+
+  """List rooms with optional filters."""
+  rooms(enabled: Boolean, templateId: ID, limit: Int, start: String): [Room!]!
+
+  """Fetch a single template by ID."""
+  template(id: ID!): Template
+
+  """List all templates."""
+  templates: [Template!]!
+
+  """Fetch a role within a template."""
+  role(templateId: ID!, roleName: String!): RoleDetails
+
+  """Fetch a session by ID."""
+  session(id: ID!): SessionDetails
+
+  """List sessions for a room."""
+  sessions(roomId: ID!, active: Boolean, limit: Int, start: String): [Session!]!
+
+  """Fetch a recording by ID."""
+  recording(id: ID!): RecordingDetails
+
+  """List recordings for a room."""
+  recordings(roomId: ID!, status: RecordingStatus, limit: Int): [Recording!]!
+
+  """Fetch a transcript by ID."""
+  transcript(id: ID!): TranscriptDetails
+
+  """Get the current live stream state for a room."""
+  liveStream(roomId: ID!): LiveStream
+
+  """List peers currently in an active room."""
+  peers(roomId: ID!, sessionId: ID): [Peer!]!
+
+  """Fetch a single peer by ID."""
+  peer(roomId: ID!, peerId: ID!): PeerDetails
+
+  """Fetch room-level analytics for a time range."""
+  analytics(roomId: ID!, from: String!, to: String!): Analytics
+
+  """List registered webhook endpoints."""
+  webhooks: [Webhook!]!
+
+  """Fetch a single webhook."""
+  webhook(id: ID!): Webhook
+
+  """List recent webhook event deliveries."""
+  webhookEvents(webhookId: ID, limit: Int): [WebhookEvent!]!
+
+  """List API keys for the account."""
+  apiKeys: [APIKey!]!
+}
+
+# ─── Mutation ─────────────────────────────────────────────────────────────────
+
+type Mutation {
+  """Create a new room."""
+  createRoom(input: RoomInput!): Room!
+
+  """Update an existing room."""
+  updateRoom(id: ID!, input: RoomInput!): Room!
+
+  """Enable a disabled room."""
+  enableRoom(id: ID!): Room!
+
+  """Disable an active room."""
+  disableRoom(id: ID!): Room!
+
+  """Create a new template."""
+  createTemplate(input: TemplateInput!): Template!
+
+  """Update an existing template."""
+  updateTemplate(id: ID!, input: TemplateInput!): Template!
+
+  """Add a new role to a template."""
+  createRole(templateId: ID!, input: RoleInput!): Role!
+
+  """Update an existing role on a template."""
+  updateRole(templateId: ID!, roleName: String!, input: RoleInput!): Role!
+
+  """Start a composite recording in a room."""
+  startRecording(roomId: ID!, input: RecordingInput): Recording!
+
+  """Stop the active recording in a room."""
+  stopRecording(roomId: ID!): Recording!
+
+  """Start an HLS live stream for a room."""
+  startHLS(roomId: ID!, input: HLSInput): HLS!
+
+  """Stop the active HLS live stream for a room."""
+  stopHLS(roomId: ID!): HLS!
+
+  """Start an RTMP push stream from a room."""
+  startRTMP(roomId: ID!, input: RTMPInput!): RTMP!
+
+  """Stop the active RTMP push stream for a room."""
+  stopRTMP(roomId: ID!): RTMP!
+
+  """Broadcast a message to peers in a room (optionally filtered by role)."""
+  sendMessage(roomId: ID!, message: String!, roles: [String]): Boolean!
+
+  """Kick a peer from an active room."""
+  removePeer(roomId: ID!, peerId: ID!, reason: String): Boolean!
+
+  """Mute a peer's audio or video track."""
+  mutePeer(roomId: ID!, peerId: ID!, type: TrackType!): Boolean!
+
+  """Change a peer's role in an active room."""
+  changePeerRole(roomId: ID!, peerId: ID!, role: String!, force: Boolean): Boolean!
+
+  """End all active sessions in a room."""
+  endRoom(roomId: ID!, reason: String, lock: Boolean): Boolean!
+
+  """Register a new webhook endpoint."""
+  createWebhook(input: WebhookInput!): Webhook!
+
+  """Update an existing webhook."""
+  updateWebhook(id: ID!, input: WebhookInput!): Webhook!
+
+  """Delete a webhook endpoint."""
+  deleteWebhook(id: ID!): Boolean!
+
+  """Generate a management token for API authentication."""
+  generateManagementToken(keyId: ID!, expirySeconds: Int): ManagementToken!
+
+  """Generate a peer join token."""
+  generateToken(input: TokenParamsInput!): MeetingToken!
+}
+
+# ─── Subscription ─────────────────────────────────────────────────────────────
+
+type Subscription {
+  """Stream peer join/leave events for a room."""
+  peerEvents(roomId: ID!): BroadcastEvent!
+
+  """Stream track state changes for a room."""
+  trackEvents(roomId: ID!): BroadcastEvent!
+
+  """Stream recording state changes for a room."""
+  recordingEvents(roomId: ID!): BroadcastEvent!
+
+  """Stream HLS/RTMP stream state changes for a room."""
+  streamEvents(roomId: ID!): BroadcastEvent!
+
+  """Stream all webhook events for an account."""
+  webhookEvents(types: [WebhookEventType!]): WebhookEvent!
+}
