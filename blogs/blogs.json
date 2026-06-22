@@ -4,9 +4,9 @@
     {
       "source": "https://www.100ms.live/blog",
       "feed_url": "https://www.100ms.live/blog",
-      "title": "",
+      "title": "100ms Blog",
       "saved": 0,
-      "method": "none"
+      "method": "html-scrape"
     },
     {
       "source": "https://status.100ms.live/",
@@ -17,5 +17,5 @@
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-21T17:00:00Z"
 }
