@@ -63,7 +63,7 @@ apis:
     url: openapi/100ms-live-server-side-api-openapi.yml
   - type: Postman
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
-  - type: SDK
+  - type: SDKs
     url: https://github.com/100mslive/server-sdks
   - url: graphql/100ms-live-graphql.md
     type: GraphQL
@@ -95,7 +95,7 @@ common:
   url: https://www.100ms.live/
 - type: Documentation
   url: https://www.100ms.live/docs/
-- type: SignUp
+- type: Signup
   url: https://dashboard.100ms.live/register
 - type: Dashboard
   url: https://dashboard.100ms.live/
@@ -113,17 +113,17 @@ common:
   url: https://twitter.com/100mslive
 - type: LinkedIn
   url: https://www.linkedin.com/company/100mslive/
-- type: SDK
+- type: SDKs
   url: https://github.com/100mslive/web-sdks
-- type: SDK
+- type: SDKs
   url: https://github.com/100mslive/100ms-ios-sdk
-- type: SDK
+- type: SDKs
   url: https://github.com/100mslive/100ms-android
-- type: SDK
+- type: SDKs
   url: https://github.com/100mslive/100ms-react-native
-- type: SDK
+- type: SDKs
   url: https://github.com/100mslive/100ms-flutter
-- type: SDK
+- type: SDKs
   url: https://github.com/100mslive/server-sdks
 - type: Samples
   url: https://github.com/100mslive/100ms-examples
