@@ -91,6 +91,14 @@ apis:
   - AWS S3 (recording storage)
   - Webhooks (HMAC-signed)
 common:
+- type: TrustCenter
+  url: security/100ms-live-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/100ms-live-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/100ms-live-domain-security.yml
+- type: Authentication
+  url: authentication/100ms-live-authentication.yml
 - type: Portal
   url: https://www.100ms.live/
 - type: Documentation

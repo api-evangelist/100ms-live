@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/100ms-live-server-side-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: ManagementToken
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded
+    from the 100ms dashboard. Include as `Authorization: Bearer <token>`.'
+  sources:
+  - openapi/100ms-live-server-side-api-openapi.yml

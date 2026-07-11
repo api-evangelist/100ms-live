@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://www.100ms.live/security
+url: https://www.100ms.live/security
+certifications:
+- SOC 2
+- HIPAA
+evidence:
+- source: https://www.100ms.live/security
+  keywords:
+  - soc 2
+  - soc2
+  - hipaa
