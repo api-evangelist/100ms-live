@@ -91,6 +91,8 @@ apis:
   - AWS S3 (recording storage)
   - Webhooks (HMAC-signed)
 common:
+- type: AgenticAccess
+  url: agentic-access/100ms-live-agentic-access.yml
 - type: TrustCenter
   url: security/100ms-live-trust-center.yml
 - type: VulnerabilityDisclosure
