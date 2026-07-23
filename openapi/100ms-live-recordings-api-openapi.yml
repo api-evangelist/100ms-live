@@ -1,0 +1,276 @@
+openapi: 3.1.0
+info:
+  title: 100ms Server-Side Active Rooms Recordings API
+  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
+
+    '
+  version: v2
+  contact:
+    name: 100ms Support
+    url: https://www.100ms.live/contact-sales
+  license:
+    name: 100ms Terms of Service
+    url: https://www.100ms.live/legal/terms-and-conditions
+servers:
+- url: https://api.100ms.live/v2
+  description: Production
+security:
+- ManagementToken: []
+tags:
+- name: Recordings
+  description: Composite and track-level recordings of sessions.
+paths:
+  /recordings:
+    get:
+      summary: List All Recordings
+      operationId: listRecordings
+      tags:
+      - Recordings
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Start'
+      - in: query
+        name: room_id
+        schema:
+          type: string
+      - in: query
+        name: session_id
+        schema:
+          type: string
+      - in: query
+        name: status
+        schema:
+          type: string
+          enum:
+          - running
+          - completed
+          - failed
+          - paused
+      responses:
+        '200':
+          $ref: '#/components/responses/RecordingList'
+  /recordings/{recording_id}:
+    parameters:
+    - in: path
+      name: recording_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get Recording
+      operationId: getRecording
+      tags:
+      - Recordings
+      responses:
+        '200':
+          $ref: '#/components/responses/Recording'
+  /recordings/room/{room_id}/start:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Start Recording For Room
+      operationId: startRecordingForRoom
+      tags:
+      - Recordings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordingStart'
+      responses:
+        '200':
+          $ref: '#/components/responses/Recording'
+  /recordings/room/{room_id}/stop:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Stop Recording For Room
+      operationId: stopRecordingForRoom
+      tags:
+      - Recordings
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /recordings/{recording_id}/stop:
+    parameters:
+    - in: path
+      name: recording_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Stop Recording By Id
+      operationId: stopRecordingById
+      tags:
+      - Recordings
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /recordings/room/{room_id}/pause:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Pause Recording For Room
+      operationId: pauseRecording
+      tags:
+      - Recordings
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /recordings/room/{room_id}/resume:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Resume Recording For Room
+      operationId: resumeRecording
+      tags:
+      - Recordings
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+components:
+  schemas:
+    RecordingStart:
+      type: object
+      properties:
+        meeting_url:
+          type: string
+          format: uri
+        resolution:
+          type: object
+          properties:
+            width:
+              type: integer
+            height:
+              type: integer
+        recording:
+          type: object
+          properties:
+            hls_vod:
+              type: boolean
+            single_file_per_layer:
+              type: boolean
+    Recording:
+      type: object
+      properties:
+        id:
+          type: string
+        room_id:
+          type: string
+        session_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - init
+          - running
+          - paused
+          - completed
+          - failed
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        stopped_at:
+          type: string
+          format: date-time
+        stopped_by:
+          type: string
+        duration:
+          type: integer
+        size:
+          type: integer
+        recording_assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecordingAsset'
+    RecordingAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - room-composite
+          - room-vod
+          - transcript
+          - chat-log
+          - summary
+        path:
+          type: string
+        format:
+          type: string
+        size:
+          type: integer
+        duration:
+          type: integer
+        room_id:
+          type: string
+        session_id:
+          type: string
+        recording_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+  parameters:
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+  responses:
+    Recording:
+      description: Recording
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Recording'
+    RecordingList:
+      description: Page of recordings
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recording'
+              last:
+                type: string
+              limit:
+                type: integer
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+  securitySchemes:
+    ManagementToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded from the 100ms dashboard. Include as `Authorization: Bearer <token>`.
+
+        '

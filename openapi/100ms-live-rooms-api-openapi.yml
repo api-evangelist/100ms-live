@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: 100ms Server-Side Active Rooms API
+  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
+
+    '
+  version: v2
+  contact:
+    name: 100ms Support
+    url: https://www.100ms.live/contact-sales
+  license:
+    name: 100ms Terms of Service
+    url: https://www.100ms.live/legal/terms-and-conditions
+servers:
+- url: https://api.100ms.live/v2
+  description: Production
+security:
+- ManagementToken: []
+tags:
+- name: Rooms
+  description: Persistent containers for a live session.
+paths:
+  /rooms:
+    get:
+      summary: List Rooms
+      operationId: listRooms
+      tags:
+      - Rooms
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Start'
+      - in: query
+        name: enabled
+        schema:
+          type: boolean
+      - in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/RoomList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create Room
+      operationId: createRoom
+      tags:
+      - Rooms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomCreate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Room'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /rooms/{room_id}:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    get:
+      summary: Retrieve A Room
+      operationId: retrieveRoom
+      tags:
+      - Rooms
+      responses:
+        '200':
+          $ref: '#/components/responses/Room'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      summary: Update A Room
+      operationId: updateRoom
+      tags:
+      - Rooms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Room'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /rooms/{room_id}/enabled:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Disable Or Enable A Room
+      operationId: setRoomEnabled
+      tags:
+      - Rooms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - enabled
+              properties:
+                enabled:
+                  type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/Room'
+components:
+  schemas:
+    RoomUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        template_id:
+          type: string
+        recording_info:
+          type: object
+        size:
+          type: integer
+        max_duration_seconds:
+          type: integer
+    RoomList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Room'
+        last:
+          type: string
+        limit:
+          type: integer
+    RoomCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        template_id:
+          type: string
+        region:
+          type: string
+          enum:
+          - in
+          - us
+          - eu
+          - auto
+        recording_info:
+          type: object
+        size:
+          type: integer
+        max_duration_seconds:
+          type: integer
+        large_room:
+          type: boolean
+        webhook:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+    Room:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        enabled:
+          type: boolean
+        description:
+          type: string
+        customer_id:
+          type: string
+        app_id:
+          type: string
+        recording_info:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            upload_info:
+              type: object
+        template_id:
+          type: string
+        template:
+          type: string
+        region:
+          type: string
+          enum:
+          - in
+          - us
+          - eu
+          - auto
+        size:
+          type: integer
+        max_duration_seconds:
+          type: integer
+        large_room:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        customer:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        id:
+          type: string
+  responses:
+    Room:
+      description: Room
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Room'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RoomList:
+      description: Page of rooms
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RoomList'
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+  securitySchemes:
+    ManagementToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded from the 100ms dashboard. Include as `Authorization: Bearer <token>`.
+
+        '

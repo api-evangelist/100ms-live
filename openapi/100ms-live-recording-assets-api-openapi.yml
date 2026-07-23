@@ -1,0 +1,162 @@
+openapi: 3.1.0
+info:
+  title: 100ms Server-Side Active Rooms Recording Assets API
+  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
+
+    '
+  version: v2
+  contact:
+    name: 100ms Support
+    url: https://www.100ms.live/contact-sales
+  license:
+    name: 100ms Terms of Service
+    url: https://www.100ms.live/legal/terms-and-conditions
+servers:
+- url: https://api.100ms.live/v2
+  description: Production
+security:
+- ManagementToken: []
+tags:
+- name: Recording Assets
+  description: Output assets (mp4, mp3, transcript, chat) produced by recordings.
+paths:
+  /recording-assets:
+    get:
+      summary: List All Recording Assets
+      operationId: listRecordingAssets
+      tags:
+      - Recording Assets
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Start'
+      - in: query
+        name: room_id
+        schema:
+          type: string
+      - in: query
+        name: session_id
+        schema:
+          type: string
+      - in: query
+        name: type
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/RecordingAssetList'
+  /recording-assets/{asset_id}:
+    parameters:
+    - in: path
+      name: asset_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get Recording Asset
+      operationId: getRecordingAsset
+      tags:
+      - Recording Assets
+      responses:
+        '200':
+          $ref: '#/components/responses/RecordingAsset'
+  /recording-assets/{asset_id}/presigned-url:
+    parameters:
+    - in: path
+      name: asset_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get Presigned Url
+      operationId: getRecordingAssetPresignedUrl
+      tags:
+      - Recording Assets
+      responses:
+        '200':
+          description: Presigned URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    format: uri
+                  expiry:
+                    type: integer
+components:
+  responses:
+    RecordingAssetList:
+      description: Page of recording assets
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecordingAsset'
+              last:
+                type: string
+              limit:
+                type: integer
+    RecordingAsset:
+      description: Recording asset
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordingAsset'
+  parameters:
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+  schemas:
+    RecordingAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - room-composite
+          - room-vod
+          - transcript
+          - chat-log
+          - summary
+        path:
+          type: string
+        format:
+          type: string
+        size:
+          type: integer
+        duration:
+          type: integer
+        room_id:
+          type: string
+        session_id:
+          type: string
+        recording_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    ManagementToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded from the 100ms dashboard. Include as `Authorization: Bearer <token>`.
+
+        '

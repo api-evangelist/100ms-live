@@ -1,0 +1,215 @@
+openapi: 3.1.0
+info:
+  title: 100ms Server-Side Active Rooms Analytics API
+  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
+
+    '
+  version: v2
+  contact:
+    name: 100ms Support
+    url: https://www.100ms.live/contact-sales
+  license:
+    name: 100ms Terms of Service
+    url: https://www.100ms.live/legal/terms-and-conditions
+servers:
+- url: https://api.100ms.live/v2
+  description: Production
+security:
+- ManagementToken: []
+tags:
+- name: Analytics
+  description: Query webhook events, track events, recording events, errors, and peer quality.
+paths:
+  /analytics/events:
+    get:
+      summary: List Webhook Events
+      operationId: listWebhookEvents
+      tags:
+      - Analytics
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Start'
+      - in: query
+        name: room_id
+        schema:
+          type: string
+      - in: query
+        name: session_id
+        schema:
+          type: string
+      - in: query
+        name: type
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/WebhookEventList'
+  /analytics/events/replay:
+    post:
+      summary: Replay Webhook Events
+      operationId: replayWebhookEvents
+      tags:
+      - Analytics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_ids:
+                  type: array
+                  items:
+                    type: string
+                room_id:
+                  type: string
+                session_id:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /analytics/track-events:
+    get:
+      summary: List Track Events
+      operationId: listTrackEvents
+      tags:
+      - Analytics
+      parameters:
+      - in: query
+        name: session_id
+        schema:
+          type: string
+      - in: query
+        name: peer_id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Track events
+          content:
+            application/json:
+              schema:
+                type: object
+  /analytics/recording-events:
+    get:
+      summary: List Recording Events
+      operationId: listRecordingEvents
+      tags:
+      - Analytics
+      parameters:
+      - in: query
+        name: session_id
+        schema:
+          type: string
+      - in: query
+        name: recording_id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Recording events
+          content:
+            application/json:
+              schema:
+                type: object
+  /analytics/error-events:
+    get:
+      summary: List Error Events
+      operationId: listErrorEvents
+      tags:
+      - Analytics
+      parameters:
+      - in: query
+        name: session_id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Error events
+          content:
+            application/json:
+              schema:
+                type: object
+  /analytics/peer-quality:
+    get:
+      summary: Get Peer Quality Stats
+      operationId: getPeerQualityStats
+      tags:
+      - Analytics
+      parameters:
+      - in: query
+        name: session_id
+        schema:
+          type: string
+      - in: query
+        name: peer_id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Peer quality stats
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    WebhookEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: string
+        type:
+          type: string
+          description: 'Examples: session.open, session.close, peer.join, peer.leave, beam.started, beam.recording.success, hls.started, hls.stopped, hls.recording.success, rtmp.started, rtmp.failed, recording.success, recording.failed, transcription.success.'
+        timestamp:
+          type: string
+          format: date-time
+        data:
+          type: object
+  responses:
+    WebhookEventList:
+      description: Page of webhook events
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookEvent'
+              last:
+                type: string
+              limit:
+                type: integer
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+  parameters:
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+  securitySchemes:
+    ManagementToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded from the 100ms dashboard. Include as `Authorization: Bearer <token>`.
+
+        '

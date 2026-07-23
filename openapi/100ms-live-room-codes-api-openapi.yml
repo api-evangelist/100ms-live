@@ -1,0 +1,114 @@
+openapi: 3.1.0
+info:
+  title: 100ms Server-Side Active Rooms Room Codes API
+  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
+
+    '
+  version: v2
+  contact:
+    name: 100ms Support
+    url: https://www.100ms.live/contact-sales
+  license:
+    name: 100ms Terms of Service
+    url: https://www.100ms.live/legal/terms-and-conditions
+servers:
+- url: https://api.100ms.live/v2
+  description: Production
+security:
+- ManagementToken: []
+tags:
+- name: Room Codes
+  description: Short codes used by client apps to join a room.
+paths:
+  /room-codes/room/{room_id}:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Create Room Codes
+      operationId: createRoomCodes
+      tags:
+      - Room Codes
+      responses:
+        '200':
+          $ref: '#/components/responses/RoomCodeList'
+    get:
+      summary: Get Room Codes
+      operationId: getRoomCodes
+      tags:
+      - Room Codes
+      responses:
+        '200':
+          $ref: '#/components/responses/RoomCodeList'
+  /room-codes/code/{code}:
+    parameters:
+    - in: path
+      name: code
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Update Room Code
+      operationId: updateRoomCode
+      tags:
+      - Room Codes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/RoomCode'
+components:
+  schemas:
+    RoomCode:
+      type: object
+      properties:
+        code:
+          type: string
+        room_id:
+          type: string
+        role:
+          type: string
+        enabled:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+  responses:
+    RoomCode:
+      description: Room code
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RoomCode'
+    RoomCodeList:
+      description: List of room codes (one per role).
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoomCode'
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ManagementToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded from the 100ms dashboard. Include as `Authorization: Bearer <token>`.
+
+        '

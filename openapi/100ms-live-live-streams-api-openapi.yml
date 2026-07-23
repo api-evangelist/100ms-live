@@ -1,0 +1,297 @@
+openapi: 3.1.0
+info:
+  title: 100ms Server-Side Active Rooms Live Streams API
+  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
+
+    '
+  version: v2
+  contact:
+    name: 100ms Support
+    url: https://www.100ms.live/contact-sales
+  license:
+    name: 100ms Terms of Service
+    url: https://www.100ms.live/legal/terms-and-conditions
+servers:
+- url: https://api.100ms.live/v2
+  description: Production
+security:
+- ManagementToken: []
+tags:
+- name: Live Streams
+  description: HLS live streams driven from a 100ms room.
+paths:
+  /live-streams:
+    get:
+      summary: List All Live Streams
+      operationId: listLiveStreams
+      tags:
+      - Live Streams
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Start'
+      - in: query
+        name: room_id
+        schema:
+          type: string
+      - in: query
+        name: status
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/LiveStreamList'
+  /live-streams/{stream_id}:
+    parameters:
+    - in: path
+      name: stream_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get Live Stream
+      operationId: getLiveStream
+      tags:
+      - Live Streams
+      responses:
+        '200':
+          $ref: '#/components/responses/LiveStream'
+  /live-streams/room/{room_id}/start:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Start Live Stream For Room
+      operationId: startLiveStreamForRoom
+      tags:
+      - Live Streams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                meeting_url:
+                  type: string
+                  format: uri
+                recording:
+                  type: object
+                  properties:
+                    hls_vod:
+                      type: boolean
+                    single_file_per_layer:
+                      type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/LiveStream'
+  /live-streams/room/{room_id}/stop:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Stop Live Stream For Room
+      operationId: stopLiveStreamForRoom
+      tags:
+      - Live Streams
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /live-streams/{stream_id}/stop:
+    parameters:
+    - in: path
+      name: stream_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Stop Live Stream By Id
+      operationId: stopLiveStreamById
+      tags:
+      - Live Streams
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /live-streams/{stream_id}/pause-recording:
+    parameters:
+    - in: path
+      name: stream_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Pause Live Stream Recording
+      operationId: pauseLiveStreamRecording
+      tags:
+      - Live Streams
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /live-streams/{stream_id}/resume-recording:
+    parameters:
+    - in: path
+      name: stream_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Resume Live Stream Recording
+      operationId: resumeLiveStreamRecording
+      tags:
+      - Live Streams
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /live-streams/{stream_id}/timed-metadata:
+    parameters:
+    - in: path
+      name: stream_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Send Timed Metadata
+      operationId: sendTimedMetadata
+      tags:
+      - Live Streams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: string
+                duration:
+                  type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+components:
+  responses:
+    LiveStream:
+      description: Live stream
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LiveStream'
+    LiveStreamList:
+      description: Page of live streams
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LiveStream'
+              last:
+                type: string
+              limit:
+                type: integer
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+  schemas:
+    RecordingAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - room-composite
+          - room-vod
+          - transcript
+          - chat-log
+          - summary
+        path:
+          type: string
+        format:
+          type: string
+        size:
+          type: integer
+        duration:
+          type: integer
+        room_id:
+          type: string
+        session_id:
+          type: string
+        recording_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    LiveStream:
+      type: object
+      properties:
+        id:
+          type: string
+        room_id:
+          type: string
+        session_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - init
+          - running
+          - paused
+          - completed
+          - failed
+        url:
+          type: string
+          format: uri
+          description: HLS playback URL (master.m3u8).
+        playback_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        stopped_at:
+          type: string
+          format: date-time
+        recording:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            assets:
+              type: array
+              items:
+                $ref: '#/components/schemas/RecordingAsset'
+  securitySchemes:
+    ManagementToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded from the 100ms dashboard. Include as `Authorization: Bearer <token>`.
+
+        '

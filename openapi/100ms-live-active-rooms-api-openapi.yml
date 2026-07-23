@@ -1,0 +1,261 @@
+openapi: 3.1.0
+info:
+  title: 100ms Server-Side Active Rooms API
+  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
+
+    '
+  version: v2
+  contact:
+    name: 100ms Support
+    url: https://www.100ms.live/contact-sales
+  license:
+    name: 100ms Terms of Service
+    url: https://www.100ms.live/legal/terms-and-conditions
+servers:
+- url: https://api.100ms.live/v2
+  description: Production
+security:
+- ManagementToken: []
+tags:
+- name: Active Rooms
+  description: In-session control of running rooms and connected peers.
+paths:
+  /active-rooms/{room_id}:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    get:
+      summary: Retrieve Active Room
+      operationId: retrieveActiveRoom
+      tags:
+      - Active Rooms
+      responses:
+        '200':
+          $ref: '#/components/responses/ActiveRoom'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /active-rooms/{room_id}/end-room:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: End Active Room
+      operationId: endActiveRoom
+      tags:
+      - Active Rooms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                lock:
+                  type: boolean
+                  description: When true
+                  the room is disabled after end.: null
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /active-rooms/{room_id}/peers:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    get:
+      summary: List Peers
+      operationId: listPeers
+      tags:
+      - Active Rooms
+      responses:
+        '200':
+          $ref: '#/components/responses/PeerList'
+  /active-rooms/{room_id}/peers/{peer_id}:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    - in: path
+      name: peer_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieve A Peer
+      operationId: retrievePeer
+      tags:
+      - Active Rooms
+      responses:
+        '200':
+          $ref: '#/components/responses/Peer'
+    post:
+      summary: Update A Peer
+      operationId: updatePeer
+      tags:
+      - Active Rooms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                role:
+                  type: string
+                metadata:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Peer'
+  /active-rooms/{room_id}/remove-peers:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Remove Peers
+      operationId: removePeers
+      tags:
+      - Active Rooms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                peer_id:
+                  type: string
+                role:
+                  type: string
+                reason:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /active-rooms/{room_id}/send-message:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Send Message
+      operationId: sendMessage
+      tags:
+      - Active Rooms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - message
+              properties:
+                message:
+                  type: string
+                type:
+                  type: string
+                peer_id:
+                  type: string
+                role:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+components:
+  responses:
+    PeerList:
+      description: List of peers in the active room (peer_id keyed object).
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/Peer'
+    Peer:
+      description: Peer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Peer'
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ActiveRoom:
+      description: Active room
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ActiveRoom'
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+  schemas:
+    ActiveRoom:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        session_id:
+          type: string
+        recording:
+          type: object
+          properties:
+            running:
+              type: boolean
+        streaming:
+          type: object
+          properties:
+            running:
+              type: boolean
+        peers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Peer'
+    Peer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        user_id:
+          type: string
+        metadata:
+          type: string
+        role:
+          type: string
+        joined_at:
+          type: string
+          format: date-time
+        tracks:
+          type: object
+          additionalProperties:
+            type: object
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        id:
+          type: string
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ManagementToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded from the 100ms dashboard. Include as `Authorization: Bearer <token>`.
+
+        '

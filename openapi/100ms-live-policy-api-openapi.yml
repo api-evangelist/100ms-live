@@ -1,0 +1,323 @@
+openapi: 3.1.0
+info:
+  title: 100ms Server-Side Active Rooms Policy API
+  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
+
+    '
+  version: v2
+  contact:
+    name: 100ms Support
+    url: https://www.100ms.live/contact-sales
+  license:
+    name: 100ms Terms of Service
+    url: https://www.100ms.live/legal/terms-and-conditions
+servers:
+- url: https://api.100ms.live/v2
+  description: Production
+security:
+- ManagementToken: []
+tags:
+- name: Policy
+  description: Templates, roles, and recording configuration.
+paths:
+  /templates:
+    get:
+      summary: List Templates
+      operationId: listTemplates
+      tags:
+      - Policy
+      responses:
+        '200':
+          $ref: '#/components/responses/TemplateList'
+    post:
+      summary: Create Template
+      operationId: createTemplate
+      tags:
+      - Policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateCreate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Template'
+  /templates/{template_id}:
+    parameters:
+    - $ref: '#/components/parameters/TemplateId'
+    get:
+      summary: Retrieve A Template
+      operationId: retrieveTemplate
+      tags:
+      - Policy
+      responses:
+        '200':
+          $ref: '#/components/responses/Template'
+    post:
+      summary: Update A Template
+      operationId: updateTemplate
+      tags:
+      - Policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateCreate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Template'
+  /templates/{template_id}/roles/{role_name}:
+    parameters:
+    - $ref: '#/components/parameters/TemplateId'
+    - in: path
+      name: role_name
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieve A Role
+      operationId: retrieveRole
+      tags:
+      - Policy
+      responses:
+        '200':
+          $ref: '#/components/responses/Role'
+    post:
+      summary: Create Or Update A Role
+      operationId: upsertRole
+      tags:
+      - Policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+      responses:
+        '200':
+          $ref: '#/components/responses/Role'
+    delete:
+      summary: Delete A Role
+      operationId: deleteRole
+      tags:
+      - Policy
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+  /templates/{template_id}/destinations:
+    parameters:
+    - $ref: '#/components/parameters/TemplateId'
+    get:
+      summary: Retrieve Destinations
+      operationId: retrieveDestinations
+      tags:
+      - Policy
+      responses:
+        '200':
+          description: Destinations object
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Update Destinations
+      operationId: updateDestinations
+      tags:
+      - Policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated destinations
+          content:
+            application/json:
+              schema:
+                type: object
+  /templates/{template_id}/settings:
+    parameters:
+    - $ref: '#/components/parameters/TemplateId'
+    get:
+      summary: Retrieve Settings
+      operationId: retrieveSettings
+      tags:
+      - Policy
+      responses:
+        '200':
+          description: Settings object
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Update Settings
+      operationId: updateSettings
+      tags:
+      - Policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated settings
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Template:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        customer_id:
+          type: string
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Role'
+        settings:
+          type: object
+        destinations:
+          type: object
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Role:
+      type: object
+      properties:
+        name:
+          type: string
+        publishParams:
+          type: object
+          properties:
+            allowed:
+              type: array
+              items:
+                type: string
+                enum:
+                - audio
+                - video
+                - screen
+            audio:
+              type: object
+            video:
+              type: object
+            screen:
+              type: object
+        subscribeParams:
+          type: object
+          properties:
+            subscribeToRoles:
+              type: array
+              items:
+                type: string
+            maxSubsBitRate:
+              type: integer
+        permissions:
+          type: object
+          properties:
+            endRoom:
+              type: boolean
+            removeOthers:
+              type: boolean
+            mute:
+              type: boolean
+            unmute:
+              type: boolean
+            changeRole:
+              type: boolean
+            sendRoomState:
+              type: boolean
+            hlsStreaming:
+              type: boolean
+            rtmpStreaming:
+              type: boolean
+            browserRecording:
+              type: boolean
+            pollWrite:
+              type: boolean
+            pollRead:
+              type: boolean
+            sendMessage:
+              type: boolean
+        priority:
+          type: integer
+        maxPeerCount:
+          type: integer
+    TemplateCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Role'
+        settings:
+          type: object
+        destinations:
+          type: object
+  parameters:
+    TemplateId:
+      in: path
+      name: template_id
+      required: true
+      schema:
+        type: string
+  responses:
+    TemplateList:
+      description: Page of templates
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+              last:
+                type: string
+              limit:
+                type: integer
+    Template:
+      description: Template
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Template'
+    Role:
+      description: Role
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Role'
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+  securitySchemes:
+    ManagementToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded from the 100ms dashboard. Include as `Authorization: Bearer <token>`.
+
+        '

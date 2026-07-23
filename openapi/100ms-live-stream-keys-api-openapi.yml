@@ -1,0 +1,108 @@
+openapi: 3.1.0
+info:
+  title: 100ms Server-Side Active Rooms Stream Keys API
+  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
+
+    '
+  version: v2
+  contact:
+    name: 100ms Support
+    url: https://www.100ms.live/contact-sales
+  license:
+    name: 100ms Terms of Service
+    url: https://www.100ms.live/legal/terms-and-conditions
+servers:
+- url: https://api.100ms.live/v2
+  description: Production
+security:
+- ManagementToken: []
+tags:
+- name: Stream Keys
+  description: Per-room RTMP ingest stream keys.
+paths:
+  /stream-keys/room/{room_id}:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    get:
+      summary: Get Rtmp Stream Key
+      operationId: getRtmpStreamKey
+      tags:
+      - Stream Keys
+      responses:
+        '200':
+          $ref: '#/components/responses/StreamKey'
+    post:
+      summary: Create Rtmp Stream Key
+      operationId: createRtmpStreamKey
+      tags:
+      - Stream Keys
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                user_id:
+                  type: string
+                ttl_seconds:
+                  type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/StreamKey'
+    delete:
+      summary: Disable Rtmp Stream Key
+      operationId: disableRtmpStreamKey
+      tags:
+      - Stream Keys
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+components:
+  responses:
+    StreamKey:
+      description: RTMP stream key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StreamKey'
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+  schemas:
+    StreamKey:
+      type: object
+      properties:
+        key:
+          type: string
+        url:
+          type: string
+          format: uri
+          description: RTMP ingest URL (rtmp://rtmp-in.100ms.live/live).
+        role:
+          type: string
+        user_id:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    ManagementToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded from the 100ms dashboard. Include as `Authorization: Bearer <token>`.
+
+        '

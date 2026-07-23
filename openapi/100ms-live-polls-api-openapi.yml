@@ -1,0 +1,156 @@
+openapi: 3.1.0
+info:
+  title: 100ms Server-Side Active Rooms Polls API
+  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
+
+    '
+  version: v2
+  contact:
+    name: 100ms Support
+    url: https://www.100ms.live/contact-sales
+  license:
+    name: 100ms Terms of Service
+    url: https://www.100ms.live/legal/terms-and-conditions
+servers:
+- url: https://api.100ms.live/v2
+  description: Production
+security:
+- ManagementToken: []
+tags:
+- name: Polls
+  description: Real-time polls and quizzes inside a room.
+paths:
+  /polls:
+    post:
+      summary: Create Or Update Poll
+      operationId: createOrUpdatePoll
+      tags:
+      - Polls
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Poll'
+      responses:
+        '200':
+          $ref: '#/components/responses/Poll'
+  /polls/{poll_id}:
+    parameters:
+    - in: path
+      name: poll_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get Poll
+      operationId: getPoll
+      tags:
+      - Polls
+      responses:
+        '200':
+          $ref: '#/components/responses/Poll'
+  /polls/room/{room_id}/link:
+    parameters:
+    - $ref: '#/components/parameters/RoomId'
+    post:
+      summary: Link Poll With Room
+      operationId: linkPollWithRoom
+      tags:
+      - Polls
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - poll_ids
+              properties:
+                poll_ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+components:
+  responses:
+    Poll:
+      description: Poll
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Poll'
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+  schemas:
+    Poll:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+          enum:
+          - poll
+          - quiz
+        anonymous:
+          type: boolean
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              text:
+                type: string
+              type:
+                type: string
+                enum:
+                - single-choice
+                - multiple-choice
+                - short-answer
+                - long-answer
+              options:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    index:
+                      type: integer
+                    text:
+                      type: string
+                    is_correct_answer:
+                      type: boolean
+        state:
+          type: string
+          enum:
+          - draft
+          - started
+          - stopped
+        created_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    ManagementToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived HS256 JWT generated server-side from the app access key/secret downloaded from the 100ms dashboard. Include as `Authorization: Bearer <token>`.
+
+        '
