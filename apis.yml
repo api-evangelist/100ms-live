@@ -2,7 +2,20 @@ aid: 100ms-live
 url: https://raw.githubusercontent.com/api-evangelist/100ms-live/refs/heads/main/apis.yml
 name: 100ms
 kind: company
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/100ms-live.png
 tags:
 - Live Video
 - Live Streaming
@@ -29,68 +42,249 @@ description: 100ms is a live video and audio infrastructure company headquartere
   and a Node.js server SDK, with public OpenAPI specs generated from the docs and
   a Postman collection.
 apis:
-- aid: 100ms-live:server-side-api
-  name: 100ms Server-Side API
-  tags:
-  - Rooms
-  - Sessions
-  - Recordings
-  - Live Streams
-  - RTMP
-  - HLS
-  - Webhooks
-  - Polls
-  - Templates
-  - Analytics
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api.100ms.live/v2
+- aid: 100ms-live:100ms-live-active-rooms-api
+  name: 100ms Active Rooms API
+  description: In-session control of running rooms and connected peers.
   humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
-  description: The 100ms Server-Side API is the unified REST control plane for the
-    100ms live video platform. It manages rooms (the persistent containers for a live
-    session), templates and roles (policy), active rooms and peers (in-session control
-    like kick/mute/message), recordings (composite and per-track), live streams (HLS
-    output and RTMP ingest stream keys), external streams (push to YouTube/Twitch/Facebook
-    Live), recording assets, room codes, polls, sessions, and an analytics API for
-    querying webhook events, track events, recording events, error events, and peer
-    quality stats. Authentication uses a short-lived management JWT (HS256) signed
-    with an app access key + secret pair issued from the dashboard.
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Active Rooms
   properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-active-rooms-api-openapi.yml
   - type: Documentation
     url: https://www.100ms.live/docs/server-side/v2/foundation/basics
   - type: Documentation
     url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
-  - type: OpenAPI
-    url: openapi/100ms-live-server-side-api-openapi.yml
   - type: Postman
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - url: graphql/100ms-live-graphql.md
-    type: GraphQL
-  x-features:
-  - Programmatic room and template provisioning
-  - Composite + track-level recording with auto-upload to S3
-  - HLS live streaming with low-latency LL-HLS support
-  - RTMP ingest via per-room stream keys
-  - External RTMP push to YouTube/Twitch/Facebook
-  - Polls and whiteboard via REST
-  - Webhook delivery with HMAC signature verification
-  - Analytics API for events, track quality, and webhook replay
-  x-use-cases:
-  - Telehealth and 1:1 consultations
-  - Live shopping and creator commerce
-  - Edtech virtual classrooms
-  - Audio rooms (Clubhouse/Discord Stages style)
-  - Live sports and event streaming (HLS)
-  - Webinars and town halls
-  - Slack-huddle/Discord-stage clones
-  x-integrations:
-  - YouTube Live (RTMP push)
-  - Twitch (RTMP push)
-  - Facebook Live (RTMP push)
-  - AWS S3 (recording storage)
-  - Webhooks (HMAC-signed)
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-analytics-api
+  name: 100ms Analytics API
+  description: Query webhook events, track events, recording events, errors, and peer quality.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-external-streams-api
+  name: 100ms External Streams API
+  description: Push the room feed to YouTube / Twitch / Facebook via RTMP.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - External Streams
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-external-streams-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-live-streams-api
+  name: 100ms Live Streams API
+  description: HLS live streams driven from a 100ms room.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Live Streams
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-live-streams-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-policy-api
+  name: 100ms Policy API
+  description: Templates, roles, and recording configuration.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-policy-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-polls-api
+  name: 100ms Polls API
+  description: Real-time polls and quizzes inside a room.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Polls
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-polls-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-recording-assets-api
+  name: 100ms Recording Assets API
+  description: Output assets (mp4, mp3, transcript, chat) produced by recordings.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Recording Assets
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-recording-assets-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-recordings-api
+  name: 100ms Recordings API
+  description: Composite and track-level recordings of sessions.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Recordings
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-recordings-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-room-codes-api
+  name: 100ms Room Codes API
+  description: Short codes used by client apps to join a room.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Room Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-room-codes-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-rooms-api
+  name: 100ms Rooms API
+  description: Persistent containers for a live session.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Rooms
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-rooms-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-sessions-api
+  name: 100ms Sessions API
+  description: Historical sessions inside a room.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
+- aid: 100ms-live:100ms-live-stream-keys-api
+  name: 100ms Stream Keys API
+  description: Per-room RTMP ingest stream keys.
+  humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  baseURL: https://api.100ms.live/v2
+  tags:
+  - Stream Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/100ms-live-stream-keys-api-openapi.yml
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/basics
+  - type: Documentation
+    url: https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens
+  - type: Postman
+    url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
+  - type: SDKs
+    url: https://github.com/100mslive/server-sdks
+  - type: GraphQL
+    url: graphql/100ms-live-graphql.md
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/100ms/overview
 - type: AgenticAccess
   url: agentic-access/100ms-live-agentic-access.yml
 - type: TrustCenter
