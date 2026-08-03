@@ -1,0 +1,381 @@
+{
+  "info": {
+    "_postman_id": "e20ce1a0-dc2f-4146-97ea-6951ce606d8c",
+    "name": "100ms Server-Side Active Rooms Polls API",
+    "description": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:27:02.000Z",
+    "updatedAt": "2026-07-28T00:27:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e20ce1a0-dc2f-4146-97ea-6951ce606d8c"
+  },
+  "item": [
+    {
+      "name": "polls",
+      "item": [
+        {
+          "name": "{poll_id}",
+          "item": [
+            {
+              "name": "Get Poll",
+              "id": "3e3049d1-74b7-4fcf-b753-b165be32a7f5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/polls/:poll_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "polls",
+                    ":poll_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "1baaafc6-c9a9-4fe6-a2e4-47e737881c15",
+                      "key": "poll_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "d647d096-4230-4c2e-9d58-096d50cbe7c2",
+                  "name": "Poll",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/polls/:poll_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "polls",
+                        ":poll_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "poll_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"type\": \"quiz\",\n  \"anonymous\": \"<boolean>\",\n  \"questions\": [\n    {\n      \"index\": \"<integer>\",\n      \"text\": \"<string>\",\n      \"type\": \"single-choice\",\n      \"options\": [\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        },\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"index\": \"<integer>\",\n      \"text\": \"<string>\",\n      \"type\": \"long-answer\",\n      \"options\": [\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        },\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"state\": \"draft\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T00:27:03.000Z",
+                  "updatedAt": "2026-07-28T00:27:03.000Z",
+                  "uid": "35240-d647d096-4230-4c2e-9d58-096d50cbe7c2"
+                }
+              ],
+              "createdAt": "2026-07-28T00:27:02.000Z",
+              "updatedAt": "2026-07-28T00:27:02.000Z",
+              "uid": "35240-3e3049d1-74b7-4fcf-b753-b165be32a7f5"
+            }
+          ],
+          "id": "6bc9124c-87e3-45fa-89c1-c430d519a8a7",
+          "createdAt": "2026-07-28T00:27:02.000Z",
+          "updatedAt": "2026-07-28T00:27:02.000Z",
+          "uid": "35240-6bc9124c-87e3-45fa-89c1-c430d519a8a7"
+        },
+        {
+          "name": "room",
+          "item": [
+            {
+              "name": "{room_id}",
+              "item": [
+                {
+                  "name": "link",
+                  "item": [
+                    {
+                      "name": "Link Poll With Room",
+                      "id": "8f541d35-6e70-4b71-acf7-dffc08690a7f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"poll_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/polls/room/:room_id/link",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "polls",
+                            "room",
+                            ":room_id",
+                            "link"
+                          ],
+                          "variable": [
+                            {
+                              "id": "dccf892a-8e6d-4ce0-9873-00095187a600",
+                              "key": "room_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "7259ceb3-5e4a-4169-a5d0-89a6f9db1324",
+                          "name": "Successful empty response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"poll_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/polls/room/:room_id/link",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "polls",
+                                "room",
+                                ":room_id",
+                                "link"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "room_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T00:27:03.000Z",
+                          "updatedAt": "2026-07-28T00:27:03.000Z",
+                          "uid": "35240-7259ceb3-5e4a-4169-a5d0-89a6f9db1324"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:27:02.000Z",
+                      "updatedAt": "2026-07-28T00:27:02.000Z",
+                      "uid": "35240-8f541d35-6e70-4b71-acf7-dffc08690a7f"
+                    }
+                  ],
+                  "id": "4311340b-c192-4d46-a3f9-b1860da4bd70",
+                  "createdAt": "2026-07-28T00:27:02.000Z",
+                  "updatedAt": "2026-07-28T00:27:02.000Z",
+                  "uid": "35240-4311340b-c192-4d46-a3f9-b1860da4bd70"
+                }
+              ],
+              "id": "eeb74fbb-dbbd-4c64-a0a5-e28d57385add",
+              "createdAt": "2026-07-28T00:27:02.000Z",
+              "updatedAt": "2026-07-28T00:27:02.000Z",
+              "uid": "35240-eeb74fbb-dbbd-4c64-a0a5-e28d57385add"
+            }
+          ],
+          "id": "547ae924-d306-4bb9-b919-ee72f1e7fb44",
+          "createdAt": "2026-07-28T00:27:02.000Z",
+          "updatedAt": "2026-07-28T00:27:02.000Z",
+          "uid": "35240-547ae924-d306-4bb9-b919-ee72f1e7fb44"
+        },
+        {
+          "name": "Create Or Update Poll",
+          "id": "6846c1ca-cc41-4c7f-972d-bbcc8111485b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"type\": \"quiz\",\n  \"anonymous\": \"<boolean>\",\n  \"questions\": [\n    {\n      \"index\": \"<integer>\",\n      \"text\": \"<string>\",\n      \"type\": \"single-choice\",\n      \"options\": [\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        },\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"index\": \"<integer>\",\n      \"text\": \"<string>\",\n      \"type\": \"long-answer\",\n      \"options\": [\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        },\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"state\": \"draft\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/polls",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "polls"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cbd2f7a1-ab57-4a8d-ada8-fb9d204b8a53",
+              "name": "Poll",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"type\": \"quiz\",\n  \"anonymous\": \"<boolean>\",\n  \"questions\": [\n    {\n      \"index\": \"<integer>\",\n      \"text\": \"<string>\",\n      \"type\": \"single-choice\",\n      \"options\": [\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        },\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"index\": \"<integer>\",\n      \"text\": \"<string>\",\n      \"type\": \"long-answer\",\n      \"options\": [\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        },\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"state\": \"draft\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/polls",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "polls"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"type\": \"quiz\",\n  \"anonymous\": \"<boolean>\",\n  \"questions\": [\n    {\n      \"index\": \"<integer>\",\n      \"text\": \"<string>\",\n      \"type\": \"single-choice\",\n      \"options\": [\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        },\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"index\": \"<integer>\",\n      \"text\": \"<string>\",\n      \"type\": \"long-answer\",\n      \"options\": [\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        },\n        {\n          \"index\": \"<integer>\",\n          \"text\": \"<string>\",\n          \"is_correct_answer\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"state\": \"draft\",\n  \"created_at\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T00:27:03.000Z",
+              "updatedAt": "2026-07-28T00:27:03.000Z",
+              "uid": "35240-cbd2f7a1-ab57-4a8d-ada8-fb9d204b8a53"
+            }
+          ],
+          "createdAt": "2026-07-28T00:27:02.000Z",
+          "updatedAt": "2026-07-28T00:27:02.000Z",
+          "uid": "35240-6846c1ca-cc41-4c7f-972d-bbcc8111485b"
+        }
+      ],
+      "id": "3e27f97a-289e-4b09-8c58-9b12b29aebcf",
+      "createdAt": "2026-07-28T00:27:02.000Z",
+      "updatedAt": "2026-07-28T00:27:02.000Z",
+      "uid": "35240-3e27f97a-289e-4b09-8c58-9b12b29aebcf"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.100ms.live/v2"
+    }
+  ]
+}

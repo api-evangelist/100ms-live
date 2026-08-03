@@ -1,0 +1,1198 @@
+{
+  "info": {
+    "_postman_id": "ff380a24-253a-4323-b8f5-56479e13a8a4",
+    "name": "100ms Server-Side Active Rooms Policy API",
+    "description": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:27:01.000Z",
+    "updatedAt": "2026-07-28T00:27:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ff380a24-253a-4323-b8f5-56479e13a8a4"
+  },
+  "item": [
+    {
+      "name": "templates",
+      "item": [
+        {
+          "name": "{template_id}",
+          "item": [
+            {
+              "name": "roles",
+              "item": [
+                {
+                  "name": "{role_name}",
+                  "item": [
+                    {
+                      "name": "Retrieve A Role",
+                      "id": "c9c84e1f-b136-4fd3-88e8-54ab72a2234c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:template_id/roles/:role_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":template_id",
+                            "roles",
+                            ":role_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4e4afb7d-06ec-43e6-b2f4-595b5412f20e",
+                              "key": "template_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "400b24b8-ae54-4bfb-a7ee-2f84c572434f",
+                              "key": "role_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "ad2d6f68-4f6d-415e-b1f8-53f557ac162c",
+                          "name": "Role",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/templates/:template_id/roles/:role_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "templates",
+                                ":template_id",
+                                "roles",
+                                ":role_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "template_id"
+                                },
+                                {
+                                  "key": "role_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"publishParams\": {\n    \"allowed\": [\n      \"audio\",\n      \"audio\"\n    ],\n    \"audio\": {},\n    \"video\": {},\n    \"screen\": {}\n  },\n  \"subscribeParams\": {\n    \"subscribeToRoles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"maxSubsBitRate\": \"<integer>\"\n  },\n  \"permissions\": {\n    \"endRoom\": \"<boolean>\",\n    \"removeOthers\": \"<boolean>\",\n    \"mute\": \"<boolean>\",\n    \"unmute\": \"<boolean>\",\n    \"changeRole\": \"<boolean>\",\n    \"sendRoomState\": \"<boolean>\",\n    \"hlsStreaming\": \"<boolean>\",\n    \"rtmpStreaming\": \"<boolean>\",\n    \"browserRecording\": \"<boolean>\",\n    \"pollWrite\": \"<boolean>\",\n    \"pollRead\": \"<boolean>\",\n    \"sendMessage\": \"<boolean>\"\n  },\n  \"priority\": \"<integer>\",\n  \"maxPeerCount\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T00:27:01.000Z",
+                          "updatedAt": "2026-07-28T00:27:01.000Z",
+                          "uid": "35240-ad2d6f68-4f6d-415e-b1f8-53f557ac162c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:27:01.000Z",
+                      "updatedAt": "2026-07-28T00:27:01.000Z",
+                      "uid": "35240-c9c84e1f-b136-4fd3-88e8-54ab72a2234c"
+                    },
+                    {
+                      "name": "Create Or Update A Role",
+                      "id": "9065caf6-9487-4452-ae5f-2abd6a125934",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"publishParams\": {\n    \"allowed\": [\n      \"audio\",\n      \"audio\"\n    ],\n    \"audio\": {},\n    \"video\": {},\n    \"screen\": {}\n  },\n  \"subscribeParams\": {\n    \"subscribeToRoles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"maxSubsBitRate\": \"<integer>\"\n  },\n  \"permissions\": {\n    \"endRoom\": \"<boolean>\",\n    \"removeOthers\": \"<boolean>\",\n    \"mute\": \"<boolean>\",\n    \"unmute\": \"<boolean>\",\n    \"changeRole\": \"<boolean>\",\n    \"sendRoomState\": \"<boolean>\",\n    \"hlsStreaming\": \"<boolean>\",\n    \"rtmpStreaming\": \"<boolean>\",\n    \"browserRecording\": \"<boolean>\",\n    \"pollWrite\": \"<boolean>\",\n    \"pollRead\": \"<boolean>\",\n    \"sendMessage\": \"<boolean>\"\n  },\n  \"priority\": \"<integer>\",\n  \"maxPeerCount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:template_id/roles/:role_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":template_id",
+                            "roles",
+                            ":role_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8c413daa-99a7-43fe-b63f-e0effa50c614",
+                              "key": "template_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "5daf7730-c31b-4c31-9b6d-420f296278d3",
+                              "key": "role_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "788243c2-efd2-42b8-9071-011f23b8119d",
+                          "name": "Role",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"publishParams\": {\n    \"allowed\": [\n      \"audio\",\n      \"audio\"\n    ],\n    \"audio\": {},\n    \"video\": {},\n    \"screen\": {}\n  },\n  \"subscribeParams\": {\n    \"subscribeToRoles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"maxSubsBitRate\": \"<integer>\"\n  },\n  \"permissions\": {\n    \"endRoom\": \"<boolean>\",\n    \"removeOthers\": \"<boolean>\",\n    \"mute\": \"<boolean>\",\n    \"unmute\": \"<boolean>\",\n    \"changeRole\": \"<boolean>\",\n    \"sendRoomState\": \"<boolean>\",\n    \"hlsStreaming\": \"<boolean>\",\n    \"rtmpStreaming\": \"<boolean>\",\n    \"browserRecording\": \"<boolean>\",\n    \"pollWrite\": \"<boolean>\",\n    \"pollRead\": \"<boolean>\",\n    \"sendMessage\": \"<boolean>\"\n  },\n  \"priority\": \"<integer>\",\n  \"maxPeerCount\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/templates/:template_id/roles/:role_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "templates",
+                                ":template_id",
+                                "roles",
+                                ":role_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "template_id"
+                                },
+                                {
+                                  "key": "role_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"publishParams\": {\n    \"allowed\": [\n      \"audio\",\n      \"audio\"\n    ],\n    \"audio\": {},\n    \"video\": {},\n    \"screen\": {}\n  },\n  \"subscribeParams\": {\n    \"subscribeToRoles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"maxSubsBitRate\": \"<integer>\"\n  },\n  \"permissions\": {\n    \"endRoom\": \"<boolean>\",\n    \"removeOthers\": \"<boolean>\",\n    \"mute\": \"<boolean>\",\n    \"unmute\": \"<boolean>\",\n    \"changeRole\": \"<boolean>\",\n    \"sendRoomState\": \"<boolean>\",\n    \"hlsStreaming\": \"<boolean>\",\n    \"rtmpStreaming\": \"<boolean>\",\n    \"browserRecording\": \"<boolean>\",\n    \"pollWrite\": \"<boolean>\",\n    \"pollRead\": \"<boolean>\",\n    \"sendMessage\": \"<boolean>\"\n  },\n  \"priority\": \"<integer>\",\n  \"maxPeerCount\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T00:27:01.000Z",
+                          "updatedAt": "2026-07-28T00:27:01.000Z",
+                          "uid": "35240-788243c2-efd2-42b8-9071-011f23b8119d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:27:01.000Z",
+                      "updatedAt": "2026-07-28T00:27:01.000Z",
+                      "uid": "35240-9065caf6-9487-4452-ae5f-2abd6a125934"
+                    },
+                    {
+                      "name": "Delete A Role",
+                      "id": "f0915927-eda6-4986-adee-e939455372e4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:template_id/roles/:role_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":template_id",
+                            "roles",
+                            ":role_name"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fae0956c-bc74-44e6-a899-96bd436456f8",
+                              "key": "template_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "bf377c79-39b1-4768-b758-9394c14a3c5d",
+                              "key": "role_name",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "607b4cb0-f506-4750-a5e0-b08fa22b755f",
+                          "name": "Successful empty response",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/templates/:template_id/roles/:role_name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "templates",
+                                ":template_id",
+                                "roles",
+                                ":role_name"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "template_id"
+                                },
+                                {
+                                  "key": "role_name"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T00:27:01.000Z",
+                          "updatedAt": "2026-07-28T00:27:01.000Z",
+                          "uid": "35240-607b4cb0-f506-4750-a5e0-b08fa22b755f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:27:01.000Z",
+                      "updatedAt": "2026-07-28T00:27:01.000Z",
+                      "uid": "35240-f0915927-eda6-4986-adee-e939455372e4"
+                    }
+                  ],
+                  "id": "abe1069b-8750-4c5d-8207-114b0166b805",
+                  "createdAt": "2026-07-28T00:27:01.000Z",
+                  "updatedAt": "2026-07-28T00:27:01.000Z",
+                  "uid": "35240-abe1069b-8750-4c5d-8207-114b0166b805"
+                }
+              ],
+              "id": "1dbda551-63bd-4f26-9a3a-fe2adb51ced2",
+              "createdAt": "2026-07-28T00:27:01.000Z",
+              "updatedAt": "2026-07-28T00:27:01.000Z",
+              "uid": "35240-1dbda551-63bd-4f26-9a3a-fe2adb51ced2"
+            },
+            {
+              "name": "destinations",
+              "item": [
+                {
+                  "name": "Retrieve Destinations",
+                  "id": "9dcc8de5-4bb9-4bdd-9364-157e921978cc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:template_id/destinations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":template_id",
+                        "destinations"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0bf63911-b56d-4a66-93f1-7a3772555a7d",
+                          "key": "template_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f3c62c87-1462-4689-9a9b-70a16518413e",
+                      "name": "Destinations object",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:template_id/destinations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":template_id",
+                            "destinations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "template_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:27:01.000Z",
+                      "updatedAt": "2026-07-28T00:27:01.000Z",
+                      "uid": "35240-f3c62c87-1462-4689-9a9b-70a16518413e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:01.000Z",
+                  "updatedAt": "2026-07-28T00:27:01.000Z",
+                  "uid": "35240-9dcc8de5-4bb9-4bdd-9364-157e921978cc"
+                },
+                {
+                  "name": "Update Destinations",
+                  "id": "48b69f16-a6a7-4010-a84f-a2749036c1c4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:template_id/destinations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":template_id",
+                        "destinations"
+                      ],
+                      "variable": [
+                        {
+                          "id": "fac06385-6ef6-4d0d-ae69-cfa2f0924200",
+                          "key": "template_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "9277e9dd-2c0f-428e-8c77-2d7dac779bc5",
+                      "name": "Updated destinations",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:template_id/destinations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":template_id",
+                            "destinations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "template_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:27:01.000Z",
+                      "updatedAt": "2026-07-28T00:27:01.000Z",
+                      "uid": "35240-9277e9dd-2c0f-428e-8c77-2d7dac779bc5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:01.000Z",
+                  "updatedAt": "2026-07-28T00:27:01.000Z",
+                  "uid": "35240-48b69f16-a6a7-4010-a84f-a2749036c1c4"
+                }
+              ],
+              "id": "571fd39c-8975-42a6-99f5-fa3d8ff43b48",
+              "createdAt": "2026-07-28T00:27:01.000Z",
+              "updatedAt": "2026-07-28T00:27:01.000Z",
+              "uid": "35240-571fd39c-8975-42a6-99f5-fa3d8ff43b48"
+            },
+            {
+              "name": "settings",
+              "item": [
+                {
+                  "name": "Retrieve Settings",
+                  "id": "d9227fa3-f715-4f3f-b0e3-0084bf954179",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:template_id/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":template_id",
+                        "settings"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9164d37b-9b5d-49d0-a366-c3396b62b100",
+                          "key": "template_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "8f9b1316-1f07-4c3e-9061-ed728036fa91",
+                      "name": "Settings object",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:template_id/settings",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":template_id",
+                            "settings"
+                          ],
+                          "variable": [
+                            {
+                              "key": "template_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:27:01.000Z",
+                      "updatedAt": "2026-07-28T00:27:01.000Z",
+                      "uid": "35240-8f9b1316-1f07-4c3e-9061-ed728036fa91"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:01.000Z",
+                  "updatedAt": "2026-07-28T00:27:01.000Z",
+                  "uid": "35240-d9227fa3-f715-4f3f-b0e3-0084bf954179"
+                },
+                {
+                  "name": "Update Settings",
+                  "id": "0a9f8eeb-88cd-48c3-b21c-83f00badfdd5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:template_id/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":template_id",
+                        "settings"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b6d7c631-8681-44bb-8aa5-f224cf26203f",
+                          "key": "template_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a54743b0-1e22-4ace-81bf-3ebcb0133317",
+                      "name": "Updated settings",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:template_id/settings",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":template_id",
+                            "settings"
+                          ],
+                          "variable": [
+                            {
+                              "key": "template_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:27:01.000Z",
+                      "updatedAt": "2026-07-28T00:27:01.000Z",
+                      "uid": "35240-a54743b0-1e22-4ace-81bf-3ebcb0133317"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:01.000Z",
+                  "updatedAt": "2026-07-28T00:27:01.000Z",
+                  "uid": "35240-0a9f8eeb-88cd-48c3-b21c-83f00badfdd5"
+                }
+              ],
+              "id": "68401269-9099-4364-8abf-1df6d6261db3",
+              "createdAt": "2026-07-28T00:27:01.000Z",
+              "updatedAt": "2026-07-28T00:27:01.000Z",
+              "uid": "35240-68401269-9099-4364-8abf-1df6d6261db3"
+            },
+            {
+              "name": "Retrieve A Template",
+              "id": "c965d20a-d904-4001-a8b7-f697a7dc7b78",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/templates/:template_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5efbdccd-a1a9-4493-b049-e56ab4d0d095",
+                      "key": "template_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "ba5045c9-ea29-4c51-8079-f11384ad3a2a",
+                  "name": "Template",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:template_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":template_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "template_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"roles\": {\n    \"velit739\": {\n      \"name\": \"<string>\",\n      \"publishParams\": {\n        \"allowed\": [\n          \"audio\",\n          \"audio\"\n        ],\n        \"audio\": {},\n        \"video\": {},\n        \"screen\": {}\n      },\n      \"subscribeParams\": {\n        \"subscribeToRoles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"maxSubsBitRate\": \"<integer>\"\n      },\n      \"permissions\": {\n        \"endRoom\": \"<boolean>\",\n        \"removeOthers\": \"<boolean>\",\n        \"mute\": \"<boolean>\",\n        \"unmute\": \"<boolean>\",\n        \"changeRole\": \"<boolean>\",\n        \"sendRoomState\": \"<boolean>\",\n        \"hlsStreaming\": \"<boolean>\",\n        \"rtmpStreaming\": \"<boolean>\",\n        \"browserRecording\": \"<boolean>\",\n        \"pollWrite\": \"<boolean>\",\n        \"pollRead\": \"<boolean>\",\n        \"sendMessage\": \"<boolean>\"\n      },\n      \"priority\": \"<integer>\",\n      \"maxPeerCount\": \"<integer>\"\n    }\n  },\n  \"settings\": {},\n  \"destinations\": {},\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T00:27:01.000Z",
+                  "updatedAt": "2026-07-28T00:27:01.000Z",
+                  "uid": "35240-ba5045c9-ea29-4c51-8079-f11384ad3a2a"
+                }
+              ],
+              "createdAt": "2026-07-28T00:27:01.000Z",
+              "updatedAt": "2026-07-28T00:27:01.000Z",
+              "uid": "35240-c965d20a-d904-4001-a8b7-f697a7dc7b78"
+            },
+            {
+              "name": "Update A Template",
+              "id": "8c6e226b-8e73-471a-8e39-57467f176d94",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"roles\": {\n    \"in1b3\": {\n      \"name\": \"<string>\",\n      \"publishParams\": {\n        \"allowed\": [\n          \"video\",\n          \"audio\"\n        ],\n        \"audio\": {},\n        \"video\": {},\n        \"screen\": {}\n      },\n      \"subscribeParams\": {\n        \"subscribeToRoles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"maxSubsBitRate\": \"<integer>\"\n      },\n      \"permissions\": {\n        \"endRoom\": \"<boolean>\",\n        \"removeOthers\": \"<boolean>\",\n        \"mute\": \"<boolean>\",\n        \"unmute\": \"<boolean>\",\n        \"changeRole\": \"<boolean>\",\n        \"sendRoomState\": \"<boolean>\",\n        \"hlsStreaming\": \"<boolean>\",\n        \"rtmpStreaming\": \"<boolean>\",\n        \"browserRecording\": \"<boolean>\",\n        \"pollWrite\": \"<boolean>\",\n        \"pollRead\": \"<boolean>\",\n        \"sendMessage\": \"<boolean>\"\n      },\n      \"priority\": \"<integer>\",\n      \"maxPeerCount\": \"<integer>\"\n    }\n  },\n  \"settings\": {},\n  \"destinations\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/templates/:template_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "templates",
+                    ":template_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "214cf84e-70ef-488f-9565-d6b0855880d9",
+                      "key": "template_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "4a77f569-c16a-4387-8328-6d03e6bc6d67",
+                  "name": "Template",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"roles\": {\n    \"in1b3\": {\n      \"name\": \"<string>\",\n      \"publishParams\": {\n        \"allowed\": [\n          \"video\",\n          \"audio\"\n        ],\n        \"audio\": {},\n        \"video\": {},\n        \"screen\": {}\n      },\n      \"subscribeParams\": {\n        \"subscribeToRoles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"maxSubsBitRate\": \"<integer>\"\n      },\n      \"permissions\": {\n        \"endRoom\": \"<boolean>\",\n        \"removeOthers\": \"<boolean>\",\n        \"mute\": \"<boolean>\",\n        \"unmute\": \"<boolean>\",\n        \"changeRole\": \"<boolean>\",\n        \"sendRoomState\": \"<boolean>\",\n        \"hlsStreaming\": \"<boolean>\",\n        \"rtmpStreaming\": \"<boolean>\",\n        \"browserRecording\": \"<boolean>\",\n        \"pollWrite\": \"<boolean>\",\n        \"pollRead\": \"<boolean>\",\n        \"sendMessage\": \"<boolean>\"\n      },\n      \"priority\": \"<integer>\",\n      \"maxPeerCount\": \"<integer>\"\n    }\n  },\n  \"settings\": {},\n  \"destinations\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:template_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":template_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "template_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"roles\": {\n    \"velit739\": {\n      \"name\": \"<string>\",\n      \"publishParams\": {\n        \"allowed\": [\n          \"audio\",\n          \"audio\"\n        ],\n        \"audio\": {},\n        \"video\": {},\n        \"screen\": {}\n      },\n      \"subscribeParams\": {\n        \"subscribeToRoles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"maxSubsBitRate\": \"<integer>\"\n      },\n      \"permissions\": {\n        \"endRoom\": \"<boolean>\",\n        \"removeOthers\": \"<boolean>\",\n        \"mute\": \"<boolean>\",\n        \"unmute\": \"<boolean>\",\n        \"changeRole\": \"<boolean>\",\n        \"sendRoomState\": \"<boolean>\",\n        \"hlsStreaming\": \"<boolean>\",\n        \"rtmpStreaming\": \"<boolean>\",\n        \"browserRecording\": \"<boolean>\",\n        \"pollWrite\": \"<boolean>\",\n        \"pollRead\": \"<boolean>\",\n        \"sendMessage\": \"<boolean>\"\n      },\n      \"priority\": \"<integer>\",\n      \"maxPeerCount\": \"<integer>\"\n    }\n  },\n  \"settings\": {},\n  \"destinations\": {},\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T00:27:01.000Z",
+                  "updatedAt": "2026-07-28T00:27:01.000Z",
+                  "uid": "35240-4a77f569-c16a-4387-8328-6d03e6bc6d67"
+                }
+              ],
+              "createdAt": "2026-07-28T00:27:01.000Z",
+              "updatedAt": "2026-07-28T00:27:01.000Z",
+              "uid": "35240-8c6e226b-8e73-471a-8e39-57467f176d94"
+            }
+          ],
+          "id": "a7066bf3-da7a-424e-a6df-55aae517b75a",
+          "createdAt": "2026-07-28T00:27:01.000Z",
+          "updatedAt": "2026-07-28T00:27:01.000Z",
+          "uid": "35240-a7066bf3-da7a-424e-a6df-55aae517b75a"
+        },
+        {
+          "name": "List Templates",
+          "id": "2b3c1ce9-4b7b-4080-a50b-0ff01669aebb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/templates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "templates"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ca114adb-c9d0-4495-b82c-917260631752",
+              "name": "Page of templates",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "templates"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"roles\": {\n        \"velit_3\": {\n          \"name\": \"<string>\",\n          \"publishParams\": {\n            \"allowed\": [\n              \"audio\",\n              \"screen\"\n            ],\n            \"audio\": {},\n            \"video\": {},\n            \"screen\": {}\n          },\n          \"subscribeParams\": {\n            \"subscribeToRoles\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"maxSubsBitRate\": \"<integer>\"\n          },\n          \"permissions\": {\n            \"endRoom\": \"<boolean>\",\n            \"removeOthers\": \"<boolean>\",\n            \"mute\": \"<boolean>\",\n            \"unmute\": \"<boolean>\",\n            \"changeRole\": \"<boolean>\",\n            \"sendRoomState\": \"<boolean>\",\n            \"hlsStreaming\": \"<boolean>\",\n            \"rtmpStreaming\": \"<boolean>\",\n            \"browserRecording\": \"<boolean>\",\n            \"pollWrite\": \"<boolean>\",\n            \"pollRead\": \"<boolean>\",\n            \"sendMessage\": \"<boolean>\"\n          },\n          \"priority\": \"<integer>\",\n          \"maxPeerCount\": \"<integer>\"\n        }\n      },\n      \"settings\": {},\n      \"destinations\": {},\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"roles\": {\n        \"qui__\": {\n          \"name\": \"<string>\",\n          \"publishParams\": {\n            \"allowed\": [\n              \"audio\",\n              \"audio\"\n            ],\n            \"audio\": {},\n            \"video\": {},\n            \"screen\": {}\n          },\n          \"subscribeParams\": {\n            \"subscribeToRoles\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"maxSubsBitRate\": \"<integer>\"\n          },\n          \"permissions\": {\n            \"endRoom\": \"<boolean>\",\n            \"removeOthers\": \"<boolean>\",\n            \"mute\": \"<boolean>\",\n            \"unmute\": \"<boolean>\",\n            \"changeRole\": \"<boolean>\",\n            \"sendRoomState\": \"<boolean>\",\n            \"hlsStreaming\": \"<boolean>\",\n            \"rtmpStreaming\": \"<boolean>\",\n            \"browserRecording\": \"<boolean>\",\n            \"pollWrite\": \"<boolean>\",\n            \"pollRead\": \"<boolean>\",\n            \"sendMessage\": \"<boolean>\"\n          },\n          \"priority\": \"<integer>\",\n          \"maxPeerCount\": \"<integer>\"\n        },\n        \"labore__8\": {\n          \"name\": \"<string>\",\n          \"publishParams\": {\n            \"allowed\": [\n              \"audio\",\n              \"audio\"\n            ],\n            \"audio\": {},\n            \"video\": {},\n            \"screen\": {}\n          },\n          \"subscribeParams\": {\n            \"subscribeToRoles\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"maxSubsBitRate\": \"<integer>\"\n          },\n          \"permissions\": {\n            \"endRoom\": \"<boolean>\",\n            \"removeOthers\": \"<boolean>\",\n            \"mute\": \"<boolean>\",\n            \"unmute\": \"<boolean>\",\n            \"changeRole\": \"<boolean>\",\n            \"sendRoomState\": \"<boolean>\",\n            \"hlsStreaming\": \"<boolean>\",\n            \"rtmpStreaming\": \"<boolean>\",\n            \"browserRecording\": \"<boolean>\",\n            \"pollWrite\": \"<boolean>\",\n            \"pollRead\": \"<boolean>\",\n            \"sendMessage\": \"<boolean>\"\n          },\n          \"priority\": \"<integer>\",\n          \"maxPeerCount\": \"<integer>\"\n        }\n      },\n      \"settings\": {},\n      \"destinations\": {},\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"last\": \"<string>\",\n  \"limit\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T00:27:01.000Z",
+              "updatedAt": "2026-07-28T00:27:01.000Z",
+              "uid": "35240-ca114adb-c9d0-4495-b82c-917260631752"
+            }
+          ],
+          "createdAt": "2026-07-28T00:27:01.000Z",
+          "updatedAt": "2026-07-28T00:27:01.000Z",
+          "uid": "35240-2b3c1ce9-4b7b-4080-a50b-0ff01669aebb"
+        },
+        {
+          "name": "Create Template",
+          "id": "2b84132a-a7a1-4ee6-a2fd-10876010b271",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"roles\": {\n    \"in1b3\": {\n      \"name\": \"<string>\",\n      \"publishParams\": {\n        \"allowed\": [\n          \"video\",\n          \"audio\"\n        ],\n        \"audio\": {},\n        \"video\": {},\n        \"screen\": {}\n      },\n      \"subscribeParams\": {\n        \"subscribeToRoles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"maxSubsBitRate\": \"<integer>\"\n      },\n      \"permissions\": {\n        \"endRoom\": \"<boolean>\",\n        \"removeOthers\": \"<boolean>\",\n        \"mute\": \"<boolean>\",\n        \"unmute\": \"<boolean>\",\n        \"changeRole\": \"<boolean>\",\n        \"sendRoomState\": \"<boolean>\",\n        \"hlsStreaming\": \"<boolean>\",\n        \"rtmpStreaming\": \"<boolean>\",\n        \"browserRecording\": \"<boolean>\",\n        \"pollWrite\": \"<boolean>\",\n        \"pollRead\": \"<boolean>\",\n        \"sendMessage\": \"<boolean>\"\n      },\n      \"priority\": \"<integer>\",\n      \"maxPeerCount\": \"<integer>\"\n    }\n  },\n  \"settings\": {},\n  \"destinations\": {}\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/templates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "templates"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d5bd4bc3-83c6-4ba0-b9c8-30b31deb5ae5",
+              "name": "Template",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"roles\": {\n    \"in1b3\": {\n      \"name\": \"<string>\",\n      \"publishParams\": {\n        \"allowed\": [\n          \"video\",\n          \"audio\"\n        ],\n        \"audio\": {},\n        \"video\": {},\n        \"screen\": {}\n      },\n      \"subscribeParams\": {\n        \"subscribeToRoles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"maxSubsBitRate\": \"<integer>\"\n      },\n      \"permissions\": {\n        \"endRoom\": \"<boolean>\",\n        \"removeOthers\": \"<boolean>\",\n        \"mute\": \"<boolean>\",\n        \"unmute\": \"<boolean>\",\n        \"changeRole\": \"<boolean>\",\n        \"sendRoomState\": \"<boolean>\",\n        \"hlsStreaming\": \"<boolean>\",\n        \"rtmpStreaming\": \"<boolean>\",\n        \"browserRecording\": \"<boolean>\",\n        \"pollWrite\": \"<boolean>\",\n        \"pollRead\": \"<boolean>\",\n        \"sendMessage\": \"<boolean>\"\n      },\n      \"priority\": \"<integer>\",\n      \"maxPeerCount\": \"<integer>\"\n    }\n  },\n  \"settings\": {},\n  \"destinations\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "templates"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"roles\": {\n    \"velit739\": {\n      \"name\": \"<string>\",\n      \"publishParams\": {\n        \"allowed\": [\n          \"audio\",\n          \"audio\"\n        ],\n        \"audio\": {},\n        \"video\": {},\n        \"screen\": {}\n      },\n      \"subscribeParams\": {\n        \"subscribeToRoles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"maxSubsBitRate\": \"<integer>\"\n      },\n      \"permissions\": {\n        \"endRoom\": \"<boolean>\",\n        \"removeOthers\": \"<boolean>\",\n        \"mute\": \"<boolean>\",\n        \"unmute\": \"<boolean>\",\n        \"changeRole\": \"<boolean>\",\n        \"sendRoomState\": \"<boolean>\",\n        \"hlsStreaming\": \"<boolean>\",\n        \"rtmpStreaming\": \"<boolean>\",\n        \"browserRecording\": \"<boolean>\",\n        \"pollWrite\": \"<boolean>\",\n        \"pollRead\": \"<boolean>\",\n        \"sendMessage\": \"<boolean>\"\n      },\n      \"priority\": \"<integer>\",\n      \"maxPeerCount\": \"<integer>\"\n    }\n  },\n  \"settings\": {},\n  \"destinations\": {},\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T00:27:01.000Z",
+              "updatedAt": "2026-07-28T00:27:01.000Z",
+              "uid": "35240-d5bd4bc3-83c6-4ba0-b9c8-30b31deb5ae5"
+            }
+          ],
+          "createdAt": "2026-07-28T00:27:01.000Z",
+          "updatedAt": "2026-07-28T00:27:01.000Z",
+          "uid": "35240-2b84132a-a7a1-4ee6-a2fd-10876010b271"
+        }
+      ],
+      "id": "05c77a8e-df29-42da-be4f-b04678f4a6fd",
+      "createdAt": "2026-07-28T00:27:01.000Z",
+      "updatedAt": "2026-07-28T00:27:01.000Z",
+      "uid": "35240-05c77a8e-df29-42da-be4f-b04678f4a6fd"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.100ms.live/v2"
+    }
+  ]
+}

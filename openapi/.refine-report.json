@@ -1,0 +1,36 @@
+{
+  "provider": "100ms-live",
+  "sources": [
+    "100ms-live-active-rooms-api-openapi.yml",
+    "100ms-live-analytics-api-openapi.yml",
+    "100ms-live-external-streams-api-openapi.yml",
+    "100ms-live-live-streams-api-openapi.yml",
+    "100ms-live-policy-api-openapi.yml",
+    "100ms-live-polls-api-openapi.yml",
+    "100ms-live-recording-assets-api-openapi.yml",
+    "100ms-live-recordings-api-openapi.yml",
+    "100ms-live-room-codes-api-openapi.yml",
+    "100ms-live-rooms-api-openapi.yml",
+    "100ms-live-sessions-api-openapi.yml",
+    "100ms-live-stream-keys-api-openapi.yml"
+  ],
+  "outputs": [
+    "100ms-live-active-rooms-api-openapi.yml",
+    "100ms-live-analytics-api-openapi.yml",
+    "100ms-live-external-streams-api-openapi.yml",
+    "100ms-live-live-streams-api-openapi.yml",
+    "100ms-live-policy-api-openapi.yml",
+    "100ms-live-polls-api-openapi.yml",
+    "100ms-live-recording-assets-api-openapi.yml",
+    "100ms-live-recordings-api-openapi.yml",
+    "100ms-live-room-codes-api-openapi.yml",
+    "100ms-live-rooms-api-openapi.yml",
+    "100ms-live-sessions-api-openapi.yml",
+    "100ms-live-stream-keys-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

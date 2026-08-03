@@ -1,0 +1,795 @@
+{
+  "info": {
+    "_postman_id": "1a164076-b50c-4f27-ba48-3ce6b5cf2454",
+    "name": "100ms Server-Side Active Rooms Recordings API",
+    "description": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:27:22.000Z",
+    "updatedAt": "2026-07-28T00:27:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1a164076-b50c-4f27-ba48-3ce6b5cf2454"
+  },
+  "item": [
+    {
+      "name": "recordings",
+      "item": [
+        {
+          "name": "{recording_id}",
+          "item": [
+            {
+              "name": "stop",
+              "item": [
+                {
+                  "name": "Stop Recording By Id",
+                  "id": "a22e46a0-fd28-4bd0-9c46-5a9ca4f96a79",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/recordings/:recording_id/stop",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recordings",
+                        ":recording_id",
+                        "stop"
+                      ],
+                      "variable": [
+                        {
+                          "id": "48f205a6-80ee-458a-b50c-58a02d209d8e",
+                          "key": "recording_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "3be83dc2-e435-4050-a8dc-78fe78e8a464",
+                      "name": "Successful empty response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/recordings/:recording_id/stop",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recordings",
+                            ":recording_id",
+                            "stop"
+                          ],
+                          "variable": [
+                            {
+                              "key": "recording_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:27:23.000Z",
+                      "updatedAt": "2026-07-28T00:27:23.000Z",
+                      "uid": "35240-3be83dc2-e435-4050-a8dc-78fe78e8a464"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:23.000Z",
+                  "updatedAt": "2026-07-28T00:27:23.000Z",
+                  "uid": "35240-a22e46a0-fd28-4bd0-9c46-5a9ca4f96a79"
+                }
+              ],
+              "id": "21bf0171-bbd1-4ca6-9818-9c85a20ac555",
+              "createdAt": "2026-07-28T00:27:22.000Z",
+              "updatedAt": "2026-07-28T00:27:22.000Z",
+              "uid": "35240-21bf0171-bbd1-4ca6-9818-9c85a20ac555"
+            },
+            {
+              "name": "Get Recording",
+              "id": "ff8c9e0c-3386-4859-bc36-0890a5f1dbb8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/recordings/:recording_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recordings",
+                    ":recording_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "afb707f0-3944-42f7-8656-077093cc0f53",
+                      "key": "recording_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "52c916a3-f12f-4837-b0dd-914af522cb82",
+                  "name": "Recording",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/recordings/:recording_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recordings",
+                        ":recording_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "recording_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"room_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"status\": \"paused\",\n  \"created_at\": \"<dateTime>\",\n  \"started_at\": \"<dateTime>\",\n  \"stopped_at\": \"<dateTime>\",\n  \"stopped_by\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"size\": \"<integer>\",\n  \"recording_assets\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"transcript\",\n      \"path\": \"<string>\",\n      \"format\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"duration\": \"<integer>\",\n      \"room_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"recording_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"room-vod\",\n      \"path\": \"<string>\",\n      \"format\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"duration\": \"<integer>\",\n      \"room_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"recording_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T00:27:23.000Z",
+                  "updatedAt": "2026-07-28T00:27:23.000Z",
+                  "uid": "35240-52c916a3-f12f-4837-b0dd-914af522cb82"
+                }
+              ],
+              "createdAt": "2026-07-28T00:27:23.000Z",
+              "updatedAt": "2026-07-28T00:27:23.000Z",
+              "uid": "35240-ff8c9e0c-3386-4859-bc36-0890a5f1dbb8"
+            }
+          ],
+          "id": "ab235082-ef3a-4c0d-a117-ac65d7fa7ce2",
+          "createdAt": "2026-07-28T00:27:22.000Z",
+          "updatedAt": "2026-07-28T00:27:22.000Z",
+          "uid": "35240-ab235082-ef3a-4c0d-a117-ac65d7fa7ce2"
+        },
+        {
+          "name": "room",
+          "item": [
+            {
+              "name": "{room_id}",
+              "item": [
+                {
+                  "name": "start",
+                  "item": [
+                    {
+                      "name": "Start Recording For Room",
+                      "id": "9c311278-17e1-43c5-80ac-3d993745a08d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"meeting_url\": \"<uri>\",\n  \"resolution\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  },\n  \"recording\": {\n    \"hls_vod\": \"<boolean>\",\n    \"single_file_per_layer\": \"<boolean>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/recordings/room/:room_id/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recordings",
+                            "room",
+                            ":room_id",
+                            "start"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4d1353e2-d3dc-4954-87cf-2c9541bd267a",
+                              "key": "room_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "f6074b90-baee-48d8-b5ec-6b8236662493",
+                          "name": "Recording",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"meeting_url\": \"<uri>\",\n  \"resolution\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  },\n  \"recording\": {\n    \"hls_vod\": \"<boolean>\",\n    \"single_file_per_layer\": \"<boolean>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/recordings/room/:room_id/start",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "recordings",
+                                "room",
+                                ":room_id",
+                                "start"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "room_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"room_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"status\": \"paused\",\n  \"created_at\": \"<dateTime>\",\n  \"started_at\": \"<dateTime>\",\n  \"stopped_at\": \"<dateTime>\",\n  \"stopped_by\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"size\": \"<integer>\",\n  \"recording_assets\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"transcript\",\n      \"path\": \"<string>\",\n      \"format\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"duration\": \"<integer>\",\n      \"room_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"recording_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"room-vod\",\n      \"path\": \"<string>\",\n      \"format\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"duration\": \"<integer>\",\n      \"room_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"recording_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T00:27:23.000Z",
+                          "updatedAt": "2026-07-28T00:27:23.000Z",
+                          "uid": "35240-f6074b90-baee-48d8-b5ec-6b8236662493"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:27:23.000Z",
+                      "updatedAt": "2026-07-28T00:27:23.000Z",
+                      "uid": "35240-9c311278-17e1-43c5-80ac-3d993745a08d"
+                    }
+                  ],
+                  "id": "af63258c-6911-4af5-9b88-c0bc554f2beb",
+                  "createdAt": "2026-07-28T00:27:22.000Z",
+                  "updatedAt": "2026-07-28T00:27:22.000Z",
+                  "uid": "35240-af63258c-6911-4af5-9b88-c0bc554f2beb"
+                },
+                {
+                  "name": "stop",
+                  "item": [
+                    {
+                      "name": "Stop Recording For Room",
+                      "id": "5b459c25-a984-42bb-a2eb-ddb63bc6c4ff",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/recordings/room/:room_id/stop",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recordings",
+                            "room",
+                            ":room_id",
+                            "stop"
+                          ],
+                          "variable": [
+                            {
+                              "id": "383b1fc3-d756-4c86-9369-0c1a8843d37a",
+                              "key": "room_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "ccac8e86-7b71-460a-9210-7cc33c55d3e9",
+                          "name": "Successful empty response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/recordings/room/:room_id/stop",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "recordings",
+                                "room",
+                                ":room_id",
+                                "stop"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "room_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T00:27:23.000Z",
+                          "updatedAt": "2026-07-28T00:27:23.000Z",
+                          "uid": "35240-ccac8e86-7b71-460a-9210-7cc33c55d3e9"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:27:23.000Z",
+                      "updatedAt": "2026-07-28T00:27:23.000Z",
+                      "uid": "35240-5b459c25-a984-42bb-a2eb-ddb63bc6c4ff"
+                    }
+                  ],
+                  "id": "173f859d-0ca8-4f81-a845-6a064324926e",
+                  "createdAt": "2026-07-28T00:27:22.000Z",
+                  "updatedAt": "2026-07-28T00:27:22.000Z",
+                  "uid": "35240-173f859d-0ca8-4f81-a845-6a064324926e"
+                },
+                {
+                  "name": "pause",
+                  "item": [
+                    {
+                      "name": "Pause Recording For Room",
+                      "id": "e23c0a2a-324a-491f-81f0-3eab5cae079d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/recordings/room/:room_id/pause",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recordings",
+                            "room",
+                            ":room_id",
+                            "pause"
+                          ],
+                          "variable": [
+                            {
+                              "id": "78ab7b8a-640d-4ab3-ba55-bff704a21b92",
+                              "key": "room_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "89379399-ac74-48c1-8830-e4278508adc1",
+                          "name": "Successful empty response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/recordings/room/:room_id/pause",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "recordings",
+                                "room",
+                                ":room_id",
+                                "pause"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "room_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T00:27:23.000Z",
+                          "updatedAt": "2026-07-28T00:27:23.000Z",
+                          "uid": "35240-89379399-ac74-48c1-8830-e4278508adc1"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:27:23.000Z",
+                      "updatedAt": "2026-07-28T00:27:23.000Z",
+                      "uid": "35240-e23c0a2a-324a-491f-81f0-3eab5cae079d"
+                    }
+                  ],
+                  "id": "0bf2eb91-2e2d-436d-9d42-2d56aec7ef40",
+                  "createdAt": "2026-07-28T00:27:22.000Z",
+                  "updatedAt": "2026-07-28T00:27:22.000Z",
+                  "uid": "35240-0bf2eb91-2e2d-436d-9d42-2d56aec7ef40"
+                },
+                {
+                  "name": "resume",
+                  "item": [
+                    {
+                      "name": "Resume Recording For Room",
+                      "id": "1f7ef5ad-4052-46f2-ba7a-4e1ac683a8ec",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/recordings/room/:room_id/resume",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recordings",
+                            "room",
+                            ":room_id",
+                            "resume"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d25f74d5-ad40-4f23-a7ce-4f68b590137b",
+                              "key": "room_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "9e3c068e-b433-40de-aef8-627ec8a4f92b",
+                          "name": "Successful empty response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/recordings/room/:room_id/resume",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "recordings",
+                                "room",
+                                ":room_id",
+                                "resume"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "room_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T00:27:23.000Z",
+                          "updatedAt": "2026-07-28T00:27:23.000Z",
+                          "uid": "35240-9e3c068e-b433-40de-aef8-627ec8a4f92b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:27:23.000Z",
+                      "updatedAt": "2026-07-28T00:27:23.000Z",
+                      "uid": "35240-1f7ef5ad-4052-46f2-ba7a-4e1ac683a8ec"
+                    }
+                  ],
+                  "id": "2252b4a3-8df3-4deb-910c-04e7ce8f029f",
+                  "createdAt": "2026-07-28T00:27:22.000Z",
+                  "updatedAt": "2026-07-28T00:27:22.000Z",
+                  "uid": "35240-2252b4a3-8df3-4deb-910c-04e7ce8f029f"
+                }
+              ],
+              "id": "5a718068-c612-46e6-9da4-86fffa0a22f9",
+              "createdAt": "2026-07-28T00:27:22.000Z",
+              "updatedAt": "2026-07-28T00:27:22.000Z",
+              "uid": "35240-5a718068-c612-46e6-9da4-86fffa0a22f9"
+            }
+          ],
+          "id": "5ddb14f4-a2c4-45f2-9708-27ddb611eedf",
+          "createdAt": "2026-07-28T00:27:22.000Z",
+          "updatedAt": "2026-07-28T00:27:22.000Z",
+          "uid": "35240-5ddb14f4-a2c4-45f2-9708-27ddb611eedf"
+        },
+        {
+          "name": "List All Recordings",
+          "id": "18752d5b-8b03-40ee-86bb-db7f161f9cf1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/recordings?limit=10&start=<string>&room_id=<string>&session_id=<string>&status=paused",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "recordings"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "start",
+                  "value": "<string>"
+                },
+                {
+                  "key": "room_id",
+                  "value": "<string>"
+                },
+                {
+                  "key": "session_id",
+                  "value": "<string>"
+                },
+                {
+                  "key": "status",
+                  "value": "paused"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3efe8fcd-4d16-4b7f-80b3-26c75f9a39ab",
+              "name": "Page of recordings",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/recordings?limit=10&start=<string>&room_id=<string>&session_id=<string>&status=paused",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recordings"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "room_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "paused"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"room_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"status\": \"running\",\n      \"created_at\": \"<dateTime>\",\n      \"started_at\": \"<dateTime>\",\n      \"stopped_at\": \"<dateTime>\",\n      \"stopped_by\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"size\": \"<integer>\",\n      \"recording_assets\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"room-composite\",\n          \"path\": \"<string>\",\n          \"format\": \"<string>\",\n          \"size\": \"<integer>\",\n          \"duration\": \"<integer>\",\n          \"room_id\": \"<string>\",\n          \"session_id\": \"<string>\",\n          \"recording_id\": \"<string>\",\n          \"created_at\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"room-composite\",\n          \"path\": \"<string>\",\n          \"format\": \"<string>\",\n          \"size\": \"<integer>\",\n          \"duration\": \"<integer>\",\n          \"room_id\": \"<string>\",\n          \"session_id\": \"<string>\",\n          \"recording_id\": \"<string>\",\n          \"created_at\": \"<dateTime>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"room_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"status\": \"failed\",\n      \"created_at\": \"<dateTime>\",\n      \"started_at\": \"<dateTime>\",\n      \"stopped_at\": \"<dateTime>\",\n      \"stopped_by\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"size\": \"<integer>\",\n      \"recording_assets\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"chat-log\",\n          \"path\": \"<string>\",\n          \"format\": \"<string>\",\n          \"size\": \"<integer>\",\n          \"duration\": \"<integer>\",\n          \"room_id\": \"<string>\",\n          \"session_id\": \"<string>\",\n          \"recording_id\": \"<string>\",\n          \"created_at\": \"<dateTime>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"room-vod\",\n          \"path\": \"<string>\",\n          \"format\": \"<string>\",\n          \"size\": \"<integer>\",\n          \"duration\": \"<integer>\",\n          \"room_id\": \"<string>\",\n          \"session_id\": \"<string>\",\n          \"recording_id\": \"<string>\",\n          \"created_at\": \"<dateTime>\"\n        }\n      ]\n    }\n  ],\n  \"last\": \"<string>\",\n  \"limit\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T00:27:23.000Z",
+              "updatedAt": "2026-07-28T00:27:23.000Z",
+              "uid": "35240-3efe8fcd-4d16-4b7f-80b3-26c75f9a39ab"
+            }
+          ],
+          "createdAt": "2026-07-28T00:27:23.000Z",
+          "updatedAt": "2026-07-28T00:27:23.000Z",
+          "uid": "35240-18752d5b-8b03-40ee-86bb-db7f161f9cf1"
+        }
+      ],
+      "id": "76c64cff-0b33-4516-a7d8-f7855544d355",
+      "createdAt": "2026-07-28T00:27:22.000Z",
+      "updatedAt": "2026-07-28T00:27:22.000Z",
+      "uid": "35240-76c64cff-0b33-4516-a7d8-f7855544d355"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.100ms.live/v2"
+    }
+  ]
+}

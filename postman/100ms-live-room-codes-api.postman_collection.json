@@ -1,0 +1,370 @@
+{
+  "info": {
+    "_postman_id": "bc92ebd0-970f-48de-8507-4f7caa11779a",
+    "name": "100ms Server-Side Active Rooms Room Codes API",
+    "description": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:27:23.000Z",
+    "updatedAt": "2026-07-28T00:27:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bc92ebd0-970f-48de-8507-4f7caa11779a"
+  },
+  "item": [
+    {
+      "name": "room-codes",
+      "item": [
+        {
+          "name": "room",
+          "item": [
+            {
+              "name": "{room_id}",
+              "item": [
+                {
+                  "name": "Create Room Codes",
+                  "id": "a7dbc9af-9380-4635-bd3b-4479623049d6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/room-codes/room/:room_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "room-codes",
+                        "room",
+                        ":room_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ac2698c3-9649-4019-942a-ea5fb2293ad4",
+                          "key": "room_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "53ec7c1c-f9ed-480f-8244-1d78a998881c",
+                      "name": "List of room codes (one per role).",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/room-codes/room/:room_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "room-codes",
+                            "room",
+                            ":room_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "room_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"code\": \"<string>\",\n      \"room_id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"room_id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T00:27:24.000Z",
+                      "updatedAt": "2026-07-28T00:27:24.000Z",
+                      "uid": "35240-53ec7c1c-f9ed-480f-8244-1d78a998881c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:24.000Z",
+                  "updatedAt": "2026-07-28T00:27:24.000Z",
+                  "uid": "35240-a7dbc9af-9380-4635-bd3b-4479623049d6"
+                },
+                {
+                  "name": "Get Room Codes",
+                  "id": "f32abf1d-0241-4b55-bf2c-90105feeb927",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/room-codes/room/:room_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "room-codes",
+                        "room",
+                        ":room_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6d640eb9-edec-437c-b7ac-f143e26c9180",
+                          "key": "room_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c57bc730-73ec-437b-ac06-ac0ef9f90f33",
+                      "name": "List of room codes (one per role).",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/room-codes/room/:room_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "room-codes",
+                            "room",
+                            ":room_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "room_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"code\": \"<string>\",\n      \"room_id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"room_id\": \"<string>\",\n      \"role\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T00:27:24.000Z",
+                      "updatedAt": "2026-07-28T00:27:24.000Z",
+                      "uid": "35240-c57bc730-73ec-437b-ac06-ac0ef9f90f33"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:24.000Z",
+                  "updatedAt": "2026-07-28T00:27:24.000Z",
+                  "uid": "35240-f32abf1d-0241-4b55-bf2c-90105feeb927"
+                }
+              ],
+              "id": "894c4913-d459-4ac6-85f6-e5ecb3ae78ff",
+              "createdAt": "2026-07-28T00:27:24.000Z",
+              "updatedAt": "2026-07-28T00:27:24.000Z",
+              "uid": "35240-894c4913-d459-4ac6-85f6-e5ecb3ae78ff"
+            }
+          ],
+          "id": "6ee674ca-a81e-40f1-bbf7-8b12c5c03ea7",
+          "createdAt": "2026-07-28T00:27:24.000Z",
+          "updatedAt": "2026-07-28T00:27:24.000Z",
+          "uid": "35240-6ee674ca-a81e-40f1-bbf7-8b12c5c03ea7"
+        },
+        {
+          "name": "code",
+          "item": [
+            {
+              "name": "{code}",
+              "item": [
+                {
+                  "name": "Update Room Code",
+                  "id": "783bbb72-9f25-41e6-b292-3f90b5aaaf86",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"enabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/room-codes/code/:code",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "room-codes",
+                        "code",
+                        ":code"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f02c1cbb-24c0-4d50-8a2c-8c6b1f398d0f",
+                          "key": "code",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a9892d91-3334-4f92-9c9d-5e534f2ceeb5",
+                      "name": "Room code",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"enabled\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/room-codes/code/:code",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "room-codes",
+                            "code",
+                            ":code"
+                          ],
+                          "variable": [
+                            {
+                              "key": "code"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"room_id\": \"<string>\",\n  \"role\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T00:27:24.000Z",
+                      "updatedAt": "2026-07-28T00:27:24.000Z",
+                      "uid": "35240-a9892d91-3334-4f92-9c9d-5e534f2ceeb5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:24.000Z",
+                  "updatedAt": "2026-07-28T00:27:24.000Z",
+                  "uid": "35240-783bbb72-9f25-41e6-b292-3f90b5aaaf86"
+                }
+              ],
+              "id": "3103544c-76ae-46ef-8716-a6d1e03ba300",
+              "createdAt": "2026-07-28T00:27:24.000Z",
+              "updatedAt": "2026-07-28T00:27:24.000Z",
+              "uid": "35240-3103544c-76ae-46ef-8716-a6d1e03ba300"
+            }
+          ],
+          "id": "5878cf81-1414-435a-82ca-a0433dc1b666",
+          "createdAt": "2026-07-28T00:27:24.000Z",
+          "updatedAt": "2026-07-28T00:27:24.000Z",
+          "uid": "35240-5878cf81-1414-435a-82ca-a0433dc1b666"
+        }
+      ],
+      "id": "51738760-ad17-485f-93da-29e4e6d6154b",
+      "createdAt": "2026-07-28T00:27:24.000Z",
+      "updatedAt": "2026-07-28T00:27:24.000Z",
+      "uid": "35240-51738760-ad17-485f-93da-29e4e6d6154b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.100ms.live/v2"
+    }
+  ]
+}

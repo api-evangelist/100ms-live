@@ -1,0 +1,896 @@
+{
+  "info": {
+    "_postman_id": "c824233b-4a9b-4816-9e09-24ff266dad2d",
+    "name": "100ms Server-Side Active Rooms API",
+    "description": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:26:56.000Z",
+    "updatedAt": "2026-07-28T00:26:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c824233b-4a9b-4816-9e09-24ff266dad2d"
+  },
+  "item": [
+    {
+      "name": "active-rooms",
+      "item": [
+        {
+          "name": "{room_id}",
+          "item": [
+            {
+              "name": "end-room",
+              "item": [
+                {
+                  "name": "End Active Room",
+                  "id": "bbf48e2e-6407-4e23-96fe-a6db221be192",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"reason\": \"<string>\",\n  \"lock\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/active-rooms/:room_id/end-room",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "active-rooms",
+                        ":room_id",
+                        "end-room"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a293c4ae-a496-42bf-9b21-575bfbdcca05",
+                          "key": "room_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "3d09df95-2bd2-4943-a221-95f57ee1bd04",
+                      "name": "Successful empty response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"reason\": \"<string>\",\n  \"lock\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/active-rooms/:room_id/end-room",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "active-rooms",
+                            ":room_id",
+                            "end-room"
+                          ],
+                          "variable": [
+                            {
+                              "key": "room_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:26:57.000Z",
+                      "updatedAt": "2026-07-28T00:26:57.000Z",
+                      "uid": "35240-3d09df95-2bd2-4943-a221-95f57ee1bd04"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:26:57.000Z",
+                  "updatedAt": "2026-07-28T00:26:57.000Z",
+                  "uid": "35240-bbf48e2e-6407-4e23-96fe-a6db221be192"
+                }
+              ],
+              "id": "a0994592-d6c9-4ff1-b3ab-68f50007d9dc",
+              "createdAt": "2026-07-28T00:26:57.000Z",
+              "updatedAt": "2026-07-28T00:26:57.000Z",
+              "uid": "35240-a0994592-d6c9-4ff1-b3ab-68f50007d9dc"
+            },
+            {
+              "name": "peers",
+              "item": [
+                {
+                  "name": "{peer_id}",
+                  "item": [
+                    {
+                      "name": "Retrieve A Peer",
+                      "id": "63bf0de9-dbab-4c14-9ebe-a5b54b1c1c70",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/active-rooms/:room_id/peers/:peer_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "active-rooms",
+                            ":room_id",
+                            "peers",
+                            ":peer_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "184108ef-a37a-44a1-a94e-1e7bd68e8564",
+                              "key": "room_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "a240296f-ccaa-4acd-bba5-35fb510c9d51",
+                              "key": "peer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "9a238cd3-2b6e-46dc-af76-7411b4c5782f",
+                          "name": "Peer",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/active-rooms/:room_id/peers/:peer_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "active-rooms",
+                                ":room_id",
+                                "peers",
+                                ":peer_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "room_id"
+                                },
+                                {
+                                  "key": "peer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"role\": \"<string>\",\n  \"joined_at\": \"<dateTime>\",\n  \"tracks\": {\n    \"incididuntef5\": {},\n    \"dolor_5\": {},\n    \"non_7\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:26:57.000Z",
+                          "updatedAt": "2026-07-28T00:26:57.000Z",
+                          "uid": "35240-9a238cd3-2b6e-46dc-af76-7411b4c5782f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:26:57.000Z",
+                      "updatedAt": "2026-07-28T00:26:57.000Z",
+                      "uid": "35240-63bf0de9-dbab-4c14-9ebe-a5b54b1c1c70"
+                    },
+                    {
+                      "name": "Update A Peer",
+                      "id": "3b9347cd-f785-4d98-b5ff-1441851d73b2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"role\": \"<string>\",\n  \"metadata\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/active-rooms/:room_id/peers/:peer_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "active-rooms",
+                            ":room_id",
+                            "peers",
+                            ":peer_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9a42b883-99dd-452d-a926-99bfce222b48",
+                              "key": "room_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "6ef14290-84c8-412e-8618-fda8a25fab8b",
+                              "key": "peer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "dde414a7-5c96-46e8-8b3f-0421d4b0dc1d",
+                          "name": "Peer",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"role\": \"<string>\",\n  \"metadata\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/active-rooms/:room_id/peers/:peer_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "active-rooms",
+                                ":room_id",
+                                "peers",
+                                ":peer_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "room_id"
+                                },
+                                {
+                                  "key": "peer_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"role\": \"<string>\",\n  \"joined_at\": \"<dateTime>\",\n  \"tracks\": {\n    \"incididuntef5\": {},\n    \"dolor_5\": {},\n    \"non_7\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:26:57.000Z",
+                          "updatedAt": "2026-07-28T00:26:57.000Z",
+                          "uid": "35240-dde414a7-5c96-46e8-8b3f-0421d4b0dc1d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:26:57.000Z",
+                      "updatedAt": "2026-07-28T00:26:57.000Z",
+                      "uid": "35240-3b9347cd-f785-4d98-b5ff-1441851d73b2"
+                    }
+                  ],
+                  "id": "aea0e83e-7712-4a99-8478-0570a75672ac",
+                  "createdAt": "2026-07-28T00:26:57.000Z",
+                  "updatedAt": "2026-07-28T00:26:57.000Z",
+                  "uid": "35240-aea0e83e-7712-4a99-8478-0570a75672ac"
+                },
+                {
+                  "name": "List Peers",
+                  "id": "d21a9846-9d79-4afb-8111-615e7f4df06b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/active-rooms/:room_id/peers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "active-rooms",
+                        ":room_id",
+                        "peers"
+                      ],
+                      "variable": [
+                        {
+                          "id": "391eb0f6-36be-4c5a-96ca-decab5141af9",
+                          "key": "room_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "855e2bd9-5f00-4027-a31c-349c2cc47cbe",
+                      "name": "List of peers in the active room (peer_id keyed object).",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/active-rooms/:room_id/peers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "active-rooms",
+                            ":room_id",
+                            "peers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "room_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"eiusmod4\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"metadata\": \"<string>\",\n    \"role\": \"<string>\",\n    \"joined_at\": \"<dateTime>\",\n    \"tracks\": {\n      \"dolore_8b\": {},\n      \"qui8\": {},\n      \"in_d3\": {}\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T00:26:57.000Z",
+                      "updatedAt": "2026-07-28T00:26:57.000Z",
+                      "uid": "35240-855e2bd9-5f00-4027-a31c-349c2cc47cbe"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:26:57.000Z",
+                  "updatedAt": "2026-07-28T00:26:57.000Z",
+                  "uid": "35240-d21a9846-9d79-4afb-8111-615e7f4df06b"
+                }
+              ],
+              "id": "aacb5185-7297-4307-bfc7-c57fc57a60f4",
+              "createdAt": "2026-07-28T00:26:57.000Z",
+              "updatedAt": "2026-07-28T00:26:57.000Z",
+              "uid": "35240-aacb5185-7297-4307-bfc7-c57fc57a60f4"
+            },
+            {
+              "name": "remove-peers",
+              "item": [
+                {
+                  "name": "Remove Peers",
+                  "id": "f745c14b-4883-4aa2-860d-b3c36d17a849",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"peer_id\": \"<string>\",\n  \"role\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/active-rooms/:room_id/remove-peers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "active-rooms",
+                        ":room_id",
+                        "remove-peers"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6a662b99-0663-4825-aa6b-3e240189588e",
+                          "key": "room_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f6e7b9fd-ec93-4e4b-a824-b3cde0315ac8",
+                      "name": "Successful empty response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"peer_id\": \"<string>\",\n  \"role\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/active-rooms/:room_id/remove-peers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "active-rooms",
+                            ":room_id",
+                            "remove-peers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "room_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:26:57.000Z",
+                      "updatedAt": "2026-07-28T00:26:57.000Z",
+                      "uid": "35240-f6e7b9fd-ec93-4e4b-a824-b3cde0315ac8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:26:57.000Z",
+                  "updatedAt": "2026-07-28T00:26:57.000Z",
+                  "uid": "35240-f745c14b-4883-4aa2-860d-b3c36d17a849"
+                }
+              ],
+              "id": "83ae7155-38e3-4eb1-bfc0-3125da9bf64e",
+              "createdAt": "2026-07-28T00:26:57.000Z",
+              "updatedAt": "2026-07-28T00:26:57.000Z",
+              "uid": "35240-83ae7155-38e3-4eb1-bfc0-3125da9bf64e"
+            },
+            {
+              "name": "send-message",
+              "item": [
+                {
+                  "name": "Send Message",
+                  "id": "97ffa5b5-1f06-49b7-b118-ac5cc15cb900",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"message\": \"<string>\",\n  \"type\": \"<string>\",\n  \"peer_id\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/active-rooms/:room_id/send-message",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "active-rooms",
+                        ":room_id",
+                        "send-message"
+                      ],
+                      "variable": [
+                        {
+                          "id": "630c44f7-9adc-46fc-bb98-c452c40756c8",
+                          "key": "room_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "25f6ea0c-89a8-47fa-9e1e-705d5a2f62a5",
+                      "name": "Successful empty response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"message\": \"<string>\",\n  \"type\": \"<string>\",\n  \"peer_id\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/active-rooms/:room_id/send-message",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "active-rooms",
+                            ":room_id",
+                            "send-message"
+                          ],
+                          "variable": [
+                            {
+                              "key": "room_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:26:57.000Z",
+                      "updatedAt": "2026-07-28T00:26:57.000Z",
+                      "uid": "35240-25f6ea0c-89a8-47fa-9e1e-705d5a2f62a5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:26:57.000Z",
+                  "updatedAt": "2026-07-28T00:26:57.000Z",
+                  "uid": "35240-97ffa5b5-1f06-49b7-b118-ac5cc15cb900"
+                }
+              ],
+              "id": "c9471c6a-9054-4b3c-91c7-cad8a2af4f33",
+              "createdAt": "2026-07-28T00:26:57.000Z",
+              "updatedAt": "2026-07-28T00:26:57.000Z",
+              "uid": "35240-c9471c6a-9054-4b3c-91c7-cad8a2af4f33"
+            },
+            {
+              "name": "Retrieve Active Room",
+              "id": "852cc3c1-203e-4a63-844a-c503f9c6111f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/active-rooms/:room_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "active-rooms",
+                    ":room_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "18be5037-bb71-409d-b142-952deb51060b",
+                      "key": "room_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "8f15333a-35b7-435f-b05e-a21091583a79",
+                  "name": "Active room",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/active-rooms/:room_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "active-rooms",
+                        ":room_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "room_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"recording\": {\n    \"running\": \"<boolean>\"\n  },\n  \"streaming\": {\n    \"running\": \"<boolean>\"\n  },\n  \"peers\": {\n    \"exercitation74\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"metadata\": \"<string>\",\n      \"role\": \"<string>\",\n      \"joined_at\": \"<dateTime>\",\n      \"tracks\": {\n        \"sedc\": {},\n        \"nulla_aff\": {},\n        \"proident78_\": {}\n      }\n    },\n    \"fugiat_f\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"metadata\": \"<string>\",\n      \"role\": \"<string>\",\n      \"joined_at\": \"<dateTime>\",\n      \"tracks\": {\n        \"sunt47\": {},\n        \"cupidatatb5\": {}\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T00:26:57.000Z",
+                  "updatedAt": "2026-07-28T00:26:57.000Z",
+                  "uid": "35240-8f15333a-35b7-435f-b05e-a21091583a79"
+                },
+                {
+                  "id": "a61c425e-a43e-4cef-afad-79580d1bfe30",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/active-rooms/:room_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "active-rooms",
+                        ":room_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "room_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:26:57.000Z",
+                  "updatedAt": "2026-07-28T00:26:57.000Z",
+                  "uid": "35240-a61c425e-a43e-4cef-afad-79580d1bfe30"
+                }
+              ],
+              "createdAt": "2026-07-28T00:26:57.000Z",
+              "updatedAt": "2026-07-28T00:26:57.000Z",
+              "uid": "35240-852cc3c1-203e-4a63-844a-c503f9c6111f"
+            }
+          ],
+          "id": "bb152e3a-02cd-4d8c-b92a-38a3be96cfe5",
+          "createdAt": "2026-07-28T00:26:57.000Z",
+          "updatedAt": "2026-07-28T00:26:57.000Z",
+          "uid": "35240-bb152e3a-02cd-4d8c-b92a-38a3be96cfe5"
+        }
+      ],
+      "id": "2117a62c-b8bb-4fdd-b13a-45c96583a887",
+      "createdAt": "2026-07-28T00:26:57.000Z",
+      "updatedAt": "2026-07-28T00:26:57.000Z",
+      "uid": "35240-2117a62c-b8bb-4fdd-b13a-45c96583a887"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.100ms.live/v2"
+    }
+  ]
+}

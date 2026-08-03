@@ -1,0 +1,352 @@
+{
+  "info": {
+    "_postman_id": "ab49904c-55ad-4a77-be4e-e8944731b086",
+    "name": "100ms Server-Side Active Rooms Stream Keys API",
+    "description": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:27:27.000Z",
+    "updatedAt": "2026-07-28T00:27:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ab49904c-55ad-4a77-be4e-e8944731b086"
+  },
+  "item": [
+    {
+      "name": "stream-keys",
+      "item": [
+        {
+          "name": "room",
+          "item": [
+            {
+              "name": "{room_id}",
+              "item": [
+                {
+                  "name": "Get Rtmp Stream Key",
+                  "id": "9a9c529b-22bb-4af2-a603-58828bbcc7e6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/stream-keys/room/:room_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stream-keys",
+                        "room",
+                        ":room_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "86f72c27-4832-40a7-bdd7-3d9c4a3475d1",
+                          "key": "room_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "71c1b2bf-7913-43e9-837e-515b882e62ca",
+                      "name": "RTMP stream key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/stream-keys/room/:room_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "stream-keys",
+                            "room",
+                            ":room_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "room_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"key\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"role\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"expires_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T00:27:28.000Z",
+                      "updatedAt": "2026-07-28T00:27:28.000Z",
+                      "uid": "35240-71c1b2bf-7913-43e9-837e-515b882e62ca"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:28.000Z",
+                  "updatedAt": "2026-07-28T00:27:28.000Z",
+                  "uid": "35240-9a9c529b-22bb-4af2-a603-58828bbcc7e6"
+                },
+                {
+                  "name": "Create Rtmp Stream Key",
+                  "id": "888620b4-75b5-4e82-880f-29f2a2c5881e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"role\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"ttl_seconds\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/stream-keys/room/:room_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stream-keys",
+                        "room",
+                        ":room_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "09935764-ddf0-4467-b308-ea34c19a0c5c",
+                          "key": "room_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c252efaa-510b-44c1-88fa-aff9032a7909",
+                      "name": "RTMP stream key",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"role\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"ttl_seconds\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/stream-keys/room/:room_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "stream-keys",
+                            "room",
+                            ":room_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "room_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"key\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"role\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"expires_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T00:27:28.000Z",
+                      "updatedAt": "2026-07-28T00:27:28.000Z",
+                      "uid": "35240-c252efaa-510b-44c1-88fa-aff9032a7909"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:28.000Z",
+                  "updatedAt": "2026-07-28T00:27:28.000Z",
+                  "uid": "35240-888620b4-75b5-4e82-880f-29f2a2c5881e"
+                },
+                {
+                  "name": "Disable Rtmp Stream Key",
+                  "id": "54440985-09d2-4f5f-8eee-52b70ca028c1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/stream-keys/room/:room_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stream-keys",
+                        "room",
+                        ":room_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2406b114-0a52-444c-97bf-9785f8701b04",
+                          "key": "room_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b4952b65-cba3-4870-8392-1136c9d0ffe5",
+                      "name": "Successful empty response",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/stream-keys/room/:room_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "stream-keys",
+                            "room",
+                            ":room_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "room_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:27:28.000Z",
+                      "updatedAt": "2026-07-28T00:27:28.000Z",
+                      "uid": "35240-b4952b65-cba3-4870-8392-1136c9d0ffe5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:28.000Z",
+                  "updatedAt": "2026-07-28T00:27:28.000Z",
+                  "uid": "35240-54440985-09d2-4f5f-8eee-52b70ca028c1"
+                }
+              ],
+              "id": "487728a0-0434-40f6-89a2-35107ee207b3",
+              "createdAt": "2026-07-28T00:27:28.000Z",
+              "updatedAt": "2026-07-28T00:27:28.000Z",
+              "uid": "35240-487728a0-0434-40f6-89a2-35107ee207b3"
+            }
+          ],
+          "id": "04c0edbb-e910-4b3e-82c9-54b72372dae0",
+          "createdAt": "2026-07-28T00:27:28.000Z",
+          "updatedAt": "2026-07-28T00:27:28.000Z",
+          "uid": "35240-04c0edbb-e910-4b3e-82c9-54b72372dae0"
+        }
+      ],
+      "id": "ab3fb708-cda1-4047-b579-89ea349b5f21",
+      "createdAt": "2026-07-28T00:27:28.000Z",
+      "updatedAt": "2026-07-28T00:27:28.000Z",
+      "uid": "35240-ab3fb708-cda1-4047-b579-89ea349b5f21"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.100ms.live/v2"
+    }
+  ]
+}

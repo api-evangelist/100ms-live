@@ -1,0 +1,579 @@
+{
+  "info": {
+    "_postman_id": "583136e1-84a8-4a06-b537-ed5b3a406022",
+    "name": "100ms Server-Side Active Rooms External Streams API",
+    "description": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:26:58.000Z",
+    "updatedAt": "2026-07-28T00:26:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-583136e1-84a8-4a06-b537-ed5b3a406022"
+  },
+  "item": [
+    {
+      "name": "external-streams",
+      "item": [
+        {
+          "name": "{stream_id}",
+          "item": [
+            {
+              "name": "stop",
+              "item": [
+                {
+                  "name": "Stop External Stream By Id",
+                  "id": "75eb03c6-f66c-4af2-a6a7-de92ed209c60",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/external-streams/:stream_id/stop",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "external-streams",
+                        ":stream_id",
+                        "stop"
+                      ],
+                      "variable": [
+                        {
+                          "id": "24758433-79b4-4934-b8a9-2de78218b9bc",
+                          "key": "stream_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b59244ab-a289-447f-96b0-8c4711296da7",
+                      "name": "Successful empty response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/external-streams/:stream_id/stop",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "external-streams",
+                            ":stream_id",
+                            "stop"
+                          ],
+                          "variable": [
+                            {
+                              "key": "stream_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:26:59.000Z",
+                      "updatedAt": "2026-07-28T00:26:59.000Z",
+                      "uid": "35240-b59244ab-a289-447f-96b0-8c4711296da7"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:26:59.000Z",
+                  "updatedAt": "2026-07-28T00:26:59.000Z",
+                  "uid": "35240-75eb03c6-f66c-4af2-a6a7-de92ed209c60"
+                }
+              ],
+              "id": "672351d3-8fa2-40eb-bf87-6e06dd8ea9b9",
+              "createdAt": "2026-07-28T00:26:59.000Z",
+              "updatedAt": "2026-07-28T00:26:59.000Z",
+              "uid": "35240-672351d3-8fa2-40eb-bf87-6e06dd8ea9b9"
+            },
+            {
+              "name": "Get External Stream",
+              "id": "8a4565ef-316d-4f0a-b1b3-44439ddee19a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/external-streams/:stream_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "external-streams",
+                    ":stream_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "456c1a25-f51f-41aa-943c-1229f86378bf",
+                      "key": "stream_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "842d043a-2a97-4e30-aaf2-76db237ec298",
+                  "name": "External (RTMP-out) stream",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/external-streams/:stream_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "external-streams",
+                        ":stream_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "stream_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"room_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"rtmp_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"started_at\": \"<dateTime>\",\n  \"stopped_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T00:26:59.000Z",
+                  "updatedAt": "2026-07-28T00:26:59.000Z",
+                  "uid": "35240-842d043a-2a97-4e30-aaf2-76db237ec298"
+                }
+              ],
+              "createdAt": "2026-07-28T00:26:59.000Z",
+              "updatedAt": "2026-07-28T00:26:59.000Z",
+              "uid": "35240-8a4565ef-316d-4f0a-b1b3-44439ddee19a"
+            }
+          ],
+          "id": "7bf80cda-843c-4d2d-bb7c-0e820940b000",
+          "createdAt": "2026-07-28T00:26:59.000Z",
+          "updatedAt": "2026-07-28T00:26:59.000Z",
+          "uid": "35240-7bf80cda-843c-4d2d-bb7c-0e820940b000"
+        },
+        {
+          "name": "room",
+          "item": [
+            {
+              "name": "{room_id}",
+              "item": [
+                {
+                  "name": "start",
+                  "item": [
+                    {
+                      "name": "Start External Stream For Room",
+                      "id": "3e37b383-27d9-4985-a35a-7c244a83093b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"rtmp_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"meeting_url\": \"<uri>\",\n  \"resolution\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/external-streams/room/:room_id/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "external-streams",
+                            "room",
+                            ":room_id",
+                            "start"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c6cabdaa-fbea-46f5-8472-52da28bbbad6",
+                              "key": "room_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "90933239-a9f2-4275-ac6a-f28afd4ad8ce",
+                          "name": "External (RTMP-out) stream",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"rtmp_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"meeting_url\": \"<uri>\",\n  \"resolution\": {\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/external-streams/room/:room_id/start",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "external-streams",
+                                "room",
+                                ":room_id",
+                                "start"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "room_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"room_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"rtmp_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"started_at\": \"<dateTime>\",\n  \"stopped_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T00:26:59.000Z",
+                          "updatedAt": "2026-07-28T00:26:59.000Z",
+                          "uid": "35240-90933239-a9f2-4275-ac6a-f28afd4ad8ce"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:26:59.000Z",
+                      "updatedAt": "2026-07-28T00:26:59.000Z",
+                      "uid": "35240-3e37b383-27d9-4985-a35a-7c244a83093b"
+                    }
+                  ],
+                  "id": "c4679eba-1245-4338-be57-bc5db8584a85",
+                  "createdAt": "2026-07-28T00:26:59.000Z",
+                  "updatedAt": "2026-07-28T00:26:59.000Z",
+                  "uid": "35240-c4679eba-1245-4338-be57-bc5db8584a85"
+                },
+                {
+                  "name": "stop",
+                  "item": [
+                    {
+                      "name": "Stop External Stream For Room",
+                      "id": "2c0799b3-9dbc-4ea7-af8a-9e04c9218aa1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/external-streams/room/:room_id/stop",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "external-streams",
+                            "room",
+                            ":room_id",
+                            "stop"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0dfa4536-9019-44e9-af39-60d2d05a2d4a",
+                              "key": "room_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "c76b89d4-bb69-4d68-991c-2bb5f5656eb1",
+                          "name": "Successful empty response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/external-streams/room/:room_id/stop",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "external-streams",
+                                "room",
+                                ":room_id",
+                                "stop"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "room_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T00:26:59.000Z",
+                          "updatedAt": "2026-07-28T00:26:59.000Z",
+                          "uid": "35240-c76b89d4-bb69-4d68-991c-2bb5f5656eb1"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:26:59.000Z",
+                      "updatedAt": "2026-07-28T00:26:59.000Z",
+                      "uid": "35240-2c0799b3-9dbc-4ea7-af8a-9e04c9218aa1"
+                    }
+                  ],
+                  "id": "84e64911-64b6-441e-86cf-c2da1a7f33f4",
+                  "createdAt": "2026-07-28T00:26:59.000Z",
+                  "updatedAt": "2026-07-28T00:26:59.000Z",
+                  "uid": "35240-84e64911-64b6-441e-86cf-c2da1a7f33f4"
+                }
+              ],
+              "id": "b7b3070a-f1c1-4572-8abe-6205d1fd7226",
+              "createdAt": "2026-07-28T00:26:59.000Z",
+              "updatedAt": "2026-07-28T00:26:59.000Z",
+              "uid": "35240-b7b3070a-f1c1-4572-8abe-6205d1fd7226"
+            }
+          ],
+          "id": "20f7e892-cef0-4fd3-8e8b-11f6d5f5bfce",
+          "createdAt": "2026-07-28T00:26:59.000Z",
+          "updatedAt": "2026-07-28T00:26:59.000Z",
+          "uid": "35240-20f7e892-cef0-4fd3-8e8b-11f6d5f5bfce"
+        },
+        {
+          "name": "List All External Streams",
+          "id": "a2d3da52-9d6f-4dde-9c22-e305f55f6ab3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/external-streams?limit=10&start=<string>&room_id=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "external-streams"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "start",
+                  "value": "<string>"
+                },
+                {
+                  "key": "room_id",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5158a765-9f30-4255-a155-de7f9ab53589",
+              "name": "Page of external streams",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/external-streams?limit=10&start=<string>&room_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "external-streams"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "room_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"room_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"rtmp_urls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"started_at\": \"<dateTime>\",\n      \"stopped_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"room_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"rtmp_urls\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"started_at\": \"<dateTime>\",\n      \"stopped_at\": \"<dateTime>\"\n    }\n  ],\n  \"last\": \"<string>\",\n  \"limit\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T00:26:59.000Z",
+              "updatedAt": "2026-07-28T00:26:59.000Z",
+              "uid": "35240-5158a765-9f30-4255-a155-de7f9ab53589"
+            }
+          ],
+          "createdAt": "2026-07-28T00:26:59.000Z",
+          "updatedAt": "2026-07-28T00:26:59.000Z",
+          "uid": "35240-a2d3da52-9d6f-4dde-9c22-e305f55f6ab3"
+        }
+      ],
+      "id": "d49a943c-232e-4dae-abef-6d5480dc8ff6",
+      "createdAt": "2026-07-28T00:26:59.000Z",
+      "updatedAt": "2026-07-28T00:26:59.000Z",
+      "uid": "35240-d49a943c-232e-4dae-abef-6d5480dc8ff6"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.100ms.live/v2"
+    }
+  ]
+}

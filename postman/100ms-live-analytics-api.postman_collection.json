@@ -1,0 +1,683 @@
+{
+  "info": {
+    "_postman_id": "afe3039a-d159-4793-9753-477078085406",
+    "name": "100ms Server-Side Active Rooms Analytics API",
+    "description": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:26:57.000Z",
+    "updatedAt": "2026-07-28T00:26:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-afe3039a-d159-4793-9753-477078085406"
+  },
+  "item": [
+    {
+      "name": "analytics",
+      "item": [
+        {
+          "name": "events",
+          "item": [
+            {
+              "name": "replay",
+              "item": [
+                {
+                  "name": "Replay Webhook Events",
+                  "id": "d88f66a3-4370-4756-86ad-0ddab7c23827",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"event_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"room_id\": \"<string>\",\n  \"session_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/events/replay",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "events",
+                        "replay"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "43822833-13a2-4466-9519-81cf88739cf7",
+                      "name": "Successful empty response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"event_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"room_id\": \"<string>\",\n  \"session_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/events/replay",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "events",
+                            "replay"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:26:58.000Z",
+                      "updatedAt": "2026-07-28T00:26:58.000Z",
+                      "uid": "35240-43822833-13a2-4466-9519-81cf88739cf7"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:26:58.000Z",
+                  "updatedAt": "2026-07-28T00:26:58.000Z",
+                  "uid": "35240-d88f66a3-4370-4756-86ad-0ddab7c23827"
+                }
+              ],
+              "id": "b7c3dc8c-8a49-4076-b019-3454d253753e",
+              "createdAt": "2026-07-28T00:26:58.000Z",
+              "updatedAt": "2026-07-28T00:26:58.000Z",
+              "uid": "35240-b7c3dc8c-8a49-4076-b019-3454d253753e"
+            },
+            {
+              "name": "List Webhook Events",
+              "id": "69bbfb95-2fe9-4d89-8f17-913845a2d458",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/analytics/events?limit=10&start=<string>&room_id=<string>&session_id=<string>&type=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "analytics",
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "room_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "89d7e738-4c1e-43c5-aba0-c5ff88c0382b",
+                  "name": "Page of webhook events",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/events?limit=10&start=<string>&room_id=<string>&session_id=<string>&type=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "events"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "key": "start",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "room_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "session_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "type",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"version\": \"<string>\",\n      \"type\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"data\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"version\": \"<string>\",\n      \"type\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"data\": {}\n    }\n  ],\n  \"last\": \"<string>\",\n  \"limit\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T00:26:58.000Z",
+                  "updatedAt": "2026-07-28T00:26:58.000Z",
+                  "uid": "35240-89d7e738-4c1e-43c5-aba0-c5ff88c0382b"
+                }
+              ],
+              "createdAt": "2026-07-28T00:26:58.000Z",
+              "updatedAt": "2026-07-28T00:26:58.000Z",
+              "uid": "35240-69bbfb95-2fe9-4d89-8f17-913845a2d458"
+            }
+          ],
+          "id": "556abf01-1f8c-4f3d-b7e6-54c014ba68b3",
+          "createdAt": "2026-07-28T00:26:58.000Z",
+          "updatedAt": "2026-07-28T00:26:58.000Z",
+          "uid": "35240-556abf01-1f8c-4f3d-b7e6-54c014ba68b3"
+        },
+        {
+          "name": "track-events",
+          "item": [
+            {
+              "name": "List Track Events",
+              "id": "b767e3ac-48e0-444c-94d7-5194510b87f8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/analytics/track-events?session_id=<string>&peer_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "analytics",
+                    "track-events"
+                  ],
+                  "query": [
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "peer_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "ba2e998e-1abc-48d3-b21f-28117dbd58c5",
+                  "name": "Track events",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/track-events?session_id=<string>&peer_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "track-events"
+                      ],
+                      "query": [
+                        {
+                          "key": "session_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "peer_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:26:58.000Z",
+                  "updatedAt": "2026-07-28T00:26:58.000Z",
+                  "uid": "35240-ba2e998e-1abc-48d3-b21f-28117dbd58c5"
+                }
+              ],
+              "createdAt": "2026-07-28T00:26:58.000Z",
+              "updatedAt": "2026-07-28T00:26:58.000Z",
+              "uid": "35240-b767e3ac-48e0-444c-94d7-5194510b87f8"
+            }
+          ],
+          "id": "1e3fa12e-b725-416d-bd66-c501e10bc376",
+          "createdAt": "2026-07-28T00:26:58.000Z",
+          "updatedAt": "2026-07-28T00:26:58.000Z",
+          "uid": "35240-1e3fa12e-b725-416d-bd66-c501e10bc376"
+        },
+        {
+          "name": "recording-events",
+          "item": [
+            {
+              "name": "List Recording Events",
+              "id": "dba3034d-62d5-45f1-a427-6c3e7326fed4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/analytics/recording-events?session_id=<string>&recording_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "analytics",
+                    "recording-events"
+                  ],
+                  "query": [
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "recording_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "903af3d3-1986-4995-9313-161eb6d43e17",
+                  "name": "Recording events",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/recording-events?session_id=<string>&recording_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "recording-events"
+                      ],
+                      "query": [
+                        {
+                          "key": "session_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "recording_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:26:58.000Z",
+                  "updatedAt": "2026-07-28T00:26:58.000Z",
+                  "uid": "35240-903af3d3-1986-4995-9313-161eb6d43e17"
+                }
+              ],
+              "createdAt": "2026-07-28T00:26:58.000Z",
+              "updatedAt": "2026-07-28T00:26:58.000Z",
+              "uid": "35240-dba3034d-62d5-45f1-a427-6c3e7326fed4"
+            }
+          ],
+          "id": "7b336652-795f-4da6-bd5f-d8b0bddf647f",
+          "createdAt": "2026-07-28T00:26:58.000Z",
+          "updatedAt": "2026-07-28T00:26:58.000Z",
+          "uid": "35240-7b336652-795f-4da6-bd5f-d8b0bddf647f"
+        },
+        {
+          "name": "error-events",
+          "item": [
+            {
+              "name": "List Error Events",
+              "id": "2f7c7a3f-5b74-4f92-81f8-80508266cd07",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/analytics/error-events?session_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "analytics",
+                    "error-events"
+                  ],
+                  "query": [
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "4ba8af03-5b71-42f9-ae12-0fc27504ac93",
+                  "name": "Error events",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/error-events?session_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "error-events"
+                      ],
+                      "query": [
+                        {
+                          "key": "session_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:26:58.000Z",
+                  "updatedAt": "2026-07-28T00:26:58.000Z",
+                  "uid": "35240-4ba8af03-5b71-42f9-ae12-0fc27504ac93"
+                }
+              ],
+              "createdAt": "2026-07-28T00:26:58.000Z",
+              "updatedAt": "2026-07-28T00:26:58.000Z",
+              "uid": "35240-2f7c7a3f-5b74-4f92-81f8-80508266cd07"
+            }
+          ],
+          "id": "4d7ee4d8-6950-498e-a905-cd67df9a3d7f",
+          "createdAt": "2026-07-28T00:26:58.000Z",
+          "updatedAt": "2026-07-28T00:26:58.000Z",
+          "uid": "35240-4d7ee4d8-6950-498e-a905-cd67df9a3d7f"
+        },
+        {
+          "name": "peer-quality",
+          "item": [
+            {
+              "name": "Get Peer Quality Stats",
+              "id": "8c56b8a5-5ea5-4fea-b650-d053d74e74fc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/analytics/peer-quality?session_id=<string>&peer_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "analytics",
+                    "peer-quality"
+                  ],
+                  "query": [
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "peer_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "5fe65223-b9d6-429a-a7e7-4adc163f79d1",
+                  "name": "Peer quality stats",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/peer-quality?session_id=<string>&peer_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "peer-quality"
+                      ],
+                      "query": [
+                        {
+                          "key": "session_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "peer_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:26:58.000Z",
+                  "updatedAt": "2026-07-28T00:26:58.000Z",
+                  "uid": "35240-5fe65223-b9d6-429a-a7e7-4adc163f79d1"
+                }
+              ],
+              "createdAt": "2026-07-28T00:26:58.000Z",
+              "updatedAt": "2026-07-28T00:26:58.000Z",
+              "uid": "35240-8c56b8a5-5ea5-4fea-b650-d053d74e74fc"
+            }
+          ],
+          "id": "68c572f3-4b01-413a-90b6-6100cde76c4e",
+          "createdAt": "2026-07-28T00:26:58.000Z",
+          "updatedAt": "2026-07-28T00:26:58.000Z",
+          "uid": "35240-68c572f3-4b01-413a-90b6-6100cde76c4e"
+        }
+      ],
+      "id": "26fcb8f5-432b-4037-a35d-cc6973fa54da",
+      "createdAt": "2026-07-28T00:26:58.000Z",
+      "updatedAt": "2026-07-28T00:26:58.000Z",
+      "uid": "35240-26fcb8f5-432b-4037-a35d-cc6973fa54da"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.100ms.live/v2"
+    }
+  ]
+}

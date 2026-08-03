@@ -1,0 +1,349 @@
+{
+  "info": {
+    "_postman_id": "7078be3d-76c9-4617-88b2-3781eb16def4",
+    "name": "100ms Server-Side Active Rooms Recording Assets API",
+    "description": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:27:21.000Z",
+    "updatedAt": "2026-07-28T00:27:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7078be3d-76c9-4617-88b2-3781eb16def4"
+  },
+  "item": [
+    {
+      "name": "recording-assets",
+      "item": [
+        {
+          "name": "{asset_id}",
+          "item": [
+            {
+              "name": "presigned-url",
+              "item": [
+                {
+                  "name": "Get Presigned Url",
+                  "id": "f9f74b1f-be71-49ec-a785-0e5dec6cc8d8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/recording-assets/:asset_id/presigned-url",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recording-assets",
+                        ":asset_id",
+                        "presigned-url"
+                      ],
+                      "variable": [
+                        {
+                          "id": "afbb1ea4-13e2-4a05-b13a-5d553bf0972c",
+                          "key": "asset_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "ba905604-0ed0-4feb-9d3b-52e91f592306",
+                      "name": "Presigned URL",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/recording-assets/:asset_id/presigned-url",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "recording-assets",
+                            ":asset_id",
+                            "presigned-url"
+                          ],
+                          "variable": [
+                            {
+                              "key": "asset_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"url\": \"<uri>\",\n  \"expiry\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T00:27:22.000Z",
+                      "updatedAt": "2026-07-28T00:27:22.000Z",
+                      "uid": "35240-ba905604-0ed0-4feb-9d3b-52e91f592306"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:27:22.000Z",
+                  "updatedAt": "2026-07-28T00:27:22.000Z",
+                  "uid": "35240-f9f74b1f-be71-49ec-a785-0e5dec6cc8d8"
+                }
+              ],
+              "id": "1cc692f1-dea8-478e-84e0-f54f095bcfb9",
+              "createdAt": "2026-07-28T00:27:22.000Z",
+              "updatedAt": "2026-07-28T00:27:22.000Z",
+              "uid": "35240-1cc692f1-dea8-478e-84e0-f54f095bcfb9"
+            },
+            {
+              "name": "Get Recording Asset",
+              "id": "df262c91-ed0b-471f-b658-1fc73d886792",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/recording-assets/:asset_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recording-assets",
+                    ":asset_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "29c70793-59fd-4267-bea3-af16053af79c",
+                      "key": "asset_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "76d2beff-aae4-43cf-8df4-e7b371734abe",
+                  "name": "Recording asset",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/recording-assets/:asset_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "recording-assets",
+                        ":asset_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "asset_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"room-vod\",\n  \"path\": \"<string>\",\n  \"format\": \"<string>\",\n  \"size\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"room_id\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"recording_id\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T00:27:22.000Z",
+                  "updatedAt": "2026-07-28T00:27:22.000Z",
+                  "uid": "35240-76d2beff-aae4-43cf-8df4-e7b371734abe"
+                }
+              ],
+              "createdAt": "2026-07-28T00:27:22.000Z",
+              "updatedAt": "2026-07-28T00:27:22.000Z",
+              "uid": "35240-df262c91-ed0b-471f-b658-1fc73d886792"
+            }
+          ],
+          "id": "d0719626-d59a-48c9-a8d4-b459c47187e7",
+          "createdAt": "2026-07-28T00:27:22.000Z",
+          "updatedAt": "2026-07-28T00:27:22.000Z",
+          "uid": "35240-d0719626-d59a-48c9-a8d4-b459c47187e7"
+        },
+        {
+          "name": "List All Recording Assets",
+          "id": "9507f45b-1402-4306-bfca-bfa4e52b3450",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/recording-assets?limit=10&start=<string>&room_id=<string>&session_id=<string>&type=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "recording-assets"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "start",
+                  "value": "<string>"
+                },
+                {
+                  "key": "room_id",
+                  "value": "<string>"
+                },
+                {
+                  "key": "session_id",
+                  "value": "<string>"
+                },
+                {
+                  "key": "type",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4f05c1a4-412e-467d-8e36-d6dacdca1e67",
+              "name": "Page of recording assets",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/recording-assets?limit=10&start=<string>&room_id=<string>&session_id=<string>&type=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recording-assets"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "room_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"transcript\",\n      \"path\": \"<string>\",\n      \"format\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"duration\": \"<integer>\",\n      \"room_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"recording_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"room-composite\",\n      \"path\": \"<string>\",\n      \"format\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"duration\": \"<integer>\",\n      \"room_id\": \"<string>\",\n      \"session_id\": \"<string>\",\n      \"recording_id\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ],\n  \"last\": \"<string>\",\n  \"limit\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T00:27:22.000Z",
+              "updatedAt": "2026-07-28T00:27:22.000Z",
+              "uid": "35240-4f05c1a4-412e-467d-8e36-d6dacdca1e67"
+            }
+          ],
+          "createdAt": "2026-07-28T00:27:22.000Z",
+          "updatedAt": "2026-07-28T00:27:22.000Z",
+          "uid": "35240-9507f45b-1402-4306-bfca-bfa4e52b3450"
+        }
+      ],
+      "id": "a70d7ec6-f1d0-44c9-8f4c-ac983fb8706c",
+      "createdAt": "2026-07-28T00:27:22.000Z",
+      "updatedAt": "2026-07-28T00:27:22.000Z",
+      "uid": "35240-a70d7ec6-f1d0-44c9-8f4c-ac983fb8706c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.100ms.live/v2"
+    }
+  ]
+}
