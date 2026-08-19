@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "100ms Server-Side Active Rooms API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rooms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/rooms",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Rooms"
+        },
+        {
+          "info": {
+            "name": "Create Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/rooms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Room"
+        },
+        {
+          "info": {
+            "name": "Retrieve A Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/rooms/:room_id",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve A Room"
+        },
+        {
+          "info": {
+            "name": "Update A Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/rooms/:room_id",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Room"
+        },
+        {
+          "info": {
+            "name": "Disable Or Enable A Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/rooms/:room_id/enabled",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Disable Or Enable A Room"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

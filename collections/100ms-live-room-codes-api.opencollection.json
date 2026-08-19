@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "100ms Server-Side Active Rooms Room Codes API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Room Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Room Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/room-codes/room/:room_id",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Room Codes"
+        },
+        {
+          "info": {
+            "name": "Create Room Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/room-codes/room/:room_id",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create Room Codes"
+        },
+        {
+          "info": {
+            "name": "Update Room Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/room-codes/code/:code",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Room Code"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

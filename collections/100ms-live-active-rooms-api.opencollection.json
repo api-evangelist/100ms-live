@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "100ms Server-Side Active Rooms API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Active Rooms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Active Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/active-rooms/:room_id",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Active Room"
+        },
+        {
+          "info": {
+            "name": "End Active Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/active-rooms/:room_id/end-room",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "End Active Room"
+        },
+        {
+          "info": {
+            "name": "List Peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/active-rooms/:room_id/peers",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Peers"
+        },
+        {
+          "info": {
+            "name": "Retrieve A Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/active-rooms/:room_id/peers/:peer_id",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "peer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve A Peer"
+        },
+        {
+          "info": {
+            "name": "Update A Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/active-rooms/:room_id/peers/:peer_id",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "peer_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Peer"
+        },
+        {
+          "info": {
+            "name": "Remove Peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/active-rooms/:room_id/remove-peers",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove Peers"
+        },
+        {
+          "info": {
+            "name": "Send Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/active-rooms/:room_id/send-message",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send Message"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

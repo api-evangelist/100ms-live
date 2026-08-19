@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "100ms Server-Side Active Rooms Recordings API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recordings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Recordings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/recordings",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List All Recordings"
+        },
+        {
+          "info": {
+            "name": "Get Recording",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/recordings/:recording_id",
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Recording"
+        },
+        {
+          "info": {
+            "name": "Start Recording For Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/recordings/room/:room_id/start",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start Recording For Room"
+        },
+        {
+          "info": {
+            "name": "Stop Recording For Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/recordings/room/:room_id/stop",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stop Recording For Room"
+        },
+        {
+          "info": {
+            "name": "Stop Recording By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/recordings/:recording_id/stop",
+            "params": [
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stop Recording By Id"
+        },
+        {
+          "info": {
+            "name": "Pause Recording For Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/recordings/room/:room_id/pause",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Pause Recording For Room"
+        },
+        {
+          "info": {
+            "name": "Resume Recording For Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/recordings/room/:room_id/resume",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resume Recording For Room"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,247 @@
+{
+  "item": [
+    {
+      "id": "9c647dd1-2373-461a-b5ec-dc1c443acbf6",
+      "name": "Sessions",
+      "description": {
+        "content": "Historical sessions inside a room.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d9f2ab1-2101-4ff4-ae45-bf1a8a539220",
+          "name": "List Sessions",
+          "request": {
+            "name": "List Sessions",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "room_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28cdcc7e-54c0-42f5-9104-c9e535d3e2a7",
+              "name": "Page of sessions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "room_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"room_id\": \"string\",\n      \"room_name\": \"string\",\n      \"active\": false,\n      \"created_at\": \"2009-08-20T16:06:19.791Z\",\n      \"updated_at\": \"2006-03-25T15:04:34.593Z\",\n      \"peers\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"user_id\": \"string\",\n          \"metadata\": \"string\",\n          \"role\": \"string\",\n          \"joined_at\": \"1979-01-03T07:27:12.434Z\",\n          \"tracks\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"user_id\": \"string\",\n          \"metadata\": \"string\",\n          \"role\": \"string\",\n          \"joined_at\": \"1958-01-24T18:52:29.579Z\",\n          \"tracks\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          }\n        }\n      ],\n      \"template_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"room_id\": \"string\",\n      \"room_name\": \"string\",\n      \"active\": true,\n      \"created_at\": \"1984-01-17T15:16:19.205Z\",\n      \"updated_at\": \"1976-08-23T17:57:54.044Z\",\n      \"peers\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"user_id\": \"string\",\n          \"metadata\": \"string\",\n          \"role\": \"string\",\n          \"joined_at\": \"1982-11-29T20:26:28.906Z\",\n          \"tracks\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {},\n            \"key_3\": {},\n            \"key_4\": {}\n          }\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"user_id\": \"string\",\n          \"metadata\": \"string\",\n          \"role\": \"string\",\n          \"joined_at\": \"1991-11-28T23:51:56.331Z\",\n          \"tracks\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          }\n        }\n      ],\n      \"template_id\": \"string\"\n    }\n  ],\n  \"last\": \"string\",\n  \"limit\": 8938\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "743e9e89-63a3-4129-b6b4-c06227d9c3ee",
+          "name": "Retrieve A Session",
+          "request": {
+            "name": "Retrieve A Session",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e7129155-9ab6-4af7-a935-059c43144661",
+              "name": "Session",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"room_id\": \"string\",\n  \"room_name\": \"string\",\n  \"active\": true,\n  \"created_at\": \"1970-06-26T05:51:32.605Z\",\n  \"updated_at\": \"2010-05-14T09:53:38.358Z\",\n  \"peers\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"user_id\": \"string\",\n      \"metadata\": \"string\",\n      \"role\": \"string\",\n      \"joined_at\": \"2011-02-25T21:04:43.469Z\",\n      \"tracks\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"user_id\": \"string\",\n      \"metadata\": \"string\",\n      \"role\": \"string\",\n      \"joined_at\": \"1983-04-07T06:44:21.589Z\",\n      \"tracks\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      }\n    }\n  ],\n  \"template_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.100ms.live/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a7f95efc-adee-4ab7-b57c-3d4294352a9e",
+    "name": "100ms Server-Side Active Rooms Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+      "type": "text/plain"
+    }
+  }
+}

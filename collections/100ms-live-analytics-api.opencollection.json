@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "100ms Server-Side Active Rooms Analytics API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Webhook Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/analytics/events",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Webhook Events"
+        },
+        {
+          "info": {
+            "name": "Replay Webhook Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/analytics/events/replay",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replay Webhook Events"
+        },
+        {
+          "info": {
+            "name": "List Track Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/analytics/track-events",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "peer_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Track Events"
+        },
+        {
+          "info": {
+            "name": "List Recording Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/analytics/recording-events",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "recording_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Recording Events"
+        },
+        {
+          "info": {
+            "name": "List Error Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/analytics/error-events",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Error Events"
+        },
+        {
+          "info": {
+            "name": "Get Peer Quality Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/analytics/peer-quality",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "peer_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Peer Quality Stats"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

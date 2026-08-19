@@ -1,0 +1,863 @@
+{
+  "item": [
+    {
+      "id": "42f3c49a-13f8-4a5c-8f4e-47f3b17590ed",
+      "name": "Live Streams",
+      "description": {
+        "content": "HLS live streams driven from a 100ms room.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d45e39f1-762c-47b8-9caa-6c9bb304d705",
+          "name": "List All Live Streams",
+          "request": {
+            "name": "List All Live Streams",
+            "description": {},
+            "url": {
+              "path": [
+                "live-streams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "room_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14fc0c34-4056-49bb-9744-1dcc3273475c",
+              "name": "Page of live streams",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live-streams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "room_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"room_id\": \"string\",\n      \"session_id\": \"string\",\n      \"status\": \"init\",\n      \"url\": \"https://yPhEmF.yjpyzFIftua+AQHmblsHKICdQnoDZk1oYRlpF7OsVFbZhxA1j3Y\",\n      \"playback_id\": \"string\",\n      \"created_at\": \"1991-11-12T16:18:22.768Z\",\n      \"started_at\": \"1960-04-27T08:38:46.193Z\",\n      \"stopped_at\": \"1964-03-29T19:12:54.019Z\",\n      \"recording\": {\n        \"enabled\": true,\n        \"assets\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"transcript\",\n            \"path\": \"string\",\n            \"format\": \"string\",\n            \"size\": 3196,\n            \"duration\": 6781,\n            \"room_id\": \"string\",\n            \"session_id\": \"string\",\n            \"recording_id\": \"string\",\n            \"created_at\": \"2019-10-31T15:12:10.337Z\"\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"transcript\",\n            \"path\": \"string\",\n            \"format\": \"string\",\n            \"size\": 8949,\n            \"duration\": 7341,\n            \"room_id\": \"string\",\n            \"session_id\": \"string\",\n            \"recording_id\": \"string\",\n            \"created_at\": \"1947-05-21T07:16:18.820Z\"\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"room_id\": \"string\",\n      \"session_id\": \"string\",\n      \"status\": \"paused\",\n      \"url\": \"https://hrGhNugQkLZ.kzyPm7+ilmvp4wA+wbpvLzKOhu6RBa0b95D4DUDwd+Y\",\n      \"playback_id\": \"string\",\n      \"created_at\": \"1983-08-28T09:03:48.609Z\",\n      \"started_at\": \"1950-09-19T08:27:16.191Z\",\n      \"stopped_at\": \"1957-06-07T22:21:20.027Z\",\n      \"recording\": {\n        \"enabled\": true,\n        \"assets\": [\n          {\n            \"id\": \"string\",\n            \"type\": \"chat-log\",\n            \"path\": \"string\",\n            \"format\": \"string\",\n            \"size\": 945,\n            \"duration\": 480,\n            \"room_id\": \"string\",\n            \"session_id\": \"string\",\n            \"recording_id\": \"string\",\n            \"created_at\": \"1990-12-10T06:53:13.673Z\"\n          },\n          {\n            \"id\": \"string\",\n            \"type\": \"room-composite\",\n            \"path\": \"string\",\n            \"format\": \"string\",\n            \"size\": 3225,\n            \"duration\": 9456,\n            \"room_id\": \"string\",\n            \"session_id\": \"string\",\n            \"recording_id\": \"string\",\n            \"created_at\": \"1949-05-13T22:49:09.704Z\"\n          }\n        ]\n      }\n    }\n  ],\n  \"last\": \"string\",\n  \"limit\": 5614\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8b595ea-d176-41a3-9e8e-ad61b573aee5",
+          "name": "Get Live Stream",
+          "request": {
+            "name": "Get Live Stream",
+            "description": {},
+            "url": {
+              "path": [
+                "live-streams",
+                ":stream_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stream_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50858ea5-a454-4ba0-bc01-776af20d139e",
+              "name": "Live stream",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live-streams",
+                    ":stream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"room_id\": \"string\",\n  \"session_id\": \"string\",\n  \"status\": \"paused\",\n  \"url\": \"https://QELNiLz.ayCrOvulo-BbsYmYzsUCgF4ttWLdoIXLxihU-YIVH\",\n  \"playback_id\": \"string\",\n  \"created_at\": \"1998-01-07T00:05:12.925Z\",\n  \"started_at\": \"1947-09-20T17:36:06.015Z\",\n  \"stopped_at\": \"2024-11-19T03:54:11.908Z\",\n  \"recording\": {\n    \"enabled\": false,\n    \"assets\": [\n      {\n        \"id\": \"string\",\n        \"type\": \"chat-log\",\n        \"path\": \"string\",\n        \"format\": \"string\",\n        \"size\": 7045,\n        \"duration\": 1978,\n        \"room_id\": \"string\",\n        \"session_id\": \"string\",\n        \"recording_id\": \"string\",\n        \"created_at\": \"1989-09-11T19:38:40.887Z\"\n      },\n      {\n        \"id\": \"string\",\n        \"type\": \"room-composite\",\n        \"path\": \"string\",\n        \"format\": \"string\",\n        \"size\": 3935,\n        \"duration\": 7886,\n        \"room_id\": \"string\",\n        \"session_id\": \"string\",\n        \"recording_id\": \"string\",\n        \"created_at\": \"1986-01-13T13:44:08.324Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3a57e87-a588-4720-8fba-78ddb41f4480",
+          "name": "Start Live Stream For Room",
+          "request": {
+            "name": "Start Live Stream For Room",
+            "description": {},
+            "url": {
+              "path": [
+                "live-streams",
+                "room",
+                ":room_id",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "room_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meeting_url\": \"<uri>\",\n  \"recording\": {\n    \"hls_vod\": \"<boolean>\",\n    \"single_file_per_layer\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f0b80b0-a440-42c4-8765-8f8a3056c607",
+              "name": "Live stream",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live-streams",
+                    "room",
+                    ":room_id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "room_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meeting_url\": \"<uri>\",\n  \"recording\": {\n    \"hls_vod\": \"<boolean>\",\n    \"single_file_per_layer\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"room_id\": \"string\",\n  \"session_id\": \"string\",\n  \"status\": \"running\",\n  \"url\": \"https://nspFNGm.gbptZ,ofWxxclOz5lRZXxkR1.5y\",\n  \"playback_id\": \"string\",\n  \"created_at\": \"1980-08-11T05:55:50.607Z\",\n  \"started_at\": \"2020-12-18T19:14:35.224Z\",\n  \"stopped_at\": \"1963-01-17T20:28:47.037Z\",\n  \"recording\": {\n    \"enabled\": true,\n    \"assets\": [\n      {\n        \"id\": \"string\",\n        \"type\": \"room-vod\",\n        \"path\": \"string\",\n        \"format\": \"string\",\n        \"size\": 4725,\n        \"duration\": 43,\n        \"room_id\": \"string\",\n        \"session_id\": \"string\",\n        \"recording_id\": \"string\",\n        \"created_at\": \"1985-07-29T09:26:30.157Z\"\n      },\n      {\n        \"id\": \"string\",\n        \"type\": \"summary\",\n        \"path\": \"string\",\n        \"format\": \"string\",\n        \"size\": 2924,\n        \"duration\": 5116,\n        \"room_id\": \"string\",\n        \"session_id\": \"string\",\n        \"recording_id\": \"string\",\n        \"created_at\": \"1986-11-15T17:10:05.463Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "679513a7-c076-4958-8292-8e9d8980ee24",
+          "name": "Stop Live Stream For Room",
+          "request": {
+            "name": "Stop Live Stream For Room",
+            "description": {},
+            "url": {
+              "path": [
+                "live-streams",
+                "room",
+                ":room_id",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "room_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "372dca00-7660-4d7b-a621-3b3370708c65",
+              "name": "Successful empty response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live-streams",
+                    "room",
+                    ":room_id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "room_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f29bfcd1-18f5-44a6-bebb-716324c83362",
+          "name": "Stop Live Stream By Id",
+          "request": {
+            "name": "Stop Live Stream By Id",
+            "description": {},
+            "url": {
+              "path": [
+                "live-streams",
+                ":stream_id",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stream_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a4c2a67-c540-4b72-9935-faf73d55209a",
+              "name": "Successful empty response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live-streams",
+                    ":stream_id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db7646ab-2275-4cc0-a851-16e4b6beea79",
+          "name": "Pause Live Stream Recording",
+          "request": {
+            "name": "Pause Live Stream Recording",
+            "description": {},
+            "url": {
+              "path": [
+                "live-streams",
+                ":stream_id",
+                "pause-recording"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stream_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eec5d092-dc0e-4ff2-8b89-dd43e0de83ec",
+              "name": "Successful empty response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live-streams",
+                    ":stream_id",
+                    "pause-recording"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8eb2c766-cae5-4648-84ca-e4991dbefc81",
+          "name": "Resume Live Stream Recording",
+          "request": {
+            "name": "Resume Live Stream Recording",
+            "description": {},
+            "url": {
+              "path": [
+                "live-streams",
+                ":stream_id",
+                "resume-recording"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stream_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4cc83e6c-110e-40d1-aa28-2770863cc3bd",
+              "name": "Successful empty response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live-streams",
+                    ":stream_id",
+                    "resume-recording"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ddb43c3-9be1-46be-b888-52767f3fec1a",
+          "name": "Send Timed Metadata",
+          "request": {
+            "name": "Send Timed Metadata",
+            "description": {},
+            "url": {
+              "path": [
+                "live-streams",
+                ":stream_id",
+                "timed-metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stream_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payload\": \"<string>\",\n  \"duration\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d18428be-6b6a-416f-ba81-cda0c65c51b6",
+              "name": "Successful empty response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live-streams",
+                    ":stream_id",
+                    "timed-metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payload\": \"<string>\",\n  \"duration\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.100ms.live/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a5491a69-b90d-4d13-9864-49a6ac7df82a",
+    "name": "100ms Server-Side Active Rooms Live Streams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.\n\n\nContact Support:\n Name: 100ms Support",
+      "type": "text/plain"
+    }
+  }
+}

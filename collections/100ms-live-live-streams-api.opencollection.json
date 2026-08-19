@@ -1,0 +1,191 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "100ms Server-Side Active Rooms Live Streams API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Live Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Live Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/live-streams",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List All Live Streams"
+        },
+        {
+          "info": {
+            "name": "Get Live Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/live-streams/:stream_id",
+            "params": [
+              {
+                "name": "stream_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Live Stream"
+        },
+        {
+          "info": {
+            "name": "Start Live Stream For Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/live-streams/room/:room_id/start",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start Live Stream For Room"
+        },
+        {
+          "info": {
+            "name": "Stop Live Stream For Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/live-streams/room/:room_id/stop",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stop Live Stream For Room"
+        },
+        {
+          "info": {
+            "name": "Stop Live Stream By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/live-streams/:stream_id/stop",
+            "params": [
+              {
+                "name": "stream_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stop Live Stream By Id"
+        },
+        {
+          "info": {
+            "name": "Pause Live Stream Recording",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/live-streams/:stream_id/pause-recording",
+            "params": [
+              {
+                "name": "stream_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Pause Live Stream Recording"
+        },
+        {
+          "info": {
+            "name": "Resume Live Stream Recording",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/live-streams/:stream_id/resume-recording",
+            "params": [
+              {
+                "name": "stream_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resume Live Stream Recording"
+        },
+        {
+          "info": {
+            "name": "Send Timed Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/live-streams/:stream_id/timed-metadata",
+            "params": [
+              {
+                "name": "stream_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send Timed Metadata"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,243 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "100ms Server-Side Active Rooms Policy API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/templates"
+          },
+          "docs": "List Templates"
+        },
+        {
+          "info": {
+            "name": "Create Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Template"
+        },
+        {
+          "info": {
+            "name": "Retrieve A Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/templates/:template_id",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve A Template"
+        },
+        {
+          "info": {
+            "name": "Update A Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/templates/:template_id",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Template"
+        },
+        {
+          "info": {
+            "name": "Retrieve A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/templates/:template_id/roles/:role_name",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "role_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve A Role"
+        },
+        {
+          "info": {
+            "name": "Create Or Update A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/templates/:template_id/roles/:role_name",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "role_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Or Update A Role"
+        },
+        {
+          "info": {
+            "name": "Delete A Role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.100ms.live/v2/templates/:template_id/roles/:role_name",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "role_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete A Role"
+        },
+        {
+          "info": {
+            "name": "Retrieve Destinations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/templates/:template_id/destinations",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Destinations"
+        },
+        {
+          "info": {
+            "name": "Update Destinations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/templates/:template_id/destinations",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Destinations"
+        },
+        {
+          "info": {
+            "name": "Retrieve Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/templates/:template_id/settings",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve Settings"
+        },
+        {
+          "info": {
+            "name": "Update Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/templates/:template_id/settings",
+            "params": [
+              {
+                "name": "template_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Settings"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

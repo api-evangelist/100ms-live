@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "100ms Server-Side Active Rooms External Streams API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "External Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All External Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/external-streams",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List All External Streams"
+        },
+        {
+          "info": {
+            "name": "Get External Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.100ms.live/v2/external-streams/:stream_id",
+            "params": [
+              {
+                "name": "stream_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get External Stream"
+        },
+        {
+          "info": {
+            "name": "Start External Stream For Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/external-streams/room/:room_id/start",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start External Stream For Room"
+        },
+        {
+          "info": {
+            "name": "Stop External Stream For Room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/external-streams/room/:room_id/stop",
+            "params": [
+              {
+                "name": "room_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stop External Stream For Room"
+        },
+        {
+          "info": {
+            "name": "Stop External Stream By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.100ms.live/v2/external-streams/:stream_id/stop",
+            "params": [
+              {
+                "name": "stream_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stop External Stream By Id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
