@@ -29,7 +29,7 @@ tags:
 - India
 created: '2026-05-25'
 modified: '2026-05-25'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 description: 100ms is a live video and audio infrastructure company headquartered
   in Bengaluru, India that provides developer SDKs and a REST control plane for embedding
   video conferencing, interactive live streaming (HLS), RTMP ingest/egress, recording,
