@@ -306,6 +306,9 @@ apis:
   - type: GraphQL
     url: graphql/100ms-live-graphql.md
 common:
+- type: CapabilityMap
+  url: capabilities/100ms-live-capability-edges.yml
+  name: 100ms Business Capability Map
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/100ms/overview
 - type: AgenticAccess
