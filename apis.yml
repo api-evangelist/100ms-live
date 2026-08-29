@@ -352,7 +352,7 @@ common:
   url: https://github.com/100mslive/100ms-flutter
 - type: SDKs
   url: https://github.com/100mslive/server-sdks
-- type: Samples
+- type: Examples
   url: https://github.com/100mslive/100ms-examples
 - type: Plans
   url: plans/100ms-live-plans-pricing.yml
