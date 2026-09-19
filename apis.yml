@@ -211,6 +211,8 @@ apis:
   humanURL: https://www.100ms.live/docs/server-side/v2/foundation/basics
   baseURL: https://api.100ms.live/v2
   tags:
+  - Recording
+  tags_raw:
   - Recordings
   properties:
   - type: OpenAPI
