@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 100ms Server-Side Active Rooms Policy API
-  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
-
-    '
+  title: 100ms Server-Side Policy API
+  description: REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
   version: v2
   contact:
     name: 100ms Support
@@ -174,6 +172,19 @@ paths:
                 type: object
 components:
   schemas:
+    TemplateCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Role'
+        settings:
+          type: object
+        destinations:
+          type: object
     Template:
       type: object
       properties:
@@ -259,26 +270,6 @@ components:
           type: integer
         maxPeerCount:
           type: integer
-    TemplateCreate:
-      type: object
-      properties:
-        name:
-          type: string
-        roles:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Role'
-        settings:
-          type: object
-        destinations:
-          type: object
-  parameters:
-    TemplateId:
-      in: path
-      name: template_id
-      required: true
-      schema:
-        type: string
   responses:
     TemplateList:
       description: Page of templates
@@ -301,18 +292,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Template'
-    Role:
-      description: Role
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Role'
     Empty:
       description: Successful empty response
       content:
         application/json:
           schema:
             type: object
+    Role:
+      description: Role
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Role'
+  parameters:
+    TemplateId:
+      in: path
+      name: template_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     ManagementToken:
       type: http

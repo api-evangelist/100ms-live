@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 100ms Server-Side Active Rooms Stream Keys API
-  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
-
-    '
+  title: 100ms Server-Side Stream Keys API
+  description: REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
   version: v2
   contact:
     name: 100ms Support
@@ -61,6 +59,23 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
+  schemas:
+    StreamKey:
+      type: object
+      properties:
+        key:
+          type: string
+        url:
+          type: string
+          format: uri
+          description: RTMP ingest URL (rtmp://rtmp-in.100ms.live/live).
+        role:
+          type: string
+        user_id:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
   responses:
     StreamKey:
       description: RTMP stream key
@@ -81,23 +96,6 @@ components:
       required: true
       schema:
         type: string
-  schemas:
-    StreamKey:
-      type: object
-      properties:
-        key:
-          type: string
-        url:
-          type: string
-          format: uri
-          description: RTMP ingest URL (rtmp://rtmp-in.100ms.live/live).
-        role:
-          type: string
-        user_id:
-          type: string
-        expires_at:
-          type: string
-          format: date-time
   securitySchemes:
     ManagementToken:
       type: http

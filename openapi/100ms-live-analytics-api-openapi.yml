@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 100ms Server-Side Active Rooms Analytics API
-  description: 'REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
-
-    '
+  title: 100ms Server-Side Analytics API
+  description: REST control plane for the 100ms live video and audio platform. Manage rooms, templates and roles (policy), active in-session control, recordings, live streams (HLS), external streams (RTMP push to YouTube/Twitch/Facebook), RTMP stream keys, room codes, polls, sessions, and analytics. All endpoints are authenticated with a short-lived management JWT signed with the app access key/secret pair from the dashboard.
   version: v2
   contact:
     name: 100ms Support
@@ -153,22 +151,6 @@ paths:
               schema:
                 type: object
 components:
-  schemas:
-    WebhookEvent:
-      type: object
-      properties:
-        id:
-          type: string
-        version:
-          type: string
-        type:
-          type: string
-          description: 'Examples: session.open, session.close, peer.join, peer.leave, beam.started, beam.recording.success, hls.started, hls.stopped, hls.recording.success, rtmp.started, rtmp.failed, recording.success, recording.failed, transcription.success.'
-        timestamp:
-          type: string
-          format: date-time
-        data:
-          type: object
   responses:
     WebhookEventList:
       description: Page of webhook events
@@ -191,7 +173,29 @@ components:
         application/json:
           schema:
             type: object
+  schemas:
+    WebhookEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: string
+        type:
+          type: string
+          description: 'Examples: session.open, session.close, peer.join, peer.leave, beam.started, beam.recording.success, hls.started, hls.stopped, hls.recording.success, rtmp.started, rtmp.failed, recording.success, recording.failed, transcription.success.'
+        timestamp:
+          type: string
+          format: date-time
+        data:
+          type: object
   parameters:
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
     Limit:
       in: query
       name: limit
@@ -199,12 +203,6 @@ components:
         type: integer
         default: 10
         maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
   securitySchemes:
     ManagementToken:
       type: http
