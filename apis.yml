@@ -83,8 +83,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-analytics-api
   name: 100ms Analytics API
   description: Query webhook events, track events, recording events, errors, and peer quality.
@@ -103,8 +101,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-external-streams-api
   name: 100ms External Streams API
   description: Push the room feed to YouTube / Twitch / Facebook via RTMP.
@@ -123,8 +119,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-live-streams-api
   name: 100ms Live Streams API
   description: HLS live streams driven from a 100ms room.
@@ -143,8 +137,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-policy-api
   name: 100ms Policy API
   description: Templates, roles, and recording configuration.
@@ -163,8 +155,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-polls-api
   name: 100ms Polls API
   description: Real-time polls and quizzes inside a room.
@@ -183,8 +173,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-recording-assets-api
   name: 100ms Recording Assets API
   description: Output assets (mp4, mp3, transcript, chat) produced by recordings.
@@ -203,8 +191,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-recordings-api
   name: 100ms Recordings API
   description: Composite and track-level recordings of sessions.
@@ -225,8 +211,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-room-codes-api
   name: 100ms Room Codes API
   description: Short codes used by client apps to join a room.
@@ -245,8 +229,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-rooms-api
   name: 100ms Rooms API
   description: Persistent containers for a live session.
@@ -265,8 +247,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-sessions-api
   name: 100ms Sessions API
   description: Historical sessions inside a room.
@@ -285,8 +265,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 - aid: 100ms-live:100ms-live-stream-keys-api
   name: 100ms Stream Keys API
   description: Per-room RTMP ingest stream keys.
@@ -305,8 +283,6 @@ apis:
     url: https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman
   - type: SDKs
     url: https://github.com/100mslive/server-sdks
-  - type: GraphQL
-    url: graphql/100ms-live-graphql.md
 common:
 - type: Website
   url: https://www.100ms.live/
