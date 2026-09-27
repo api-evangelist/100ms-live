@@ -151,28 +151,6 @@ paths:
               schema:
                 type: object
 components:
-  responses:
-    WebhookEventList:
-      description: Page of webhook events
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/WebhookEvent'
-              last:
-                type: string
-              limit:
-                type: integer
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
   schemas:
     WebhookEvent:
       type: object
@@ -190,12 +168,6 @@ components:
         data:
           type: object
   parameters:
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
     Limit:
       in: query
       name: limit
@@ -203,6 +175,34 @@ components:
         type: integer
         default: 10
         maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+  responses:
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+    WebhookEventList:
+      description: Page of webhook events
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookEvent'
+              last:
+                type: string
+              limit:
+                type: integer
   securitySchemes:
     ManagementToken:
       type: http

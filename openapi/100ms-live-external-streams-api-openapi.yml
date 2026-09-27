@@ -117,6 +117,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ExternalStream'
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
     ExternalStreamList:
       description: Page of external streams
       content:
@@ -132,25 +138,7 @@ components:
                 type: string
               limit:
                 type: integer
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
   parameters:
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
     Limit:
       in: query
       name: limit
@@ -158,6 +146,18 @@ components:
         type: integer
         default: 10
         maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
   schemas:
     ExternalStream:
       type: object

@@ -62,14 +62,13 @@ paths:
         '200':
           $ref: '#/components/responses/RoomCode'
 components:
-  parameters:
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
   responses:
+    RoomCode:
+      description: Room code
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RoomCode'
     RoomCodeList:
       description: List of room codes (one per role).
       content:
@@ -81,12 +80,13 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/RoomCode'
-    RoomCode:
-      description: Room code
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RoomCode'
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
   schemas:
     RoomCode:
       type: object

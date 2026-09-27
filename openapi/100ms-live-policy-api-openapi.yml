@@ -171,20 +171,41 @@ paths:
               schema:
                 type: object
 components:
-  schemas:
-    TemplateCreate:
-      type: object
-      properties:
-        name:
-          type: string
-        roles:
-          type: object
-          additionalProperties:
+  responses:
+    Template:
+      description: Template
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Template'
+    TemplateList:
+      description: Page of templates
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+              last:
+                type: string
+              limit:
+                type: integer
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+    Role:
+      description: Role
+      content:
+        application/json:
+          schema:
             $ref: '#/components/schemas/Role'
-        settings:
-          type: object
-        destinations:
-          type: object
+  schemas:
     Template:
       type: object
       properties:
@@ -270,40 +291,19 @@ components:
           type: integer
         maxPeerCount:
           type: integer
-  responses:
-    TemplateList:
-      description: Page of templates
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Template'
-              last:
-                type: string
-              limit:
-                type: integer
-    Template:
-      description: Template
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Template'
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
-    Role:
-      description: Role
-      content:
-        application/json:
-          schema:
+    TemplateCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        roles:
+          type: object
+          additionalProperties:
             $ref: '#/components/schemas/Role'
+        settings:
+          type: object
+        destinations:
+          type: object
   parameters:
     TemplateId:
       in: path

@@ -164,57 +164,7 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
-  parameters:
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
-    Limit:
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
   schemas:
-    RecordingAsset:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - room-composite
-          - room-vod
-          - transcript
-          - chat-log
-          - summary
-        path:
-          type: string
-        format:
-          type: string
-        size:
-          type: integer
-        duration:
-          type: integer
-        room_id:
-          type: string
-        session_id:
-          type: string
-        recording_id:
-          type: string
-        created_at:
-          type: string
-          format: date-time
     LiveStream:
       type: object
       properties:
@@ -257,7 +207,69 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/RecordingAsset'
+    RecordingAsset:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - room-composite
+          - room-vod
+          - transcript
+          - chat-log
+          - summary
+        path:
+          type: string
+        format:
+          type: string
+        size:
+          type: integer
+        duration:
+          type: integer
+        room_id:
+          type: string
+        session_id:
+          type: string
+        recording_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+  parameters:
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
   responses:
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+    LiveStream:
+      description: Live stream
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LiveStream'
     LiveStreamList:
       description: Page of live streams
       content:
@@ -273,18 +285,6 @@ components:
                 type: string
               limit:
                 type: integer
-    LiveStream:
-      description: Live stream
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LiveStream'
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
   securitySchemes:
     ManagementToken:
       type: http

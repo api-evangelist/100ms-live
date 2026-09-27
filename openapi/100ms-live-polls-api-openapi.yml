@@ -73,6 +73,26 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+  responses:
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+    Poll:
+      description: Poll
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Poll'
   schemas:
     Poll:
       type: object
@@ -124,26 +144,6 @@ components:
         created_at:
           type: string
           format: date-time
-  parameters:
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
-  responses:
-    Poll:
-      description: Poll
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Poll'
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
   securitySchemes:
     ManagementToken:
       type: http

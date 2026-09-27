@@ -59,6 +59,26 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+  responses:
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+    StreamKey:
+      description: RTMP stream key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StreamKey'
   schemas:
     StreamKey:
       type: object
@@ -76,26 +96,6 @@ components:
         expires_at:
           type: string
           format: date-time
-  responses:
-    StreamKey:
-      description: RTMP stream key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StreamKey'
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
-  parameters:
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
   securitySchemes:
     ManagementToken:
       type: http

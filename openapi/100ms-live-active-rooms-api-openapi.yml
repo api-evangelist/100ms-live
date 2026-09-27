@@ -156,47 +156,27 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
-  parameters:
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
-  responses:
-    PeerList:
-      description: List of peers in the active room (peer_id keyed object).
-      content:
-        application/json:
-          schema:
-            type: object
-            additionalProperties:
-              $ref: '#/components/schemas/Peer'
-    Peer:
-      description: Peer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Peer'
-    NotFound:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ActiveRoom:
-      description: Active room
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ActiveRoom'
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
   schemas:
+    Peer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        user_id:
+          type: string
+        metadata:
+          type: string
+        role:
+          type: string
+        joined_at:
+          type: string
+          format: date-time
+        tracks:
+          type: object
+          additionalProperties:
+            type: object
     Error:
       type: object
       properties:
@@ -229,26 +209,46 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/Peer'
-    Peer:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        user_id:
-          type: string
-        metadata:
-          type: string
-        role:
-          type: string
-        joined_at:
-          type: string
-          format: date-time
-        tracks:
-          type: object
-          additionalProperties:
+  responses:
+    PeerList:
+      description: List of peers in the active room (peer_id keyed object).
+      content:
+        application/json:
+          schema:
             type: object
+            additionalProperties:
+              $ref: '#/components/schemas/Peer'
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+    Peer:
+      description: Peer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Peer'
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ActiveRoom:
+      description: Active room
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ActiveRoom'
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     ManagementToken:
       type: http
