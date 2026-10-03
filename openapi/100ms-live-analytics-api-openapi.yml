@@ -151,23 +151,13 @@ paths:
               schema:
                 type: object
 components:
-  schemas:
-    WebhookEvent:
-      type: object
-      properties:
-        id:
-          type: string
-        version:
-          type: string
-        type:
-          type: string
-          description: 'Examples: session.open, session.close, peer.join, peer.leave, beam.started, beam.recording.success, hls.started, hls.stopped, hls.recording.success, rtmp.started, rtmp.failed, recording.success, recording.failed, transcription.success.'
-        timestamp:
-          type: string
-          format: date-time
-        data:
-          type: object
   parameters:
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
     Limit:
       in: query
       name: limit
@@ -175,12 +165,6 @@ components:
         type: integer
         default: 10
         maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
   responses:
     Empty:
       description: Successful empty response
@@ -203,6 +187,22 @@ components:
                 type: string
               limit:
                 type: integer
+  schemas:
+    WebhookEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        version:
+          type: string
+        type:
+          type: string
+          description: 'Examples: session.open, session.close, peer.join, peer.leave, beam.started, beam.recording.success, hls.started, hls.stopped, hls.recording.success, rtmp.started, rtmp.failed, recording.success, recording.failed, transcription.success.'
+        timestamp:
+          type: string
+          format: date-time
+        data:
+          type: object
   securitySchemes:
     ManagementToken:
       type: http

@@ -54,49 +54,7 @@ paths:
         '200':
           $ref: '#/components/responses/Session'
 components:
-  responses:
-    Session:
-      description: Session
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Session'
-    SessionList:
-      description: Page of sessions
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Session'
-              last:
-                type: string
-              limit:
-                type: integer
   schemas:
-    Peer:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        user_id:
-          type: string
-        metadata:
-          type: string
-        role:
-          type: string
-        joined_at:
-          type: string
-          format: date-time
-        tracks:
-          type: object
-          additionalProperties:
-            type: object
     Session:
       type: object
       properties:
@@ -120,6 +78,26 @@ components:
             $ref: '#/components/schemas/Peer'
         template_id:
           type: string
+    Peer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        user_id:
+          type: string
+        metadata:
+          type: string
+        role:
+          type: string
+        joined_at:
+          type: string
+          format: date-time
+        tracks:
+          type: object
+          additionalProperties:
+            type: object
   parameters:
     Limit:
       in: query
@@ -134,6 +112,28 @@ components:
       schema:
         type: string
         description: Cursor returned by the previous page.
+  responses:
+    SessionList:
+      description: Page of sessions
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
+              last:
+                type: string
+              limit:
+                type: integer
+    Session:
+      description: Session
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Session'
   securitySchemes:
     ManagementToken:
       type: http

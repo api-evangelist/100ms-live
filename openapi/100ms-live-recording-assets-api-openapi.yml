@@ -83,21 +83,13 @@ paths:
                   expiry:
                     type: integer
 components:
-  parameters:
-    Limit:
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
   responses:
+    RecordingAsset:
+      description: Recording asset
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordingAsset'
     RecordingAssetList:
       description: Page of recording assets
       content:
@@ -113,12 +105,20 @@ components:
                 type: string
               limit:
                 type: integer
-    RecordingAsset:
-      description: Recording asset
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordingAsset'
+  parameters:
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
   schemas:
     RecordingAsset:
       type: object

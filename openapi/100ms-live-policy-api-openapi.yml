@@ -171,13 +171,26 @@ paths:
               schema:
                 type: object
 components:
+  parameters:
+    TemplateId:
+      in: path
+      name: template_id
+      required: true
+      schema:
+        type: string
   responses:
-    Template:
-      description: Template
+    Role:
+      description: Role
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Template'
+            $ref: '#/components/schemas/Role'
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
     TemplateList:
       description: Page of templates
       content:
@@ -193,18 +206,12 @@ components:
                 type: string
               limit:
                 type: integer
-    Empty:
-      description: Successful empty response
+    Template:
+      description: Template
       content:
         application/json:
           schema:
-            type: object
-    Role:
-      description: Role
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Role'
+            $ref: '#/components/schemas/Template'
   schemas:
     Template:
       type: object
@@ -304,13 +311,6 @@ components:
           type: object
         destinations:
           type: object
-  parameters:
-    TemplateId:
-      in: path
-      name: template_id
-      required: true
-      schema:
-        type: string
   securitySchemes:
     ManagementToken:
       type: http

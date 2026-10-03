@@ -110,6 +110,28 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
+  schemas:
+    ExternalStream:
+      type: object
+      properties:
+        id:
+          type: string
+        room_id:
+          type: string
+        session_id:
+          type: string
+        status:
+          type: string
+        rtmp_urls:
+          type: array
+          items:
+            type: string
+        started_at:
+          type: string
+          format: date-time
+        stopped_at:
+          type: string
+          format: date-time
   responses:
     ExternalStream:
       description: External (RTMP-out) stream
@@ -146,40 +168,18 @@ components:
         type: integer
         default: 10
         maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
     RoomId:
       in: path
       name: room_id
       required: true
       schema:
         type: string
-  schemas:
-    ExternalStream:
-      type: object
-      properties:
-        id:
-          type: string
-        room_id:
-          type: string
-        session_id:
-          type: string
-        status:
-          type: string
-        rtmp_urls:
-          type: array
-          items:
-            type: string
-        started_at:
-          type: string
-          format: date-time
-        stopped_at:
-          type: string
-          format: date-time
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
   securitySchemes:
     ManagementToken:
       type: http

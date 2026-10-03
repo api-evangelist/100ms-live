@@ -80,13 +80,6 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/RoomCode'
-  parameters:
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
   schemas:
     RoomCode:
       type: object
@@ -102,6 +95,13 @@ components:
         created_at:
           type: string
           format: date-time
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     ManagementToken:
       type: http

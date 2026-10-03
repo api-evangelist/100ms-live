@@ -164,6 +164,34 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
+  responses:
+    LiveStream:
+      description: Live stream
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LiveStream'
+    LiveStreamList:
+      description: Page of live streams
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LiveStream'
+              last:
+                type: string
+              limit:
+                type: integer
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
   schemas:
     LiveStream:
       type: object
@@ -245,46 +273,18 @@ components:
         type: integer
         default: 10
         maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
     RoomId:
       in: path
       name: room_id
       required: true
       schema:
         type: string
-  responses:
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
-    LiveStream:
-      description: Live stream
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LiveStream'
-    LiveStreamList:
-      description: Page of live streams
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LiveStream'
-              last:
-                type: string
-              limit:
-                type: integer
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
   securitySchemes:
     ManagementToken:
       type: http

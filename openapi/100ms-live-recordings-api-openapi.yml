@@ -128,7 +128,75 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
+  responses:
+    RecordingList:
+      description: Page of recordings
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recording'
+              last:
+                type: string
+              limit:
+                type: integer
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+    Recording:
+      description: Recording
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Recording'
+  parameters:
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
   schemas:
+    RecordingStart:
+      type: object
+      properties:
+        meeting_url:
+          type: string
+          format: uri
+        resolution:
+          type: object
+          properties:
+            width:
+              type: integer
+            height:
+              type: integer
+        recording:
+          type: object
+          properties:
+            hls_vod:
+              type: boolean
+            single_file_per_layer:
+              type: boolean
     Recording:
       type: object
       properties:
@@ -196,74 +264,6 @@ components:
         created_at:
           type: string
           format: date-time
-    RecordingStart:
-      type: object
-      properties:
-        meeting_url:
-          type: string
-          format: uri
-        resolution:
-          type: object
-          properties:
-            width:
-              type: integer
-            height:
-              type: integer
-        recording:
-          type: object
-          properties:
-            hls_vod:
-              type: boolean
-            single_file_per_layer:
-              type: boolean
-  parameters:
-    Limit:
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
-  responses:
-    RecordingList:
-      description: Page of recordings
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Recording'
-              last:
-                type: string
-              limit:
-                type: integer
-    Recording:
-      description: Recording
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Recording'
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
   securitySchemes:
     ManagementToken:
       type: http
