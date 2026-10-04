@@ -110,6 +110,54 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
+  parameters:
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+  responses:
+    ExternalStream:
+      description: External (RTMP-out) stream
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExternalStream'
+    ExternalStreamList:
+      description: Page of external streams
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExternalStream'
+              last:
+                type: string
+              limit:
+                type: integer
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
   schemas:
     ExternalStream:
       type: object
@@ -132,54 +180,6 @@ components:
         stopped_at:
           type: string
           format: date-time
-  responses:
-    ExternalStream:
-      description: External (RTMP-out) stream
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ExternalStream'
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
-    ExternalStreamList:
-      description: Page of external streams
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExternalStream'
-              last:
-                type: string
-              limit:
-                type: integer
-  parameters:
-    Limit:
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
   securitySchemes:
     ManagementToken:
       type: http

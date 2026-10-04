@@ -171,26 +171,19 @@ paths:
               schema:
                 type: object
 components:
-  parameters:
-    TemplateId:
-      in: path
-      name: template_id
-      required: true
-      schema:
-        type: string
   responses:
-    Role:
-      description: Role
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Role'
     Empty:
       description: Successful empty response
       content:
         application/json:
           schema:
             type: object
+    Template:
+      description: Template
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Template'
     TemplateList:
       description: Page of templates
       content:
@@ -206,36 +199,20 @@ components:
                 type: string
               limit:
                 type: integer
-    Template:
-      description: Template
+    Role:
+      description: Role
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Template'
-  schemas:
-    Template:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        customer_id:
-          type: string
-        roles:
-          type: object
-          additionalProperties:
             $ref: '#/components/schemas/Role'
-        settings:
-          type: object
-        destinations:
-          type: object
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
+  parameters:
+    TemplateId:
+      in: path
+      name: template_id
+      required: true
+      schema:
+        type: string
+  schemas:
     Role:
       type: object
       properties:
@@ -311,6 +288,29 @@ components:
           type: object
         destinations:
           type: object
+    Template:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        customer_id:
+          type: string
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Role'
+        settings:
+          type: object
+        destinations:
+          type: object
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
   securitySchemes:
     ManagementToken:
       type: http

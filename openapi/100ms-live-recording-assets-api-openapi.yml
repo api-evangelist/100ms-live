@@ -83,28 +83,6 @@ paths:
                   expiry:
                     type: integer
 components:
-  responses:
-    RecordingAsset:
-      description: Recording asset
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordingAsset'
-    RecordingAssetList:
-      description: Page of recording assets
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RecordingAsset'
-              last:
-                type: string
-              limit:
-                type: integer
   parameters:
     Limit:
       in: query
@@ -150,6 +128,28 @@ components:
         created_at:
           type: string
           format: date-time
+  responses:
+    RecordingAssetList:
+      description: Page of recording assets
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecordingAsset'
+              last:
+                type: string
+              limit:
+                type: integer
+    RecordingAsset:
+      description: Recording asset
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordingAsset'
   securitySchemes:
     ManagementToken:
       type: http

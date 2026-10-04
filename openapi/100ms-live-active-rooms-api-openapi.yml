@@ -156,39 +156,6 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
-  responses:
-    NotFound:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ActiveRoom:
-      description: Active room
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ActiveRoom'
-    Peer:
-      description: Peer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Peer'
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
-    PeerList:
-      description: List of peers in the active room (peer_id keyed object).
-      content:
-        application/json:
-          schema:
-            type: object
-            additionalProperties:
-              $ref: '#/components/schemas/Peer'
   schemas:
     ActiveRoom:
       type: object
@@ -242,6 +209,39 @@ components:
           type: object
           additionalProperties:
             type: object
+  responses:
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Peer:
+      description: Peer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Peer'
+    PeerList:
+      description: List of peers in the active room (peer_id keyed object).
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/Peer'
+    ActiveRoom:
+      description: Active room
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ActiveRoom'
   parameters:
     RoomId:
       in: path

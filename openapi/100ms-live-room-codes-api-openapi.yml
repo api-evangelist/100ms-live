@@ -62,6 +62,28 @@ paths:
         '200':
           $ref: '#/components/responses/RoomCode'
 components:
+  parameters:
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+  schemas:
+    RoomCode:
+      type: object
+      properties:
+        code:
+          type: string
+        room_id:
+          type: string
+        role:
+          type: string
+        enabled:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
   responses:
     RoomCode:
       description: Room code
@@ -80,28 +102,6 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/RoomCode'
-  schemas:
-    RoomCode:
-      type: object
-      properties:
-        code:
-          type: string
-        room_id:
-          type: string
-        role:
-          type: string
-        enabled:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-  parameters:
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
   securitySchemes:
     ManagementToken:
       type: http

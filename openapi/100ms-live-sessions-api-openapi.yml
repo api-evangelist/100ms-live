@@ -54,6 +54,20 @@ paths:
         '200':
           $ref: '#/components/responses/Session'
 components:
+  parameters:
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
   schemas:
     Session:
       type: object
@@ -98,20 +112,6 @@ components:
           type: object
           additionalProperties:
             type: object
-  parameters:
-    Limit:
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
   responses:
     SessionList:
       description: Page of sessions

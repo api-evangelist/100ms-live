@@ -152,12 +152,6 @@ paths:
                 type: object
 components:
   parameters:
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
     Limit:
       in: query
       name: limit
@@ -165,6 +159,12 @@ components:
         type: integer
         default: 10
         maximum: 100
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
   responses:
     Empty:
       description: Successful empty response
