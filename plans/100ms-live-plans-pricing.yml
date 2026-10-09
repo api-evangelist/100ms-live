@@ -152,3 +152,38 @@ plans:
         unit: 1
         price: 'contract'
         userMultiplied: true
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - negotiated
+  - subscription
+  units:
+  - compute
+  plans:
+  - name: Build (Free)
+    access: free
+    model: metered
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - month
+    - per-use
+  - name: Growth
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - compute
+    periods:
+    - per-use
+  - name: Enterprise
+    access: negotiated
+    model: negotiated
+    model_how: stated
+    units:
+    - compute
+    periods:
+    - term
