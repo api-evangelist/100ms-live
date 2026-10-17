@@ -157,6 +157,35 @@ paths:
           $ref: '#/components/responses/Empty'
 components:
   schemas:
+    Peer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        user_id:
+          type: string
+        metadata:
+          type: string
+        role:
+          type: string
+        joined_at:
+          type: string
+          format: date-time
+        tracks:
+          type: object
+          additionalProperties:
+            type: object
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        id:
+          type: string
     ActiveRoom:
       type: object
       properties:
@@ -180,54 +209,19 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/Peer'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        id:
-          type: string
-    Peer:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        user_id:
-          type: string
-        metadata:
-          type: string
-        role:
-          type: string
-        joined_at:
-          type: string
-          format: date-time
-        tracks:
-          type: object
-          additionalProperties:
-            type: object
   responses:
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
-    NotFound:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Peer:
       description: Peer
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Peer'
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     PeerList:
       description: List of peers in the active room (peer_id keyed object).
       content:
@@ -236,6 +230,12 @@ components:
             type: object
             additionalProperties:
               $ref: '#/components/schemas/Peer'
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
     ActiveRoom:
       description: Active room
       content:

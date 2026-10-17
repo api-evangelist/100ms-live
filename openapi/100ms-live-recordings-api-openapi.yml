@@ -129,13 +129,6 @@ paths:
           $ref: '#/components/responses/Empty'
 components:
   parameters:
-    Limit:
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
     Start:
       in: query
       name: start
@@ -148,44 +141,42 @@ components:
       required: true
       schema:
         type: string
-  schemas:
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
+  responses:
     Recording:
-      type: object
-      properties:
-        id:
-          type: string
-        room_id:
-          type: string
-        session_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - queued
-          - init
-          - running
-          - paused
-          - completed
-          - failed
-        created_at:
-          type: string
-          format: date-time
-        started_at:
-          type: string
-          format: date-time
-        stopped_at:
-          type: string
-          format: date-time
-        stopped_by:
-          type: string
-        duration:
-          type: integer
-        size:
-          type: integer
-        recording_assets:
-          type: array
-          items:
-            $ref: '#/components/schemas/RecordingAsset'
+      description: Recording
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Recording'
+    RecordingList:
+      description: Page of recordings
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recording'
+              last:
+                type: string
+              limit:
+                type: integer
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+  schemas:
     RecordingAsset:
       type: object
       properties:
@@ -236,34 +227,43 @@ components:
               type: boolean
             single_file_per_layer:
               type: boolean
-  responses:
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
-    RecordingList:
-      description: Page of recordings
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Recording'
-              last:
-                type: string
-              limit:
-                type: integer
     Recording:
-      description: Recording
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Recording'
+      type: object
+      properties:
+        id:
+          type: string
+        room_id:
+          type: string
+        session_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - queued
+          - init
+          - running
+          - paused
+          - completed
+          - failed
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        stopped_at:
+          type: string
+          format: date-time
+        stopped_by:
+          type: string
+        duration:
+          type: integer
+        size:
+          type: integer
+        recording_assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecordingAsset'
   securitySchemes:
     ManagementToken:
       type: http

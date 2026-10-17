@@ -110,37 +110,36 @@ paths:
         '200':
           $ref: '#/components/responses/Room'
 components:
+  parameters:
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+    RoomId:
+      in: path
+      name: room_id
+      required: true
+      schema:
+        type: string
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
   schemas:
-    RoomCreate:
+    Error:
       type: object
       properties:
-        name:
-          type: string
-        description:
-          type: string
-        template_id:
-          type: string
-        region:
-          type: string
-          enum:
-          - in
-          - us
-          - eu
-          - auto
-        recording_info:
-          type: object
-        size:
+        code:
           type: integer
-        max_duration_seconds:
-          type: integer
-        large_room:
-          type: boolean
-        webhook:
-          type: object
-          properties:
-            url:
-              type: string
-              format: uri
+        message:
+          type: string
+        id:
+          type: string
     Room:
       type: object
       properties:
@@ -188,6 +187,47 @@ components:
           format: date-time
         customer:
           type: string
+    RoomCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        template_id:
+          type: string
+        region:
+          type: string
+          enum:
+          - in
+          - us
+          - eu
+          - auto
+        recording_info:
+          type: object
+        size:
+          type: integer
+        max_duration_seconds:
+          type: integer
+        large_room:
+          type: boolean
+        webhook:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+    RoomList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Room'
+        last:
+          type: string
+        limit:
+          type: integer
     RoomUpdate:
       type: object
       properties:
@@ -203,29 +243,15 @@ components:
           type: integer
         max_duration_seconds:
           type: integer
-    RoomList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Room'
-        last:
-          type: string
-        limit:
-          type: integer
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        id:
-          type: string
   responses:
-    BadRequest:
-      description: Bad request
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
       content:
         application/json:
           schema:
@@ -236,44 +262,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Room'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     RoomList:
       description: Page of rooms
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RoomList'
-  parameters:
-    Limit:
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
-    RoomId:
-      in: path
-      name: room_id
-      required: true
-      schema:
-        type: string
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ManagementToken:
       type: http

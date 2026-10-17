@@ -54,21 +54,27 @@ paths:
         '200':
           $ref: '#/components/responses/Session'
 components:
-  parameters:
-    Limit:
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 10
-        maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
   schemas:
+    Peer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        user_id:
+          type: string
+        metadata:
+          type: string
+        role:
+          type: string
+        joined_at:
+          type: string
+          format: date-time
+        tracks:
+          type: object
+          additionalProperties:
+            type: object
     Session:
       type: object
       properties:
@@ -92,27 +98,27 @@ components:
             $ref: '#/components/schemas/Peer'
         template_id:
           type: string
-    Peer:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        user_id:
-          type: string
-        metadata:
-          type: string
-        role:
-          type: string
-        joined_at:
-          type: string
-          format: date-time
-        tracks:
-          type: object
-          additionalProperties:
-            type: object
+  parameters:
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+        maximum: 100
   responses:
+    Session:
+      description: Session
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Session'
     SessionList:
       description: Page of sessions
       content:
@@ -128,12 +134,6 @@ components:
                 type: string
               limit:
                 type: integer
-    Session:
-      description: Session
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Session'
   securitySchemes:
     ManagementToken:
       type: http

@@ -59,19 +59,6 @@ paths:
         '200':
           $ref: '#/components/responses/Empty'
 components:
-  responses:
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
-    StreamKey:
-      description: RTMP stream key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StreamKey'
   parameters:
     RoomId:
       in: path
@@ -79,6 +66,19 @@ components:
       required: true
       schema:
         type: string
+  responses:
+    StreamKey:
+      description: RTMP stream key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StreamKey'
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
   schemas:
     StreamKey:
       type: object

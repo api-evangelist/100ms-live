@@ -152,6 +152,12 @@ paths:
                 type: object
 components:
   parameters:
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
     Limit:
       in: query
       name: limit
@@ -159,19 +165,7 @@ components:
         type: integer
         default: 10
         maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
   responses:
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
     WebhookEventList:
       description: Page of webhook events
       content:
@@ -187,6 +181,12 @@ components:
                 type: string
               limit:
                 type: integer
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
   schemas:
     WebhookEvent:
       type: object

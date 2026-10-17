@@ -171,47 +171,6 @@ paths:
               schema:
                 type: object
 components:
-  responses:
-    Empty:
-      description: Successful empty response
-      content:
-        application/json:
-          schema:
-            type: object
-    Template:
-      description: Template
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Template'
-    TemplateList:
-      description: Page of templates
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Template'
-              last:
-                type: string
-              limit:
-                type: integer
-    Role:
-      description: Role
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Role'
-  parameters:
-    TemplateId:
-      in: path
-      name: template_id
-      required: true
-      schema:
-        type: string
   schemas:
     Role:
       type: object
@@ -275,19 +234,6 @@ components:
           type: integer
         maxPeerCount:
           type: integer
-    TemplateCreate:
-      type: object
-      properties:
-        name:
-          type: string
-        roles:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Role'
-        settings:
-          type: object
-        destinations:
-          type: object
     Template:
       type: object
       properties:
@@ -311,6 +257,60 @@ components:
         updated_at:
           type: string
           format: date-time
+    TemplateCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        roles:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Role'
+        settings:
+          type: object
+        destinations:
+          type: object
+  responses:
+    Template:
+      description: Template
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Template'
+    Empty:
+      description: Successful empty response
+      content:
+        application/json:
+          schema:
+            type: object
+    Role:
+      description: Role
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Role'
+    TemplateList:
+      description: Page of templates
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+              last:
+                type: string
+              limit:
+                type: integer
+  parameters:
+    TemplateId:
+      in: path
+      name: template_id
+      required: true
+      schema:
+        type: string
   securitySchemes:
     ManagementToken:
       type: http

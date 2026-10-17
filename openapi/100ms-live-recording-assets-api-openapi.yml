@@ -84,6 +84,12 @@ paths:
                     type: integer
 components:
   parameters:
+    Start:
+      in: query
+      name: start
+      schema:
+        type: string
+        description: Cursor returned by the previous page.
     Limit:
       in: query
       name: limit
@@ -91,12 +97,6 @@ components:
         type: integer
         default: 10
         maximum: 100
-    Start:
-      in: query
-      name: start
-      schema:
-        type: string
-        description: Cursor returned by the previous page.
   schemas:
     RecordingAsset:
       type: object
@@ -129,6 +129,12 @@ components:
           type: string
           format: date-time
   responses:
+    RecordingAsset:
+      description: Recording asset
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordingAsset'
     RecordingAssetList:
       description: Page of recording assets
       content:
@@ -144,12 +150,6 @@ components:
                 type: string
               limit:
                 type: integer
-    RecordingAsset:
-      description: Recording asset
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordingAsset'
   securitySchemes:
     ManagementToken:
       type: http
