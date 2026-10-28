@@ -1,4 +1,4 @@
-# 100ms (100ms-live)
+# 100ms
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,89 +66,200 @@
 
 100ms is a live video and audio infrastructure company headquartered in Bengaluru, India that provides developer SDKs and a REST control plane for embedding video conferencing, interactive live streaming (HLS), RTMP ingest/egress, recording, real-time chat/messaging, polls, whiteboard, and AI-powered transcription into applications. The company was acquired by Disney+ Hotstar (JioCinema/JioHotstar) in 2023 and continues to operate as an independent commercial SaaS — the same infrastructure powering some of the largest live cricket audiences in the world (IPL on JioCinema/Hotstar). The platform exposes a single Server-Side REST API at api.100ms.live/v2 plus client SDKs for Web (JavaScript/React), iOS (Swift), Android (Kotlin), React Native, Flutter, and a Node.js server SDK, with public OpenAPI specs generated from the docs and a Postman collection.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/100ms-live/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/100ms-live/refs/heads/main/apis.yml)
+**Areas:** Live Streaming · Video Conferencing · WebRTC · HLS · RTMP · Recording · Real-Time Messaging · Live Infrastructure · India
 
-## Tags
+## 100ms on APIs.io
 
-- Live Video
-- Live Streaming
-- Video Conferencing
-- WebRTC
-- HLS
-- RTMP
-- Recording
-- Real-time Messaging
-- Live Infrastructure
-- India
+Everything profiled for 100ms is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/100ms-live/](https://apis.io/providers/100ms-live/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (12)
 
-- **Created:** 2026-05-25
-- **Modified:** 2026-05-25
+- [100ms Active Rooms API](https://apis.io/apis/100ms-live/100ms-live-active-rooms-api/) — In-session control of running rooms and connected peers.
+- [100ms Analytics API](https://apis.io/apis/100ms-live/100ms-live-analytics-api/) — Query webhook events, track events, recording events, errors, and peer quality.
+- [100ms External Streams API](https://apis.io/apis/100ms-live/100ms-live-external-streams-api/) — Push the room feed to YouTube / Twitch / Facebook via RTMP.
+- [100ms Live Streams API](https://apis.io/apis/100ms-live/100ms-live-live-streams-api/) — HLS live streams driven from a 100ms room.
+- [100ms Policy API](https://apis.io/apis/100ms-live/100ms-live-policy-api/) — Templates, roles, and recording configuration.
+- [100ms Polls API](https://apis.io/apis/100ms-live/100ms-live-polls-api/) — Real-time polls and quizzes inside a room.
+- [100ms Recording Assets API](https://apis.io/apis/100ms-live/100ms-live-recording-assets-api/) — Output assets (mp4, mp3, transcript, chat) produced by recordings.
+- [100ms Recordings API](https://apis.io/apis/100ms-live/100ms-live-recordings-api/) — Composite and track-level recordings of sessions.
+- [100ms Room Codes API](https://apis.io/apis/100ms-live/100ms-live-room-codes-api/) — Short codes used by client apps to join a room.
+- [100ms Rooms API](https://apis.io/apis/100ms-live/100ms-live-rooms-api/) — Persistent containers for a live session.
+- [100ms Sessions API](https://apis.io/apis/100ms-live/100ms-live-sessions-api/) — Historical sessions inside a room.
+- [100ms Stream Keys API](https://apis.io/apis/100ms-live/100ms-live-stream-keys-api/) — Per-room RTMP ingest stream keys.
 
-## APIs
+### Published properties
 
-### 100ms Server-Side API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The 100ms Server-Side API is the unified REST control plane for the 100ms live video platform. It manages rooms (the persistent containers for a live session), templates and roles (policy), active rooms and peers (in-session control like kick/mute/message), recordings (composite and per-track), live streams (HLS output and RTMP ingest stream keys), external streams (push to YouTube/Twitch/Facebook Live), recording assets, room codes, polls, sessions, and an analytics API for querying webhook events, track events, recording events, error events, and peer quality stats. Authentication uses a short-lived management JWT (HS256) signed with an app access key + secret pair issued from the dashboard.
+#### GraphQL (1)
 
-- **Human URL:** [https://www.100ms.live/docs/server-side/v2/foundation/basics](https://www.100ms.live/docs/server-side/v2/foundation/basics)
-- **Base URL:** `https://api.100ms.live/v2`
+GraphQL schemas.
 
-#### Tags
+- [Moved to /providers/100ms-live/](https://apis.io/graphqls/100ms-live/100ms-live-graphql/)
 
-- Rooms
-- Sessions
-- Recordings
-- Live Streams
-- RTMP
-- HLS
-- Webhooks
-- Polls
-- Templates
-- Analytics
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://www.100ms.live/docs/server-side/v2/foundation/basics)
-- [Documentation](https://www.100ms.live/docs/server-side/v2/foundation/authentication-and-tokens)
-- [OpenAPI](openapi/100ms-live-server-side-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/100ms-live-server-side-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/100ms-live-server-side-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman](https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [SDK](https://github.com/100mslive/server-sdks)
+- [100Ms Live Agentic Access](https://apis.io/agentic-access/100ms-live/100ms-live-agentic-access/)
 
-## Common Properties
+#### JSON Schema (3)
 
-- [Portal](https://www.100ms.live/)
+The data models the API reads and writes.
+
+- [100ms Recording](https://apis.io/schemas/100ms-live/100ms-live-recording/)
+- [100ms Room](https://apis.io/schemas/100ms-live/100ms-live-room/)
+- [100ms Webhook Event](https://apis.io/schemas/100ms-live/100ms-live-webhook-event/)
+
+#### JSON Structure (1)
+
+Data models expressed in JSON Structure.
+
+- [100Ms Live Room Structure](https://apis.io/json-structure/100ms-live/100ms-live-room-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [100Ms Live Context](https://apis.io/jsonld/100ms-live/100ms-live-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [100Ms Live Vocabulary](https://apis.io/vocabularies/100ms-live/100ms-live-vocabulary/)
+
+#### Examples (3)
+
+Example requests and responses.
+
+- [100Ms Live Create Room Example](https://apis.io/examples/100ms-live/100ms-live-create-room-example/)
+- [100Ms Live Start Live Stream Example](https://apis.io/examples/100ms-live/100ms-live-start-live-stream-example/)
+- [100Ms Live Webhook Session Open Example](https://apis.io/examples/100ms-live/100ms-live-webhook-session-open-example/)
+
+#### Collections (25)
+
+Postman and Open Collection request collections.
+
+- [100ms Server-Side Active Rooms API](https://apis.io/collections/100ms-live/open-100ms-live-active-rooms-api/)
+- [100ms Server-Side Active Rooms Analytics API](https://apis.io/collections/100ms-live/open-100ms-live-analytics-api/)
+- [100ms Server-Side Active Rooms External Streams API](https://apis.io/collections/100ms-live/open-100ms-live-external-streams-api/)
+- [100ms Server-Side Active Rooms Live Streams API](https://apis.io/collections/100ms-live/open-100ms-live-live-streams-api/)
+- [100ms Server-Side Active Rooms Policy API](https://apis.io/collections/100ms-live/open-100ms-live-policy-api/)
+- [100ms Server-Side Active Rooms Polls API](https://apis.io/collections/100ms-live/open-100ms-live-polls-api/)
+- [100ms Server-Side Active Rooms Recording Assets API](https://apis.io/collections/100ms-live/open-100ms-live-recording-assets-api/)
+- [100ms Server-Side Active Rooms Recordings API](https://apis.io/collections/100ms-live/open-100ms-live-recordings-api/)
+- [100ms Server-Side Active Rooms Room Codes API](https://apis.io/collections/100ms-live/open-100ms-live-room-codes-api/)
+- [100ms Server-Side Active Rooms API](https://apis.io/collections/100ms-live/open-100ms-live-rooms-api/)
+- [100ms Server-Side API](https://apis.io/collections/100ms-live/open-100ms-live-server-side-api/)
+- [100ms Server-Side Active Rooms Sessions API](https://apis.io/collections/100ms-live/open-100ms-live-sessions-api/)
+- [100ms Server-Side Active Rooms Stream Keys API](https://apis.io/collections/100ms-live/open-100ms-live-stream-keys-api/)
+- [100ms Server-Side Active Rooms API](https://apis.io/collections/100ms-live/postman-100ms-live-active-rooms-api/)
+- [100ms Server-Side Active Rooms Analytics API](https://apis.io/collections/100ms-live/postman-100ms-live-analytics-api/)
+- [100ms Server-Side Active Rooms External Streams API](https://apis.io/collections/100ms-live/postman-100ms-live-external-streams-api/)
+- [100ms Server-Side Active Rooms Live Streams API](https://apis.io/collections/100ms-live/postman-100ms-live-live-streams-api/)
+- [100ms Server-Side Active Rooms Policy API](https://apis.io/collections/100ms-live/postman-100ms-live-policy-api/)
+- [100ms Server-Side Active Rooms Polls API](https://apis.io/collections/100ms-live/postman-100ms-live-polls-api/)
+- [100ms Server-Side Active Rooms Recording Assets API](https://apis.io/collections/100ms-live/postman-100ms-live-recording-assets-api/)
+- [100ms Server-Side Active Rooms Recordings API](https://apis.io/collections/100ms-live/postman-100ms-live-recordings-api/)
+- [100ms Server-Side Active Rooms Room Codes API](https://apis.io/collections/100ms-live/postman-100ms-live-room-codes-api/)
+- [100ms Server-Side Active Rooms API](https://apis.io/collections/100ms-live/postman-100ms-live-rooms-api/)
+- [100ms Server-Side Active Rooms Sessions API](https://apis.io/collections/100ms-live/postman-100ms-live-sessions-api/)
+- [100ms Server-Side Active Rooms Stream Keys API](https://apis.io/collections/100ms-live/postman-100ms-live-stream-keys-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [100ms — jsonschema rules](https://apis.io/rules/100ms-live/100ms-live-jsonschema-spectral-rules/)
+- [100ms API Rules](https://apis.io/rules/100ms-live/100ms-live-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [100Ms Live Authentication](https://apis.io/security/100ms-live/100ms-live-authentication/)
+- [100Ms Live Domain Security](https://apis.io/security/100ms-live/100ms-live-domain-security/)
+- [100Ms Live Trust Center](https://apis.io/security/100ms-live/100ms-live-trust-center/)
+- [100Ms Live Vulnerability Disclosure](https://apis.io/security/100ms-live/100ms-live-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [100Ms Live Plans Pricing](https://apis.io/plans/100ms-live/100ms-live-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [100Ms Live Rate Limits](https://apis.io/rate-limits/100ms-live/100ms-live-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [100Ms Live Finops](https://apis.io/finops/100ms-live/100ms-live-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.100ms.live/)
 - [Documentation](https://www.100ms.live/docs/)
-- [Sign Up](https://dashboard.100ms.live/register)
-- [Dashboard](https://dashboard.100ms.live/)
 - [Pricing](https://www.100ms.live/pricing)
-- [Git Hub](https://github.com/100mslive)
-- [Status Page](https://status.100ms.live/)
 - [Blog](https://www.100ms.live/blog)
-- [Postman](https://www.100ms.live/docs/server-side/v2/how-to-guides/set-up-postman) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Twitter](https://twitter.com/100mslive)
-- [LinkedIn](https://www.linkedin.com/company/100mslive/)
-- [SDK](https://github.com/100mslive/web-sdks)
-- [SDK](https://github.com/100mslive/100ms-ios-sdk)
-- [SDK](https://github.com/100mslive/100ms-android)
-- [SDK](https://github.com/100mslive/100ms-react-native)
-- [SDK](https://github.com/100mslive/100ms-flutter)
-- [SDK](https://github.com/100mslive/server-sdks)
-- [Samples](https://github.com/100mslive/100ms-examples)
-- [Plans](plans/100ms-live-plans-pricing.yml)
-- [Rate Limits](rate-limits/100ms-live-rate-limits.yml)
-- [Fin Ops](finops/100ms-live-finops.yml)
-- [JSON Schema](json-schema/100ms-live-room-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/100ms-live-recording-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/100ms-live-webhook-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/100ms-live-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Vocabulary](vocabulary/100ms-live-vocabulary.yml)
-- [Spectral Rules](rules/100ms-live-rules.yml)
+- [Status](https://status.100ms.live/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 49.5** — developing · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 54.4 |
+| Contract governance | 27.3 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 54.8 |
+| Access clarity | 39.5 |
+
+**Agent readiness 19.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/100ms-live/](https://apis.io/providers/100ms-live/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for 100ms: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/100ms-live/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
